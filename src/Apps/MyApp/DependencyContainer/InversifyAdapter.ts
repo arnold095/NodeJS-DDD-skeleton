@@ -26,7 +26,6 @@ export class InversifyAdapter implements IocAdapter {
 
     private bindControllers(controllers) {
         for (const controller of controllers) {
-            console.log(controller);
             this.container.bind(controller.name).to(controller).inRequestScope();
         }
     }

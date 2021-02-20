@@ -3,8 +3,9 @@ import { DummyRepository } from "../Domain/DummyRepository";
 @injectable()
 export class DummyCreator {
     constructor(
-        //private repository: DummyRepository
+        @inject('DummyRepository') private repository: DummyRepository
     ) {
+        console.log('aa');
 
     }
 
