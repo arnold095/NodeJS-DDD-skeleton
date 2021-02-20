@@ -1,0 +1,40 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "no-console": false,
+        "quotemark": [
+            false,
+            "single"
+        ],
+        "object-literal-sort-keys": false,
+        "trailing-comma": false,
+        "no-empty": false,
+        "no-shadowed-variable": false,
+        "no-trailing-whitespace": false,
+        "ordered-imports": false,
+        "member-access": false,
+        "arrow-parens": false,
+        "curly": false,
+        "member-ordering": false,
+        "triple-equals": false,
+        "newline-before-return": false,
+        "newline-per-chained-call": false,
+        "one-line": false,
+        "variable-name": false,
+        "max-line-length": false,
+        "eofline": false,
+        "radix": false,
+        "prefer-for-of": false
+    },
+    "rulesDirectory": [],
+    "jsRules": {}
+}
