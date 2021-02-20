@@ -1,13 +1,18 @@
 import { Container as InversifyContainer } from 'inversify';
+import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
 import { DummyContainer } from './Containers/DummyContainer';
-export class InversifyAdapter {
-    private container: InversifyContainer;
+export class InversifyAdapter implements IocAdapter {
+    private container: InversifyContainer = new InversifyContainer();
 
     constructor() {
         this.inject(DummyContainer.container());
     }
 
-    public get<T>(className: string): T {
+    public get<T>(someClass: ClassConstructor<T>, action?: Action): T {
+        return this.getClass(someClass.name);
+    }
+
+    public getClass<T>(className: string): T {
         return this.container.get(className);
     }
 
@@ -21,6 +26,7 @@ export class InversifyAdapter {
 
     private bindControllers(controllers) {
         for (const controller of controllers) {
+            console.log(controller);
             this.container.bind(controller.name).to(controller).inRequestScope();
         }
     }
