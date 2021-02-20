@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  node_ddd_skeleton:
+    build: .
+    restart: unless-stopped
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./src:/code/src
+    env_file: 
+      - ./dev.env
+    command: bash -c "npm run start"
