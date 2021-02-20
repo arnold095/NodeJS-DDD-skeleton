@@ -5,7 +5,7 @@ map.install();
 import "reflect-metadata";
 import { InversifyAdapter } from "./DependencyContainer/InversifyAdapter";
 import { KoaServer } from './Server/KoaServer';
-import { RedisConnection } from '@/Contexts/Shared/Persistence/Redis/RedisConnection';
+import { RedisConnection } from '@/Contexts/Shared/Infrastructure/Persistence/Redis/RedisConnection';
 
 export class App {
     private readonly server: KoaServer;

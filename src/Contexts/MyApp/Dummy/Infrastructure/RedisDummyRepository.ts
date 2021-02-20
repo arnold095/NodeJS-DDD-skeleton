@@ -1,4 +1,4 @@
-import { RedisClient } from "@/Contexts/Shared/Persistence/Redis/RedisClient";
+import { RedisClient } from "@/Contexts/Shared/Infrastructure/Persistence/Redis/RedisClient";
 import { Dummy } from "../Domain/Dummy";
 import { DummyRepository } from "../Domain/DummyRepository";
 import { DummyContent } from "../Domain/ValueObject/DummyContent";
