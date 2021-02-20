@@ -1,9 +1,10 @@
 import { Container as InversifyContainer } from 'inversify';
+import { DummyContainer } from './Containers/DummyContainer';
 export class InversifyAdapter {
     private container: InversifyContainer;
 
     constructor() {
-
+        this.inject(DummyContainer.container());
     }
 
     public get<T>(className: string): T {
