@@ -8,8 +8,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "types": [
-      "reflect-metadata",
-      "jest"
+      "reflect-metadata"
     ],
     "typeRoots": [
       "./types",
