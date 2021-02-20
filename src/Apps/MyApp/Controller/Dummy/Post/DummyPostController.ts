@@ -1,6 +1,7 @@
 import { DummyCreator } from "@/Contexts/MyApp/Dummy/Application/DummyCreator";
+import { DummyCreatorRequest } from "@/Contexts/MyApp/Dummy/Application/DummyCreatorRequest";
 import { inject, injectable } from "inversify";
-import { Controller, Post } from "routing-controllers";
+import { Body, Controller, Post } from "routing-controllers";
 
 @injectable()
 @Controller('/dummy')
@@ -12,7 +13,7 @@ export class DummyPostController {
     }
 
     @Post('/save')
-    public async run() {
-        await this.dummyCreator.run();
+    public async run(@Body() request: DummyCreatorRequest ) {
+        await this.dummyCreator.run(request);
     }
 }
