@@ -19,11 +19,12 @@ export class DummyCreator {
         const content = new DummyContent(request.content);
         await this.ensureDoesNotExist(id);
         const dummy = Dummy.create(id, title, content);
-        await this.repository.create(dummy);
+        await this.repository.save(dummy);
     }
 
     private async ensureDoesNotExist(id: DummyId) {
-        if (this.repository.find(id)) {
+        const dummy = await this.repository.find(id);
+        if (undefined !== dummy) {
             throw new DummyAlreadyExist('Dummy already exists');
         }
     }

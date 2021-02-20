@@ -1,15 +1,33 @@
 import { RedisClient } from "@/Contexts/Shared/Persistence/Redis/RedisClient";
-import { injectable } from "inversify";
 import { Dummy } from "../Domain/Dummy";
 import { DummyRepository } from "../Domain/DummyRepository";
+import { DummyContent } from "../Domain/ValueObject/DummyContent";
+import { DummyId } from "../Domain/ValueObject/DummyId";
+import { DummyTitle } from "../Domain/ValueObject/DummyTitle";
 
 
 export class RedisDummyRepository extends RedisClient implements DummyRepository {
-    public async find(): Promise<Dummy> {
-        throw new Error("Method not implemented.");
+    public async find(id: DummyId): Promise<Dummy> {
+        let dummy: Dummy;
+        const dummyFound = await this.get(id.value);
+        console.log(dummyFound);
+        if (null !== dummyFound) {
+            dummy = new Dummy(
+                new DummyId(dummyFound.id),
+                new DummyTitle(dummyFound.title),
+                new DummyContent(dummyFound.content)
+            );
+        }
+        return dummy;
     }
-    public async create(dummy: Dummy): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async save(dummy: Dummy): Promise<void> {
+        const primitives = {
+            id: dummy.id.value,
+            title: dummy.title.value,
+            content: dummy.title.value
+        };
+        await this.set(dummy.id.value, primitives);
     }
 
 }
