@@ -12,3 +12,10 @@ services:
     env_file: 
       - ./dev.env
     command: bash -c "npm run start:dev"
+  redis_ddd_skeleton:
+    image: redis:6.0.10-alpine
+    container_name: redis_ddd_skeleton
+    logging:
+      driver: none
+    ports:
+      - 6379:6379
