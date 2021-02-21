@@ -1,5 +1,5 @@
-import { DummyCreator } from "@/Contexts/MyApp/Dummy/Application/DummyCreator";
-import { DummyCreatorRequest } from "@/Contexts/MyApp/Dummy/Application/DummyCreatorRequest";
+import { DummyCreator } from "@/Contexts/MyApp/Dummy/Application/Create/DummyCreator";
+import { DummyCreatorRequest } from "@/Contexts/MyApp/Dummy/Application/Create/DummyCreatorRequest";
 import { inject, injectable } from "inversify";
 import { Body, Controller, Post } from "routing-controllers";
 

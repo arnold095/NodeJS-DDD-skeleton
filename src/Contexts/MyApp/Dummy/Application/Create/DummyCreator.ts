@@ -1,10 +1,10 @@
 import { inject, injectable } from "inversify";
-import { Dummy } from "../Domain/Dummy";
-import { DummyRepository } from "../Domain/DummyRepository";
-import { DummyAlreadyExist } from "../Domain/Exception/DummyAlreadyExist";
-import { DummyContent } from "../Domain/ValueObject/DummyContent";
-import { DummyId } from "../Domain/ValueObject/DummyId";
-import { DummyTitle } from "../Domain/ValueObject/DummyTitle";
+import { Dummy } from "../../Domain/Dummy";
+import { DummyRepository } from "../../Domain/DummyRepository";
+import { DummyAlreadyExist } from "../../Domain/Exception/DummyAlreadyExist";
+import { DummyContent } from "../../Domain/ValueObject/DummyContent";
+import { DummyId } from "../../Domain/ValueObject/DummyId";
+import { DummyTitle } from "../../Domain/ValueObject/DummyTitle";
 import { DummyCreatorRequest } from "./DummyCreatorRequest";
 @injectable()
 export class DummyCreator {

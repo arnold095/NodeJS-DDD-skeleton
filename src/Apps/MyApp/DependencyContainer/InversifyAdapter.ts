@@ -1,11 +1,13 @@
 import { Container as InversifyContainer } from 'inversify';
 import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
 import { DummyContainer } from './Containers/DummyContainer';
+import { SharedContainer } from './Containers/SharedContainer';
 export class InversifyAdapter implements IocAdapter {
     private container: InversifyContainer = new InversifyContainer();
 
     constructor() {
         this.inject(DummyContainer.container());
+        this.inject(SharedContainer.getContainer());
     }
 
     public get<T>(someClass: ClassConstructor<T>, action?: Action): T {
