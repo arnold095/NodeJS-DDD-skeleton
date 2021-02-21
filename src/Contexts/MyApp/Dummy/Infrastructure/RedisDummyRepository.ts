@@ -2,6 +2,7 @@ import { RedisClient } from "@/Contexts/Shared/Infrastructure/Persistence/Redis/
 import { Dummy } from "../Domain/Dummy";
 import { DummyRepository } from "../Domain/DummyRepository";
 import { DummyContent } from "../Domain/ValueObject/DummyContent";
+import { DummyEmail } from "../Domain/ValueObject/DummyEmail";
 import { DummyId } from "../Domain/ValueObject/DummyId";
 import { DummyTitle } from "../Domain/ValueObject/DummyTitle";
 
@@ -14,7 +15,8 @@ export class RedisDummyRepository extends RedisClient implements DummyRepository
             dummy = new Dummy(
                 new DummyId(dummyFound.id),
                 new DummyTitle(dummyFound.title),
-                new DummyContent(dummyFound.content)
+                new DummyContent(dummyFound.content),
+                new DummyEmail(dummyFound.email)
             );
         }
         return dummy;
@@ -24,7 +26,8 @@ export class RedisDummyRepository extends RedisClient implements DummyRepository
         const primitives = {
             id: dummy.id.value,
             title: dummy.title.value,
-            content: dummy.title.value
+            content: dummy.title.value,
+            email: dummy.email.value
         };
         await this.set(dummy.id.value, primitives);
     }

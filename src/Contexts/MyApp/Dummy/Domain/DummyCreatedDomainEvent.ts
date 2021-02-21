@@ -3,13 +3,15 @@ import { DomainEvent } from "@/Contexts/Shared/Domain/Bus/Event/DomainEvent";
 export type DummyCreatedDomainEventBody = {
     readonly title: string;
     readonly content: string;
+    readonly email: string;
 };
 
 export class DummyCreatedDomainEvent extends DomainEvent {
     private static readonly _eventName = 'dummy.created';
 
     public constructor(private readonly _id: string, private readonly _title: string,
-        private readonly _content: string, eventId?: string, occurredOn?: Date) {
+        private readonly _content: string, private readonly _email: string,
+        eventId?: string, occurredOn?: Date) {
         super(_id, DummyCreatedDomainEvent.eventName, eventId, occurredOn);
     }
 
@@ -29,11 +31,15 @@ export class DummyCreatedDomainEvent extends DomainEvent {
         return this._content;
     }
 
+    public get email(): string {
+        return this._email;
+    }
 
     public toPrimitives(): DummyCreatedDomainEventBody {
         return {
             title: this.title,
-            content: this.content
+            content: this.content,
+            email: this.email
         };
     }
 
@@ -43,6 +49,7 @@ export class DummyCreatedDomainEvent extends DomainEvent {
             aggregateId,
             body.title,
             body.content,
+            body.email,
             eventId,
             occurredOn
         );
