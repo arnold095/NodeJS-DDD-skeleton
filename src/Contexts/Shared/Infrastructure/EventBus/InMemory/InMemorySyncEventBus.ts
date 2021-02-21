@@ -21,7 +21,7 @@ export class InMemorySyncEventBus implements EventBus {
             const subscribers = this.subscriptions.get(event.eventName);
             if (subscribers) {
                 return subscribers.map(subscriber => {
-                    executions.push(subscriber);
+                    executions.push(subscriber.boundedCallback(event));
                 });
             }
         });
