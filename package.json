@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest -c jest.config.js --coverage",
+    "test:watch": "jest -c jest.config.unit.js  --watch",
+    "test:unit": "jest -c jest.config.unit.js",
+    "test:integration": "jest -c jest.config.integration.js",
     "start:dev": "tsc-watch --onSuccess \"node ./dist/Apps/MyApp/App.js mode=dev\"  --compiler typescript/bin/tsc"
   },
   "repository": {
