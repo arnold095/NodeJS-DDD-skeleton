@@ -10,7 +10,6 @@ export class RedisDummyRepository extends RedisClient implements DummyRepository
     public async find(id: DummyId): Promise<Dummy> {
         let dummy: Dummy;
         const dummyFound = await this.get(id.value);
-        console.log(dummyFound);
         if (null !== dummyFound) {
             dummy = new Dummy(
                 new DummyId(dummyFound.id),
