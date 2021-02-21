@@ -3,6 +3,7 @@ import { RabbitMQConnection } from "@/Contexts/Shared/Infrastructure/EventBus/Ra
 import { DomainEvent } from "@/Contexts/Shared/Domain/Bus/Event/DomainEvent";
 import { EventBus } from "@/Contexts/Shared/Domain/Bus/Event/EventBus";
 import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
+import { DomainEventJsonSerializer } from "@/Contexts/Shared/Infrastructure/EventBus/DomainEventJsonSerializer";
 
 @injectable()
 export class RabbitMQEventBus implements EventBus {
@@ -36,7 +37,7 @@ export class RabbitMQEventBus implements EventBus {
         const eventParams = {
             routingKey: event.eventName,
             messageId: event.eventId,
-            body: ''
+            body: DomainEventJsonSerializer.serialize(event)
         };
         await this.connection.exchange(this.exchangeName, eventParams);
     }
