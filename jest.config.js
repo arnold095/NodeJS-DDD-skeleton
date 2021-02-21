@@ -1,3 +1,4 @@
+require('dotenv').config({path: './dev.test.env'});
 module.exports = {
     clearMocks: true,
     collectCoverage: true,
