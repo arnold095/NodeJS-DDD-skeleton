@@ -17,7 +17,7 @@ export class Mail {
     static create(from: MailAddress, to: MailAddress,
         subject: MailSubject, body: MailBody):Mail {
         return new Mail(
-            new MailId(Uuid.random()), 
+            new MailId(Uuid.random().value), 
             from, 
             to, 
             subject, 
