@@ -1,6 +1,7 @@
 import { Container as InversifyContainer } from 'inversify';
 import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
 import { DummyContainer } from './Containers/DummyContainer';
+import { NotificationsContainer } from './Containers/NotificationsContainer';
 import { SharedContainer } from './Containers/SharedContainer';
 export class InversifyAdapter implements IocAdapter {
     private container: InversifyContainer = new InversifyContainer();
@@ -8,6 +9,7 @@ export class InversifyAdapter implements IocAdapter {
     constructor() {
         this.inject(DummyContainer.container());
         this.inject(SharedContainer.getContainer());
+        this.inject(NotificationsContainer.getContainer());
     }
 
     public get<T>(someClass: ClassConstructor<T>, action?: Action): T {
