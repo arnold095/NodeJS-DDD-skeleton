@@ -1,4 +1,4 @@
-import { DummyCreator } from "@/Contexts/MyApp/Dummy/Application/DummyCreator";
+import { DummyCreator } from "@/Contexts/MyApp/Dummy/Application/Create/DummyCreator";
 import { RedisDummyRepository } from "@/Contexts/MyApp/Dummy/Infrastructure/RedisDummyRepository";
 import { DummyPostController } from "../../Controller/Dummy/Post/DummyPostController";
 import { ContainerTypes } from "../ContainerTypes";
