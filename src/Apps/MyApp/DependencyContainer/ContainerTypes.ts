@@ -5,6 +5,7 @@ export type ContainerTypes = {
         abstract: string,
         concrete: any
     }[];
+    domainEventSubscribers?: any[];
     buses?: {
         abstract: string,
         concrete: any

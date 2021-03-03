@@ -7,7 +7,10 @@ export class NotificationsContainer {
     public static getContainer(): ContainerTypes {
         return {
             services: [
-                SendWelcomeDummyMail, SendWelcomeDummyMailOnDummyCreated
+                SendWelcomeDummyMail
+            ],
+            domainEventSubscribers: [
+                SendWelcomeDummyMailOnDummyCreated,
             ],
             repositories: [
                 {

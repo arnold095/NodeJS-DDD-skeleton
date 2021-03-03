@@ -1,7 +1,6 @@
 import { DummyCreatedDomainEvent } from "@/Contexts/MyApp/Dummy/Domain/DummyCreatedDomainEvent";
 import { DomainEvent } from "@/Contexts/Shared/Domain/Bus/Event/DomainEvent";
 import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
-import { eventSubscriber } from "@/Contexts/Shared/Domain/Decorators/EventSubscriber";
 import { inject, injectable } from "inversify";
 import { MailAddress } from "../Domain/ValueObject/MailAddress";
 import { MailBody } from "../Domain/ValueObject/MailBody";
@@ -9,8 +8,7 @@ import { MailSubject } from "../Domain/ValueObject/MailSubject";
 import { SendWelcomeDummyMail } from "./SendWelcomeDummyMail";
 
 @injectable()
-@eventSubscriber()
-export class SendWelcomeDummyMailOnDummyCreated implements DomainEventSubscriber<DummyCreatedDomainEvent>{
+export class SendWelcomeDummyMailOnDummyCreated implements DomainEventSubscriber {
     constructor(
         @inject('SendWelcomeDummyMail') private readonly sendMail: SendWelcomeDummyMail
     ) {
