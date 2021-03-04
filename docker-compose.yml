@@ -12,6 +12,9 @@ services:
     env_file: 
       - ./dev.env
     command: bash -c "npm run start:dev"
+    depends_on:
+      - redis_ddd_skeleton
+      - rabbitmq_ddd_skeleton
   redis_ddd_skeleton:
     image: redis:6.0.10-alpine
     container_name: redis_ddd_skeleton
@@ -19,3 +22,13 @@ services:
       driver: none
     ports:
       - 6379:6379
+  rabbitmq_ddd_skeleton:
+    container_name: rabbitmq_ddd_skeleton
+    image: 'rabbitmq:3.8.9-management'
+    restart: unless-stopped
+    ports:
+      - 5630:5672
+      - 8090:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=ddd_skeleton
+      - RABBITMQ_DEFAULT_PASS=ddd_sk3l3t0n
