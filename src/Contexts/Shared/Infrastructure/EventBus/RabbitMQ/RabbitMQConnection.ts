@@ -60,7 +60,7 @@ export class RabbitMQConnection {
         });
     }
 
-    private async checkConnection(): Promise<void> {
+    public async checkConnection(): Promise<void> {
         if (!this.connection) {
             await this.connect();
         }

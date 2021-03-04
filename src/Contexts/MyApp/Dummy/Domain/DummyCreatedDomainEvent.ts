@@ -1,3 +1,4 @@
+import { domainEvent } from "@/Contexts/Shared/Domain/Decorators/DomainEvent";
 import { DomainEvent } from "@/Contexts/Shared/Domain/Bus/Event/DomainEvent";
 
 export type DummyCreatedDomainEventBody = {
@@ -6,6 +7,7 @@ export type DummyCreatedDomainEventBody = {
     readonly email: string;
 };
 
+@domainEvent()
 export class DummyCreatedDomainEvent extends DomainEvent {
     private static readonly _eventName = 'dummy.created';
 
