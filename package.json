@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "amqplib": "^0.7.0",
+    "elastic-apm-node": "^3.12.1",
     "inversify": "^5.0.1",
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
