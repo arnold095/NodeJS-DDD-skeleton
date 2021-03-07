@@ -6,6 +6,8 @@ import { RabbitMQDomainEventsConsumer } from "@/Contexts/Shared/Infrastructure/E
 import { DomainEventMapping } from "@/Contexts/Shared/Infrastructure/EventBus/DomainEventMapping";
 import { DomainEventJsonDeserializer } from "@/Contexts/Shared/Infrastructure/EventBus/DomainEventJsonDeserializer";
 import { DomainEventSubscriberLocator } from "@/Contexts/Shared/Infrastructure/EventBus/DomainEventSubscriberLocator";
+import { TypeORMProvider } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMProvider";
+import { TypeORMClient } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient";
 
 export class SharedContainer {
     public static getContainer(): ContainerTypes {
@@ -13,7 +15,8 @@ export class SharedContainer {
             services: [
                 RabbitMQConnection, RabbitMQConfigurator,
                 RabbitMQDomainEventsConsumer, DomainEventMapping,
-                DomainEventJsonDeserializer, DomainEventSubscriberLocator
+                DomainEventJsonDeserializer, DomainEventSubscriberLocator,
+                TypeORMProvider, TypeORMClient
             ],
             buses: [
                 {
