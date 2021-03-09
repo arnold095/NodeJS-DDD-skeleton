@@ -5,7 +5,7 @@ import { DummyEmail } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyEmail
 import { DummyContent } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyContent";
 import { DummyTitle } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyTitle";
 import { Dummy } from "@/Contexts/MyApp/Dummy/Domain/Dummy";
-import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Decorators/ColumnVO";
+import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO";
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {
