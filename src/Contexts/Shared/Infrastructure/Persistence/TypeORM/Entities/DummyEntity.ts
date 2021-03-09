@@ -6,6 +6,8 @@ import { DummyContent } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyCon
 import { DummyTitle } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyTitle";
 import { Dummy } from "@/Contexts/MyApp/Dummy/Domain/Dummy";
 import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO";
+import { EntityToDomain } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityToDomain";
+import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {
@@ -16,27 +18,28 @@ export class DummyEntity implements PersistenceEntity {
             to: value => value
         }
     })
-    id;
+    private _id;
 
     @ColumnVO('email', DummyEmail)
-    email;
+    private _email;
 
     @ColumnVO('title', DummyTitle)
-    title;
+    private _title;
 
     @ColumnVO('content', DummyContent)
-    content;
+    private _content;
 
-    public toDomainClass(): Dummy {
-        return new Dummy(this.id, this.title, this.content, this.email);
+
+    public toDomainClass(): DomainModel {
+        return EntityToDomain.run(this, Dummy);
     }
 
     public static fromDomainClass(dummy: Dummy): DummyEntity {
         const entity = new DummyEntity();
-        entity.id = dummy.id.value;
-        entity.title = dummy.title.value;
-        entity.content = dummy.content.value;
-        entity.email = dummy.email.value;
+        entity._id = dummy.id.value;
+        entity._title = dummy.title.value;
+        entity._content = dummy.content.value;
+        entity._email = dummy.email.value;
         return entity;
     }
 }

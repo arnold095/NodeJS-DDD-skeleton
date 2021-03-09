@@ -4,10 +4,11 @@ import { DummyContent } from "./ValueObject/DummyContent";
 import { DummyEmail } from "./ValueObject/DummyEmail";
 import { DummyId } from "./ValueObject/DummyId";
 import { DummyTitle } from "./ValueObject/DummyTitle";
+import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 
-export class Dummy extends AggregateRoot {
-    constructor(private readonly _id: DummyId, private readonly _title: DummyTitle,
-        private readonly _content: DummyContent, private readonly _email: DummyEmail) {
+export class Dummy extends AggregateRoot implements DomainModel {
+    constructor(private _id: DummyId, private _title: DummyTitle,
+        private _content: DummyContent, private _email: DummyEmail) {
         super();
     }
 
