@@ -6,8 +6,8 @@ import { DummyContent } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyCon
 import { DummyTitle } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyTitle";
 import { Dummy } from "@/Contexts/MyApp/Dummy/Domain/Dummy";
 import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO";
-import { EntityToDomain } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityToDomain";
 import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
+import { EntityTransformer } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer";
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {
@@ -29,17 +29,11 @@ export class DummyEntity implements PersistenceEntity {
     @ColumnVO('content', DummyContent)
     private _content;
 
-
-    public toDomainClass(): DomainModel {
-        return EntityToDomain.run(this, Dummy);
+    public toDomainModel(): DomainModel {
+        return EntityTransformer.toDomainModel(this, Dummy);
     }
 
-    public static fromDomainClass(dummy: Dummy): DummyEntity {
-        const entity = new DummyEntity();
-        entity._id = dummy.id.value;
-        entity._title = dummy.title.value;
-        entity._content = dummy.content.value;
-        entity._email = dummy.email.value;
-        return entity;
+    public static fromDomainClass(dummy: Dummy): PersistenceEntity {
+        return EntityTransformer.toEntity(dummy, DummyEntity);
     }
 }

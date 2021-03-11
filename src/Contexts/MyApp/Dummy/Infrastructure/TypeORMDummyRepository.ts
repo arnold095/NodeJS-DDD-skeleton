@@ -15,7 +15,7 @@ export class TypeORMDummyRepository extends TypeORMClient implements DummyReposi
         const repository = await this.repository(DummyEntity);
         const entity = await repository.findOne(id.value);
         if (entity) {
-            dummy = entity.toDomainClass();
+            dummy = entity.toDomainModel();
         }
         return dummy;
     }

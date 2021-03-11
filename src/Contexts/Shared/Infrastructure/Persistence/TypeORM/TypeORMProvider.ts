@@ -26,7 +26,7 @@ export class TypeORMProvider {
                 DummyEntity
             ],
             synchronize: false,
-            logging: true,
+            logging: false,
         };
     }
 
