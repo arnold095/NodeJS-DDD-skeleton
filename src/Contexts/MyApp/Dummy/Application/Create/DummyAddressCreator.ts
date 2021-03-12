@@ -8,14 +8,17 @@ import { DummyAddressAlias } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObj
 import { DummyAddressStreet } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressStreet";
 import { DummyAddressCity } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCity";
 import { DummyAddressPostalCode } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressPostalCode";
-import { DummyNotFound } from "@/Contexts/MyApp/Dummy/Domain/Exception/DummyNotFound";
+import { DummyAddressAdder } from "@/Contexts/MyApp/Dummy/Domain/Services/DummyAddressAdder";
 
 @injectable()
 export class DummyAddressCreator {
+    private dummyAddressAdder: DummyAddressAdder;
+
     public constructor(
         @inject('DummyRepository') private readonly repository: DummyRepository,
         @inject('EventBus') private readonly eventBus: EventBus
     ) {
+        this.dummyAddressAdder = new DummyAddressAdder(this.repository);
     }
 
     public async run(request: DummyAddressCreatorRequest): Promise<void> {
@@ -26,15 +29,8 @@ export class DummyAddressCreator {
         const city = new DummyAddressCity(request.city);
         const postalCode = new DummyAddressPostalCode(request.postalCode);
         const country = new DummyAddressPostalCode(request.country);
-        const dummy = await this.repository.find(dummyId);
-        this.ensureDummyExists(dummy);
-        // await this.repository.find()
-        // await this.bus.publish(aggregate.pullDomainEvents());
-    }
-
-    private ensureDummyExists(dummy) {
-        if(undefined === dummy){
-            throw new DummyNotFound(`Dummy doesn't exist`);
-        }
+        const dummy = await this.dummyAddressAdder.run(id, dummyId, alias,
+            street, city, postalCode, country);
+        await this.eventBus.publish(dummy.pullDomainEvents());
     }
 }
