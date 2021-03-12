@@ -7,6 +7,7 @@ import { DummyTitle } from "./ValueObject/DummyTitle";
 import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 import { DummyAddress } from "@/Contexts/MyApp/DummyAddress/Domain/DummyAddress";
 import { DummyAddressId } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId";
+import { DummyAddressCreatedDomainEvent } from "@/Contexts/MyApp/Dummy/Domain/DummyAddressCreatedDomainEvent";
 
 export class Dummy extends AggregateRoot implements DomainModel {
     private _addresses: DummyAddress[] = [];
@@ -24,6 +25,22 @@ export class Dummy extends AggregateRoot implements DomainModel {
             email.value
         ));
         return dummy;
+    }
+
+    public saveAddress(dummyAddress: DummyAddress) {
+        this.addresses.push(dummyAddress);
+        const domainEvent = new DummyAddressCreatedDomainEvent(
+            this.id.value,
+            dummyAddress.id.value,
+            dummyAddress.alias.value,
+            dummyAddress.street.value,
+            dummyAddress.city.value,
+            dummyAddress.postalCode.value,
+            dummyAddress.country.value,
+            dummyAddress.dateAdd.value,
+            dummyAddress.dateUpd.value,
+        );
+        this.record(domainEvent);
     }
 
     public get id(): DummyId {
@@ -48,9 +65,5 @@ export class Dummy extends AggregateRoot implements DomainModel {
 
     public findAddress(id: DummyAddressId) {
         this.addresses.find(address => address.id.equals(id));
-    }
-
-    public saveAddress(dummyAddress: DummyAddress) {
-        this.addresses.push(dummyAddress);
     }
 }

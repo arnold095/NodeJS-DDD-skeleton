@@ -12,8 +12,8 @@ export class DummyCreatedDomainEvent extends DomainEvent {
     private static readonly _eventName = 'dummy.created';
 
     public constructor(private readonly _id: string, private readonly _title: string,
-        private readonly _content: string, private readonly _email: string,
-        eventId?: string, occurredOn?: Date) {
+                       private readonly _content: string, private readonly _email: string,
+                       eventId?: string, occurredOn?: Date) {
         super(_id, DummyCreatedDomainEvent.eventName, eventId, occurredOn);
     }
 
@@ -46,7 +46,7 @@ export class DummyCreatedDomainEvent extends DomainEvent {
     }
 
     public static fromPrimitives(aggregateId: string, body: DummyCreatedDomainEventBody,
-        eventId: string, occurredOn: Date): DummyCreatedDomainEvent {
+                                 eventId: string, occurredOn: Date): DummyCreatedDomainEvent {
         return new DummyCreatedDomainEvent(
             aggregateId,
             body.title,
