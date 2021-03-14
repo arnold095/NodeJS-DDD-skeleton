@@ -31,6 +31,7 @@ export class DummyAddressCreator {
         const country = new DummyAddressPostalCode(request.country);
         const dummy = await this.dummyAddressAdder.run(id, dummyId, alias,
             street, city, postalCode, country);
+        await this.repository.save(dummy);
         await this.eventBus.publish(dummy.pullDomainEvents());
     }
 }

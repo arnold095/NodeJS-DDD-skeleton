@@ -2,7 +2,6 @@ import { ConnectionNotFoundError, createConnection, getConnection } from 'typeor
 import { ConnectionOptions } from "typeorm/connection/ConnectionOptions";
 import { Connection } from "typeorm/connection/Connection";
 import { injectable } from "inversify";
-import { DummyEntity } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyEntity";
 
 @injectable()
 export class TypeORMProvider {
@@ -23,7 +22,7 @@ export class TypeORMProvider {
             username: process.env.MYSQL_USER,
             password: process.env.MYSQL_PASSWORD,
             entities: [
-                DummyEntity
+                __dirname + '/Entities/*.js',
             ],
             synchronize: false,
             logging: false,

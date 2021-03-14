@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn } from "typeorm";
+import { Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { DummyId } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId";
 import { PersistenceEntity } from "@/Contexts/Shared/Domain/Persistence/PersistenceEntity";
 import { DummyEmail } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyEmail";
@@ -8,6 +8,7 @@ import { Dummy } from "@/Contexts/MyApp/Dummy/Domain/Dummy";
 import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO";
 import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 import { EntityTransformer } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer";
+import { DummyAddressEntity } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyAddressEntity";
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {
@@ -28,6 +29,11 @@ export class DummyEntity implements PersistenceEntity {
 
     @ColumnVO('content', DummyContent)
     private _content;
+
+    @OneToMany(() => DummyAddressEntity, address => address.dummy, {
+        eager: true
+    })
+    _addresses: DummyAddressEntity[];
 
     public toDomainModel(): DomainModel {
         return EntityTransformer.toDomainModel(this, Dummy);
