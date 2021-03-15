@@ -8,8 +8,9 @@ import { DummyAddressDateAdd } from "@/Contexts/MyApp/DummyAddress/Domain/ValueO
 import { DummyAddressDateUpd } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateUpd";
 import { DummyId } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId";
 import { DateValueObject } from "@/Contexts/Shared/Domain/ValueObject/DateValueObject";
+import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 
-export class DummyAddress {
+export class DummyAddress implements DomainModel {
     public constructor(private _id: DummyAddressId,
                        private _dummyId: DummyId,
                        private _alias: DummyAddressAlias,

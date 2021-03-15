@@ -9,16 +9,12 @@ import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/D
 import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 import { EntityTransformer } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer";
 import { DummyAddressEntity } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyAddressEntity";
+import { DummyAddress } from "@/Contexts/MyApp/DummyAddress/Domain/DummyAddress";
+import { PrimaryColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO";
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {
-    @PrimaryColumn({
-        name: 'id_dummy', type: 'uuid',
-        transformer: {
-            from: value => new DummyId(value),
-            to: value => value
-        }
-    })
+    @PrimaryColumnVO('id_dummy', DummyId)
     private _id;
 
     @ColumnVO('email', DummyEmail)
@@ -30,16 +26,21 @@ export class DummyEntity implements PersistenceEntity {
     @ColumnVO('content', DummyContent)
     private _content;
 
-    @OneToMany(() => DummyAddressEntity, address => address.dummy, {
-        eager: true
+    @OneToMany(type => DummyAddressEntity, address => address.dummy, {
+        eager: true,
+        cascade: ['insert', "update"]
     })
-    _addresses: DummyAddressEntity[];
+    public _addresses;
 
     public toDomainModel(): DomainModel {
+        this._addresses = EntityTransformer.toDomainModels(this._addresses, DummyAddress);
         return EntityTransformer.toDomainModel(this, Dummy);
     }
 
     public static fromDomainClass(dummy: Dummy): PersistenceEntity {
-        return EntityTransformer.toEntity(dummy, DummyEntity);
+        const addresses = EntityTransformer.toEntities(dummy.addresses, DummyAddressEntity);
+        const dummyEntity = EntityTransformer.toEntity(dummy, DummyEntity);
+        dummyEntity._addresses = addresses;
+        return dummyEntity;
     }
 }

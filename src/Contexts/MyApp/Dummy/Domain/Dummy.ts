@@ -59,7 +59,7 @@ export class Dummy extends AggregateRoot implements DomainModel {
         return this._addresses;
     }
 
-    public findAddress(id: DummyAddressId) {
-        this.addresses.find(address => address.id.equals(id));
+    public findAddress(id: DummyAddressId): DummyAddress {
+        return this.addresses.find(address => address.id.equals(id));
     }
 }

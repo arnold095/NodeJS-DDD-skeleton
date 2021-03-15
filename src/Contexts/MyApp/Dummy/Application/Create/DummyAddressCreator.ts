@@ -9,6 +9,7 @@ import { DummyAddressStreet } from "@/Contexts/MyApp/DummyAddress/Domain/ValueOb
 import { DummyAddressCity } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCity";
 import { DummyAddressPostalCode } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressPostalCode";
 import { DummyAddressAdder } from "@/Contexts/MyApp/Dummy/Domain/Services/DummyAddressAdder";
+import { DummyAddressCountry } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCountry";
 
 @injectable()
 export class DummyAddressCreator {
@@ -28,7 +29,7 @@ export class DummyAddressCreator {
         const street = new DummyAddressStreet(request.street);
         const city = new DummyAddressCity(request.city);
         const postalCode = new DummyAddressPostalCode(request.postalCode);
-        const country = new DummyAddressPostalCode(request.country);
+        const country = new DummyAddressCountry(request.country);
         const dummy = await this.dummyAddressAdder.run(id, dummyId, alias,
             street, city, postalCode, country);
         await this.repository.save(dummy);

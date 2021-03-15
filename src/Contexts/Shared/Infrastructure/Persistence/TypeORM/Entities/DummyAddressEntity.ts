@@ -14,36 +14,34 @@ import { DummyAddressCountry } from "@/Contexts/MyApp/DummyAddress/Domain/ValueO
 import { DummyAddressDateAdd } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateAdd";
 import { DummyAddressDateUpd } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateUpd";
 import { DummyAddressId } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId";
-import { Transform } from "class-transformer";
+import { PrimaryColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO";
+import { DummyAddressStreet } from "@/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressStreet";
 
 @Entity('dummy_address')
 export class DummyAddressEntity implements PersistenceEntity {
 
-    @PrimaryColumn({
-        name: 'id_dummy_address', type: 'uuid',
-        transformer: {
-            from: value => new DummyAddressId(value),
-            to: value => value
-        }
-    })
-    dummyAddressId;
+    @PrimaryColumnVO('id_dummy_address', DummyAddressId)
+    _id;
     @ColumnVO('id_dummy', DummyId)
-    dummyId;
+    _dummyId;
     @ColumnVO('alias', DummyAddressAlias)
-    alias;
+    _alias;
     @ColumnVO('city', DummyAddressCity)
-    city;
+    _city;
+    @ColumnVO('street', DummyAddressStreet)
+    _street;
     @ColumnVO('postal_code', DummyAddressPostalCode)
-    postalCode;
+    _postalCode;
     @ColumnVO('country', DummyAddressCountry)
-    country;
+    _country;
     @ColumnVO('date_add', DummyAddressDateAdd)
-    dateAdd;
+    _dateAdd;
     @ColumnVO('date_upd', DummyAddressDateUpd)
-    dateUpd;
+    _dateUpd;
 
     @ManyToOne(() => DummyEntity, dummy => dummy._addresses, {
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        cascade: ['insert', "update"]
     })
     @JoinColumn({name: 'id_dummy'})
     dummy: DummyEntity;
