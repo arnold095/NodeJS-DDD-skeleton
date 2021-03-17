@@ -1,6 +1,5 @@
-import { useContainer, useKoaServer, IocAdapter } from 'routing-controllers';
+import { IocAdapter, useContainer, useKoaServer } from 'routing-controllers';
 import * as Koa from 'koa';
-import { DummyPostController } from '../Controller/Dummy/Post/DummyPostController';
 
 export class KoaServer {
     private server: Koa;
@@ -15,7 +14,9 @@ export class KoaServer {
         useContainer(this.container)
         const koaServer = useKoaServer(this.server, {
             routePrefix: '/api',
-            controllers: [DummyPostController]
+            controllers: [
+                __dirname + '/../Controller/**/*.js',
+            ]
         });
         koaServer.listen(this.serverPort);
         console.log(`Server running at port ${this.serverPort}`);

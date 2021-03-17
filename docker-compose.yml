@@ -36,6 +36,21 @@ services:
       driver: none
     ports:
       - 6379:6379
+  mariadb_ddd_skeleton:
+    image: mariadb:10.5
+    logging:
+      driver: none
+    container_name: mariadb_ddd_skeleton
+    restart: unless-stopped
+    ports:
+      - '3307:3306'
+    networks:
+      - "node_ddd_skeleton"
+    environment:
+      MYSQL_DATABASE: node_ddd_skeleton
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123qwe
+      MYSQL_ROOT_PASSWORD: 123qwe
   rabbitmq_ddd_skeleton:
     container_name: rabbitmq_ddd_skeleton
     image: 'rabbitmq:3.8.9-management'
