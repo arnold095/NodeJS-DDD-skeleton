@@ -14,7 +14,10 @@ export function PrimaryColumnVO(columnName: string, valueObject: any, type: Colu
                 primary: true,
                 nullable: false,
                 transformer: {
-                    from: value => new valueObject(value),
+                    from: value => {
+                        if (value) value = new valueObject(value);
+                        return value;
+                    },
                     to: (value) => {
                         let val = value;
                         if (value instanceof valueObject) return value.value;

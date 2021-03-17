@@ -11,7 +11,10 @@ export function ColumnVO(columnName: string, valueObject: any, type: string= 'va
                 name: columnName,
                 type,
                 transformer: {
-                    from: value => new valueObject(value),
+                    from: value => {
+                        if (value) value = new valueObject(value);
+                        return value;
+                    },
                     to: (value) => {
                         let val = value;
                         if(value instanceof valueObject) return value.value;

@@ -28,7 +28,7 @@ export class Dummy extends AggregateRoot implements DomainModel {
     }
 
     public saveAddress(dummyAddress: DummyAddress) {
-        this.addresses.push(dummyAddress);
+        this._addresses.push(dummyAddress);
         const domainEvent = new DummyAddressCreatedDomainEvent(
             this.id.value, dummyAddress.id.value,
             dummyAddress.alias.value, dummyAddress.street.value,

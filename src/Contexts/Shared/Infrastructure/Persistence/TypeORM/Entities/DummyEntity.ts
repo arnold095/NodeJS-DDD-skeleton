@@ -1,4 +1,4 @@
-import { Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Entity, OneToMany } from "typeorm";
 import { DummyId } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId";
 import { PersistenceEntity } from "@/Contexts/Shared/Domain/Persistence/PersistenceEntity";
 import { DummyEmail } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyEmail";
@@ -38,9 +38,10 @@ export class DummyEntity implements PersistenceEntity {
     }
 
     public static fromDomainClass(dummy: Dummy): PersistenceEntity {
-        const addresses = EntityTransformer.toEntities(dummy.addresses, DummyAddressEntity);
         const dummyEntity = EntityTransformer.toEntity(dummy, DummyEntity);
-        dummyEntity._addresses = addresses;
+        if (dummy.addresses) {
+            dummyEntity._addresses = EntityTransformer.toEntities(dummy.addresses, DummyAddressEntity);
+        }
         return dummyEntity;
     }
 }
