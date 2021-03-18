@@ -7,8 +7,8 @@ import { UserAuthPasswordMother } from "../../Domain/UserAuthPasswordMother";
 
 export class UserRegisterRequestMother {
     public static create(
-        id?: string, firstName?: string,
-        lastName?: string, email?: string,
+        id?: string, email?: string,
+        firstName?: string, lastName?: string,
         password?: string
     ) {
         return new UserRegisterRequest(

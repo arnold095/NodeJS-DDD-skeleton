@@ -5,6 +5,10 @@ import { UserRegisterRequest } from "@/Contexts/Auth/Application/UserRegisterReq
 import { UserAuthId } from "@/Contexts/Auth/Domain/ValueObject/UserAuthId";
 import { UserAlreadyExists } from "@/Contexts/Auth/Domain/Exception/UserAlreadyExists";
 import { UserAuthEmail } from "@/Contexts/Auth/Domain/ValueObject/UserAuthEmail";
+import { UserAuthFirstName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthFirstName";
+import { UserAuthLastName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthLastName";
+import { UserAuthPassword } from "@/Contexts/Auth/Domain/ValueObject/UserAuthPassword";
+import { UserAuth } from "@/Contexts/Auth/Domain/UserAuth";
 
 @injectable()
 export class UserRegister {
@@ -16,10 +20,15 @@ export class UserRegister {
     }
 
     public async run(request: UserRegisterRequest): Promise<void> {
-        const userId = new UserAuthId(request.id);
-        const userEmail = new UserAuthEmail(request.email);
-        await this.ensureUserDoesNotExist(userEmail);
-        // await this.bus.publish(aggregate.pullDomainEvents());
+        const id = new UserAuthId(request.id);
+        const email = new UserAuthEmail(request.email);
+        await this.ensureUserDoesNotExist(email);
+        const firstName = new UserAuthFirstName(request.firstName);
+        const lastName = new UserAuthLastName(request.lastName);
+        const password = new UserAuthPassword(request.password);
+        const user = UserAuth.register(id, firstName, lastName, email, password);
+        await this.repository.save(user);
+        await this.bus.publish(user.pullDomainEvents());
     }
 
     private async ensureUserDoesNotExist(email: UserAuthEmail) {
