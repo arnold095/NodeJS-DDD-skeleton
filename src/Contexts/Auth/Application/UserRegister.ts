@@ -25,7 +25,7 @@ export class UserRegister {
         await this.ensureUserDoesNotExist(email);
         const firstName = new UserAuthFirstName(request.firstName);
         const lastName = new UserAuthLastName(request.lastName);
-        const password = new UserAuthPassword(request.password);
+        const password = await this.processAndHashPassword(request.password);
         const user = UserAuth.register(id, firstName, lastName, email, password);
         await this.repository.save(user);
         await this.bus.publish(user.pullDomainEvents());
@@ -40,5 +40,11 @@ export class UserRegister {
         if (undefined !== user) {
             throw new UserAlreadyExists(`The email ${email.value} already exists`);
         }
+    }
+
+    private async processAndHashPassword(passwordRequest: string) {
+        const password = new UserAuthPassword(passwordRequest);
+        const hashedPassword = await password.hashValue();
+        return new UserAuthPassword(hashedPassword);
     }
 }
