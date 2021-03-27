@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import { Controller, Get, Param, Post, Req } from "routing-controllers";
+import { Controller, Get, HttpCode, Param } from "routing-controllers";
 import { DummyFinder } from "@/Contexts/MyApp/Dummy/Application/Find/DummyFinder";
 import { DummyFinderRequest } from "@/Contexts/MyApp/Dummy/Application/Find/DummyFinderRequest";
 
@@ -12,8 +12,9 @@ export class DummyGetController {
     }
 
     @Get('/:id')
-    public async run(@Param('id') id: string) {//
+    @HttpCode(200)
+    public async run(@Param('id') id: string) {
         const request = new DummyFinderRequest(id);
-        await this.finder.run(request);
+        return await this.finder.run(request);//TODO: DTO Response
     }
 }

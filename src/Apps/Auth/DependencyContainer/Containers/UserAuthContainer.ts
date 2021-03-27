@@ -1,0 +1,32 @@
+import { ContainerTypes } from '@/Apps/MyApp/DependencyContainer/ContainerTypes';
+import { RegisterController } from "@/Apps/Auth/Controller/Post/RegisterController";
+import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Authentication/Infrastructure/TypeOrmUserAuthRepository";
+import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";
+import { UserEncoder } from "@/Contexts/Auth/Authorization/Application/UserEncoder";
+import { JWTAuthorizationUserEncode } from "@/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode";
+import { LoginController } from "@/Apps/Auth/Controller/Post/LoginController";
+import { UserLogin } from "@/Contexts/Auth/Authentication/Application/UserLogin";
+
+export class UserAuthContainer {
+
+    public static getContainer(): ContainerTypes {
+        return {
+            controllers: [
+                RegisterController, LoginController
+            ],
+            services: [
+                UserRegister, UserEncoder, UserLogin
+            ],
+            repositories: [
+                {
+                    abstract: 'UserAuthRepository',
+                    concrete: TypeOrmUserAuthRepository
+                },
+                {
+                    abstract: 'AuthorizationUserEncode',
+                    concrete: JWTAuthorizationUserEncode
+                }
+            ]
+        };
+    }
+}

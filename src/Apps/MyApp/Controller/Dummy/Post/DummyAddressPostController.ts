@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Body, Controller, Post } from "routing-controllers";
+import { Body, Controller, OnUndefined, Post } from "routing-controllers";
 import { DummyAddressCreator } from "@/Contexts/MyApp/Dummy/Application/Create/DummyAddressCreator";
 import { DummyAddressCreatorRequest } from "@/Contexts/MyApp/Dummy/Application/Create/DummyAddressCreatorRequest";
 
@@ -12,6 +12,7 @@ export class DummyAddressPostController {
     }
 
     @Post('/save')
+    @OnUndefined(202)
     public async run(@Body() request: DummyAddressCreatorRequest) {
         await this.addressCreator.run(request);
     }
