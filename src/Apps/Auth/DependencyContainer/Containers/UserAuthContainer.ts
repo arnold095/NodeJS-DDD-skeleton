@@ -2,6 +2,8 @@ import { ContainerTypes } from '@/Apps/MyApp/DependencyContainer/ContainerTypes'
 import { RegisterController } from "@/Apps/Auth/Controller/Post/RegisterController";
 import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Authentication/Infrastructure/TypeOrmUserAuthRepository";
 import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";
+import { UserEncoder } from "@/Contexts/Auth/Authorization/Application/UserEncoder";
+import { JWTAuthorizationUserEncode } from "@/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode";
 
 export class UserAuthContainer {
 
@@ -11,12 +13,16 @@ export class UserAuthContainer {
                 RegisterController
             ],
             services: [
-                UserRegister
+                UserRegister, UserEncoder
             ],
             repositories: [
                 {
                     abstract: 'UserAuthRepository',
                     concrete: TypeOrmUserAuthRepository
+                },
+                {
+                    abstract: 'AuthorizationUserEncode',
+                    concrete: JWTAuthorizationUserEncode
                 }
             ]
         };

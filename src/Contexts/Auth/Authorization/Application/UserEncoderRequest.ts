@@ -1,5 +1,5 @@
 export class UserEncoderRequest {
-    constructor(readonly id, readonly name,
-                readonly lastName, readonly email) {
+    constructor(readonly id: string, readonly name: string,
+                readonly lastName: string, readonly email: string) {
     }
 }

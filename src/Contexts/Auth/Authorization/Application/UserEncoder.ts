@@ -14,13 +14,13 @@ export class UserEncoder {
     ) {
     }
 
-    public async run(request: UserEncoderRequest): Promise<any> {
+    public run(request: UserEncoderRequest): string {
         const user = AuthorizationUser.create(
             new UserAuthId(request.id),
             new UserAuthFirstName(request.name),
-            new UserAuthLastName(request.name),
-            new UserAuthEmail(request.name),
+            new UserAuthLastName(request.lastName),
+            new UserAuthEmail(request.email),
         );
-        return await this.encoder.encode(user);
+        return this.encoder.encode(user);
     }
 }

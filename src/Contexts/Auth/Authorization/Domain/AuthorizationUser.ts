@@ -16,4 +16,13 @@ export class AuthorizationUser {
             id, name, lastName, email
         );
     }
+
+    public toPrimitives() {
+        return {
+            id: this.id.value,
+            name: this.name.value,
+            lastName: this.lastName.value,
+            email: this.email.value,
+        }
+    }
 }

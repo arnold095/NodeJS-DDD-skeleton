@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Body, Controller, Post } from "routing-controllers";
+import { Body, Controller, HttpCode, Post } from "routing-controllers";
 import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";
 import { UserRegisterRequest } from "@/Contexts/Auth/Authentication/Application/UserRegisterRequest";
 
@@ -12,7 +12,8 @@ export class RegisterController {
     }
 
     @Post('/register')
+    @HttpCode(201)
     public async run(@Body() request: UserRegisterRequest) {
-        await this.userRegister.run(request);
+        return await this.userRegister.run(request);
     }
 }
