@@ -1,17 +1,17 @@
-import { PersistenceEntity } from "@/Contexts/Shared/Domain/Persistence/PersistenceEntity";
 import { PrimaryColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO";
-import { UserAuthId } from "@/Contexts/Auth/Domain/ValueObject/UserAuthId";
 import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO";
-import { UserAuthFirstName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthFirstName";
-import { UserAuthLastName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthLastName";
-import { UserAuthEmail } from "@/Contexts/Auth/Domain/ValueObject/UserAuthEmail";
-import { UserAuthPassword } from "@/Contexts/Auth/Domain/ValueObject/UserAuthPassword";
-import { UserAuthDateAdd } from "@/Contexts/Auth/Domain/ValueObject/UserAuthDateAdd";
-import { UserAuthDateUpd } from "@/Contexts/Auth/Domain/ValueObject/UserAuthDateUpd";
-import { EntityTransformer } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer";
-import { UserAuth } from "@/Contexts/Auth/Domain/UserAuth";
-import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
 import { Entity } from "typeorm";
+import { EntityTransformer } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer";
+import { PersistenceEntity } from "@/Contexts/Shared/Domain/Persistence/PersistenceEntity";
+import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
+import { UserAuthId } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId";
+import { UserAuthFirstName } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName";
+import { UserAuthLastName } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName";
+import { UserAuthEmail } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
+import { UserAuthPassword } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword";
+import { UserAuthDateAdd } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateAdd";
+import { UserAuthDateUpd } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateUpd";
+import { UserAuth } from "@/Contexts/Auth/Authentication/Domain/UserAuth";
 
 @Entity('user')
 export class UserAuthEntity implements PersistenceEntity {

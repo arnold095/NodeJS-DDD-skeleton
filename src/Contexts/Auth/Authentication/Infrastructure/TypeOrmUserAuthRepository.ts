@@ -1,9 +1,10 @@
-import { UserAuthRepository } from "@/Contexts/Auth/Domain/UserAuthRepository";
-import { UserAuthEmail } from "@/Contexts/Auth/Domain/ValueObject/UserAuthEmail";
-import { UserAuth } from "@/Contexts/Auth/Domain/UserAuth";
+
 import { injectable } from "inversify";
 import { UserAuthEntity } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/UserAuthEntity";
 import { TypeORMClient } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient";
+import { UserAuth } from "@/Contexts/Auth/Authentication/Domain/UserAuth";
+import { UserAuthRepository } from "@/Contexts/Auth/Authentication/Domain/UserAuthRepository";
+import { UserAuthEmail } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
 
 @injectable()
 export class TypeOrmUserAuthRepository extends TypeORMClient implements UserAuthRepository {

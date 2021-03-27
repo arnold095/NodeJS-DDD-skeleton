@@ -3,7 +3,7 @@ import { domainEvent } from '@/Contexts/Shared/Domain/Decorators/DomainEvent';
 import { DomainEventSubscriber } from '@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber';
 import { DomainEvent } from '@/Contexts/Shared/Domain/Bus/Event/DomainEvent';
 import { SendWelcomeUserMail } from "@/Contexts/Notifications/Mail/Application/SendWelcomeUserMail";
-import { UserRegisteredDomainEvent } from "@/Contexts/Auth/Domain/UserRegisteredDomainEvent";
+import { UserRegisteredDomainEvent } from "@/Contexts/Auth/Authentication/Domain/UserRegisteredDomainEvent";
 
 @domainEvent()
 @injectable()

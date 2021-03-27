@@ -1,14 +1,14 @@
 import { inject, injectable } from 'inversify';
 import { EventBus } from "@/Contexts/Shared/Domain/Bus/Event/EventBus";
-import { UserAuthRepository } from "@/Contexts/Auth/Domain/UserAuthRepository";
-import { UserRegisterRequest } from "@/Contexts/Auth/Application/UserRegisterRequest";
-import { UserAuthId } from "@/Contexts/Auth/Domain/ValueObject/UserAuthId";
-import { UserAlreadyExists } from "@/Contexts/Auth/Domain/Exception/UserAlreadyExists";
-import { UserAuthEmail } from "@/Contexts/Auth/Domain/ValueObject/UserAuthEmail";
-import { UserAuthFirstName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthFirstName";
-import { UserAuthLastName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthLastName";
-import { UserAuthPassword } from "@/Contexts/Auth/Domain/ValueObject/UserAuthPassword";
-import { UserAuth } from "@/Contexts/Auth/Domain/UserAuth";
+import { UserAuthRepository } from "@/Contexts/Auth/Authentication/Domain/UserAuthRepository";
+import { UserRegisterRequest } from "@/Contexts/Auth/Authentication/Application/UserRegisterRequest";
+import { UserAuthId } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId";
+import { UserAlreadyExists } from "@/Contexts/Auth/Authentication/Domain/Exception/UserAlreadyExists";
+import { UserAuthEmail } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
+import { UserAuthFirstName } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName";
+import { UserAuthLastName } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName";
+import { UserAuthPassword } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword";
+import { UserAuth } from "@/Contexts/Auth/Authentication/Domain/UserAuth";
 
 @injectable()
 export class UserRegister {

@@ -1,7 +1,7 @@
 import { ContainerTypes } from '@/Apps/MyApp/DependencyContainer/ContainerTypes';
-import { UserRegister } from "@/Contexts/Auth/Application/UserRegister";
-import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Infrastructure/TypeOrmUserAuthRepository";
 import { RegisterController } from "@/Apps/Auth/Controller/Post/RegisterController";
+import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Authentication/Infrastructure/TypeOrmUserAuthRepository";
+import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";
 
 export class UserAuthContainer {
 

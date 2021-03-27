@@ -1,4 +1,4 @@
-import { UserAuthLastName } from "../../../../src/Contexts/Auth/Domain/ValueObject/UserAuthLastName";
+import { UserAuthLastName } from "../../../../src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName";
 import { MotherCreator } from "../../Shared/Domain/MotherCreator";
 
 export class UserAuthLastNameMother extends MotherCreator {

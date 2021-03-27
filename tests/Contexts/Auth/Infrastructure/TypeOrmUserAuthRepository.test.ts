@@ -1,5 +1,5 @@
 import { Arranger } from "../../Shared/Infrastructure/Arranger";
-import { UserAuthRepository } from "../../../../src/Contexts/Auth/Domain/UserAuthRepository";
+import { UserAuthRepository } from "../../../../src/Contexts/Auth/Authentication/Domain/UserAuthRepository";
 import { UserAuthMother } from "../Domain/UserAuthMother";
 import { UserAuthEmailMother } from "../Domain/UserAuthEmailMother";
 

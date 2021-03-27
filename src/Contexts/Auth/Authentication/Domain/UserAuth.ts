@@ -1,13 +1,13 @@
-import { UserAuthId } from "@/Contexts/Auth/Domain/ValueObject/UserAuthId";
+import { UserAuthId } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId";
 import { AggregateRoot } from "@/Contexts/Shared/Domain/Aggregate/AggregateRoot";
-import { UserAuthFirstName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthFirstName";
-import { UserAuthLastName } from "@/Contexts/Auth/Domain/ValueObject/UserAuthLastName";
-import { UserAuthEmail } from "@/Contexts/Auth/Domain/ValueObject/UserAuthEmail";
-import { UserAuthPassword } from "@/Contexts/Auth/Domain/ValueObject/UserAuthPassword";
-import { UserAuthDateAdd } from "@/Contexts/Auth/Domain/ValueObject/UserAuthDateAdd";
-import { UserAuthDateUpd } from "@/Contexts/Auth/Domain/ValueObject/UserAuthDateUpd";
+import { UserAuthFirstName } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName";
+import { UserAuthLastName } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName";
+import { UserAuthEmail } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
+import { UserAuthPassword } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword";
+import { UserAuthDateAdd } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateAdd";
+import { UserAuthDateUpd } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateUpd";
 import { DateValueObject } from "@/Contexts/Shared/Domain/ValueObject/DateValueObject";
-import { UserRegisteredDomainEvent } from "@/Contexts/Auth/Domain/UserRegisteredDomainEvent";
+import { UserRegisteredDomainEvent } from "@/Contexts/Auth/Authentication/Domain/UserRegisteredDomainEvent";
 
 export class UserAuth extends AggregateRoot {
     public constructor(

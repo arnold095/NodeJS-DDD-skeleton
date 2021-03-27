@@ -1,5 +1,5 @@
 import { MotherCreator } from '../../Shared/Domain/MotherCreator';
-import { UserAuthPassword } from "../../../../src/Contexts/Auth/Domain/ValueObject/UserAuthPassword";
+import { UserAuthPassword } from "../../../../src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword";
 
 export class UserAuthPasswordMother extends MotherCreator {
     public static create(): UserAuthPassword {

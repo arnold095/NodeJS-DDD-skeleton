@@ -1,5 +1,5 @@
 import { MotherCreator } from "../../Shared/Domain/MotherCreator";
-import { UserAuthDateUpd } from "../../../../src/Contexts/Auth/Domain/ValueObject/UserAuthDateUpd";
+import { UserAuthDateUpd } from "../../../../src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateUpd";
 
 export class UserAuthDateUpdMother extends MotherCreator {
     public static create(): UserAuthDateUpd {

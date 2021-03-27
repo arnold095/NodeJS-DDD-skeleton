@@ -1,6 +1,6 @@
-import { UserAuthRepository } from "../../../../src/Contexts/Auth/Domain/UserAuthRepository";
-import { UserAuth } from "../../../../src/Contexts/Auth/Domain/UserAuth";
-import { UserAuthEmail } from "../../../../src/Contexts/Auth/Domain/ValueObject/UserAuthEmail";
+import { UserAuthRepository } from "../../../../src/Contexts/Auth/Authentication/Domain/UserAuthRepository";
+import { UserAuth } from "../../../../src/Contexts/Auth/Authentication/Domain/UserAuth";
+import { UserAuthEmail } from "../../../../src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
 
 export class UserAuthRepositoryMock implements UserAuthRepository {
     private mockedUser: UserAuth[] = [];

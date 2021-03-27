@@ -1,7 +1,7 @@
 import * as map from 'source-map-support';
 import 'reflect-metadata';
 import { UserAuthRepositoryMock } from "../../Mock/UserAuthRepositoryMock";
-import { UserRegister } from "../../../../../src/Contexts/Auth/Application/UserRegister";
+import { UserRegister } from "../../../../../src/Contexts/Auth/Authentication/Application/UserRegister";
 import { EventBusMock } from "../../../Shared/Infrastructure/Mock/EventBusMock";
 import { UserRegisterRequestMother } from "./UserRegisterRequestMother";
 import { UserAuthEmailMother } from "../../Domain/UserAuthEmailMother";
