@@ -7,6 +7,7 @@ import { UserAuthPassword } from "@/Contexts/Auth/Domain/ValueObject/UserAuthPas
 import { UserAuthDateAdd } from "@/Contexts/Auth/Domain/ValueObject/UserAuthDateAdd";
 import { UserAuthDateUpd } from "@/Contexts/Auth/Domain/ValueObject/UserAuthDateUpd";
 import { DateValueObject } from "@/Contexts/Shared/Domain/ValueObject/DateValueObject";
+import { UserRegisteredDomainEvent } from "@/Contexts/Auth/Domain/UserRegisteredDomainEvent";
 
 export class UserAuth extends AggregateRoot {
     public constructor(
@@ -24,9 +25,16 @@ export class UserAuth extends AggregateRoot {
         const date = DateValueObject.currentDate();
         const dateAdd = new UserAuthDateAdd(date.value);
         const dateUpd = new UserAuthDateUpd(date.value);
-        return new UserAuth(
+        const user = new UserAuth(
             id, firstName, lastName,
             email, password, dateAdd, dateUpd);
+        user.record(new UserRegisteredDomainEvent(
+            user.id.value, user.firstName.value,
+            user.lastName.value, user.email.value,
+            user.password.value, user.dateAdd.value,
+            user.dateUpd.value,
+        ));
+        return user;
     }
 
     get id(): UserAuthId {
