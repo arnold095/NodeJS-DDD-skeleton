@@ -19,7 +19,7 @@ export class UserAuthPassword extends Bcrypt {
         return await this.hash(this.value);
     }
 
-    public async isEquals(other: UserAuthPassword): Promise<boolean> {
-        return await this.match(other.value, this.value);
+    public async isEquals(other: string): Promise<boolean> {
+        return await this.match(other, this.value);
     }
 }

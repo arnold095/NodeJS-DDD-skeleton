@@ -4,16 +4,18 @@ import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Authentication/Infras
 import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";
 import { UserEncoder } from "@/Contexts/Auth/Authorization/Application/UserEncoder";
 import { JWTAuthorizationUserEncode } from "@/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode";
+import { LoginController } from "@/Apps/Auth/Controller/Post/LoginController";
+import { UserLogin } from "@/Contexts/Auth/Authentication/Application/UserLogin";
 
 export class UserAuthContainer {
 
     public static getContainer(): ContainerTypes {
         return {
             controllers: [
-                RegisterController
+                RegisterController, LoginController
             ],
             services: [
-                UserRegister, UserEncoder
+                UserRegister, UserEncoder, UserLogin
             ],
             repositories: [
                 {
