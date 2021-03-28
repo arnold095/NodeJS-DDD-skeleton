@@ -1,14 +1,14 @@
 import { Container as InversifyContainer } from 'inversify';
 import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
-import { DummyContainer } from './Containers/DummyContainer';
-import { SharedContainer } from './Containers/SharedContainer';
 import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
+import { NotificationsContainer } from "@/Apps/Notifications/DependencyContainer/Containers/NotificationsContainer";
+import { SharedContainer } from "@/Apps/Notifications/DependencyContainer/Containers/SharedContainer";
 
 export class InversifyAdapter implements IocAdapter {
     private container: InversifyContainer = new InversifyContainer();
 
     constructor() {
-        this.inject(DummyContainer.container());
+        this.inject(NotificationsContainer.container());
         this.inject(SharedContainer.container());
     }
 
