@@ -1,4 +1,4 @@
-import { inject, injectable, multiInject } from "inversify";
+import { inject, injectable, multiInject, optional } from "inversify";
 import { RabbitMQConnection } from "@/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConnection";
 import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
 import { RabbitMQExchangeNameFormatter } from "@/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQExchangeNameFormatter";
@@ -9,7 +9,7 @@ import { Replies } from "amqplib";
 export class RabbitMQConfigurator {
     public constructor(
         @inject('RabbitMQConnection') private connection: RabbitMQConnection,
-        @multiInject('DomainEventSubscriber') private subscribers: DomainEventSubscriber[]
+        @multiInject('DomainEventSubscriber') @optional() private subscribers: DomainEventSubscriber[]
     ) {
 
     }

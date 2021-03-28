@@ -10,7 +10,7 @@ import { TypeORMProvider } from "@/Contexts/Shared/Infrastructure/Persistence/Ty
 import { TypeORMClient } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient";
 
 export class SharedContainer {
-    public static getContainer(): ContainerTypes {
+    public static container(): ContainerTypes {
         return {
             services: [
                 RabbitMQConnection, RabbitMQConfigurator,

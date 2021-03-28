@@ -9,7 +9,7 @@ import { UserLogin } from "@/Contexts/Auth/Authentication/Application/UserLogin"
 
 export class UserAuthContainer {
 
-    public static getContainer(): ContainerTypes {
+    public static container(): ContainerTypes {
         return {
             controllers: [
                 RegisterController, LoginController

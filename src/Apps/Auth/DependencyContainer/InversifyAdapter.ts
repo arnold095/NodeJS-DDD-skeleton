@@ -3,15 +3,13 @@ import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
 import { SharedContainer } from './Containers/SharedContainer';
 import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
 import { UserAuthContainer } from "@/Apps/Auth/DependencyContainer/Containers/UserAuthContainer";
-import { NotificationsContainer } from "@/Apps/Auth/DependencyContainer/Containers/NotificationsContainer";
 
 export class InversifyAdapter implements IocAdapter {
     private container: InversifyContainer = new InversifyContainer();
 
     constructor() {
-        this.inject(NotificationsContainer.getContainer());
-        this.inject(UserAuthContainer.getContainer());
-        this.inject(SharedContainer.getContainer());
+        this.inject(UserAuthContainer.container());
+        this.inject(SharedContainer.container());
     }
 
     public get<T>(someClass: ClassConstructor<T>, action?: Action): T {

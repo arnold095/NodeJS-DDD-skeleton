@@ -2,15 +2,19 @@ import { SendWelcomeDummyMail } from "@/Contexts/Notifications/Mail/Application/
 import { SendWelcomeDummyMailOnDummyCreated } from "@/Contexts/Notifications/Mail/Application/SendWelcomeDummyMailOnDummyCreated";
 import { NodeMailer } from "@/Contexts/Notifications/Mail/Infrastructure/NodeMailer";
 import { ContainerTypes } from "../ContainerTypes";
+import { SendWelcomeUserMailOnUserRegistered } from "@/Contexts/Notifications/Mail/Application/SendWelcomeUserMailOnUserRegistered";
+import { SendWelcomeUserMail } from "@/Contexts/Notifications/Mail/Application/SendWelcomeUserMail";
 
 export class NotificationsContainer {
-    public static getContainer(): ContainerTypes {
+    public static container(): ContainerTypes {
         return {
             services: [
-                SendWelcomeDummyMail
+                SendWelcomeDummyMail,
+                SendWelcomeUserMail
             ],
             domainEventSubscribers: [
                 SendWelcomeDummyMailOnDummyCreated,
+                SendWelcomeUserMailOnUserRegistered
             ],
             repositories: [
                 {
