@@ -43,6 +43,23 @@ services:
     depends_on:
       - redis_ddd_skeleton
       - rabbitmq_ddd_skeleton
+  notifications_service:
+    container_name: notifications_service
+    build: .
+    restart: unless-stopped
+    networks:
+      - "node_ddd_skeleton"
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./package.json:/code/package.json
+      - ./src:/code/src
+    env_file:
+      - ./dev.env
+    command: bash -c "npm run consumer:start -- queue:_send_welcome_user_mail_on_user_registered"
+    depends_on:
+      - redis_ddd_skeleton
+      - rabbitmq_ddd_skeleton
   redis_ddd_skeleton:
     image: redis:6.0.10-alpine
     container_name: redis_ddd_skeleton

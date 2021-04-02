@@ -10,7 +10,7 @@
     "test:integration": "jest -c jest.config.integration.js",
     "start:dev": "tsc-watch --onSuccess \"node ./dist/Apps/MyApp/App.js mode=dev\"  --compiler typescript/bin/tsc",
     "auth:dev": "tsc-watch --onSuccess \"node ./dist/Apps/Auth/App.js mode=dev\"  --compiler typescript/bin/tsc",
-    "consumer:start": "node ./dist/Apps/MyApp/Command/RabbitMQ/ConsumeRabbitMQDomainEventsCommand.js"
+    "consumer:start": "tsc && node ./dist/Apps/Notifications/Command/RabbitMQ/ConsumeRabbitMQDomainEventsCommand.js"
   },
   "repository": {
     "type": "git",
