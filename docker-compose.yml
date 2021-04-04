@@ -84,6 +84,19 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: 123qwe
       MYSQL_ROOT_PASSWORD: 123qwe
+  mongodb:
+    container_name: mongodb_ddd_skeleton
+    image: library/mongo:4.4.4
+    volumes:
+      - ./data/mongo:/data/db:delegated
+    networks:
+      - "node_ddd_skeleton"
+    ports:
+      - 27017:27017
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
   rabbitmq_ddd_skeleton:
     container_name: rabbitmq_ddd_skeleton
     image: 'rabbitmq:3.8.9-management'
