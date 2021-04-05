@@ -1,4 +1,4 @@
-import { UserRegisterRequest } from "../../../../../src/Contexts/Auth/Authentication/Application/UserRegisterRequest";
+import { UserRegisterRequest } from "../../../../../../src/Contexts/Auth/Authentication/Application/UserRegisterRequest";
 import { UserAuthIdMother } from "../../Domain/UserAuthIdMother";
 import { UserAuthFirstNameMother } from "../../Domain/UserAuthFirstNameMother";
 import { UserAuthLastNameMother } from "../../Domain/UserAuthLastNameMother";

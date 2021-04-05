@@ -23,6 +23,7 @@ export class TypeORMProvider {
             password: process.env.MYSQL_PASSWORD,
             entities: [
                 __dirname + '/Entities/*.js',
+                __dirname + '/Entities/*.ts',
             ],
             synchronize: false,
             logging: false,

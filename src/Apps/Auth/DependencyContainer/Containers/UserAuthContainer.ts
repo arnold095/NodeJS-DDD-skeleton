@@ -1,4 +1,4 @@
-import { ContainerTypes } from '@/Apps/MyApp/DependencyContainer/ContainerTypes';
+import { ContainerTypes } from "@/Apps/Auth/DependencyContainer/ContainerTypes";
 import { RegisterController } from "@/Apps/Auth/Controller/Post/RegisterController";
 import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Authentication/Infrastructure/TypeOrmUserAuthRepository";
 import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";

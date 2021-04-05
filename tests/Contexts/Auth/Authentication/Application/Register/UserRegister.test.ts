@@ -1,12 +1,12 @@
 import * as map from 'source-map-support';
 import 'reflect-metadata';
 import { UserAuthRepositoryMock } from "../../Mock/UserAuthRepositoryMock";
-import { UserRegister } from "../../../../../src/Contexts/Auth/Authentication/Application/UserRegister";
-import { EventBusMock } from "../../../Shared/Infrastructure/Mock/EventBusMock";
+import { UserRegister } from "../../../../../../src/Contexts/Auth/Authentication/Application/UserRegister";
+import { EventBusMock } from "../../../../Shared/Infrastructure/Mock/EventBusMock";
 import { UserRegisterRequestMother } from "./UserRegisterRequestMother";
 import { UserAuthEmailMother } from "../../Domain/UserAuthEmailMother";
-import { UserEncoder } from "../../../../../src/Contexts/Auth/Authorization/Application/UserEncoder";
-import { JWTAuthorizationUserEncode } from "../../../../../src/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode";
+import { UserEncoder } from "../../../../../../src/Contexts/Auth/Authorization/Application/UserEncoder";
+import { JWTAuthorizationUserEncode } from "../../../../../../src/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode";
 
 map.install();
 
