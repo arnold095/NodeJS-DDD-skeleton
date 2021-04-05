@@ -45,7 +45,10 @@ export class RabbitMQDomainEventBus implements EventBus {
         this.connection.channel.publish(this.exchangeName, routingKey, body, {
             messageId,
             contentType: 'application/json',
-            contentEncoding: 'utf-8'
+            contentEncoding: 'utf-8',
+            headers: {
+                redelivery_count: 0
+            }
         });
         console.log("[x] Sent %s:'%s' ", routingKey, serializedBody);
     }

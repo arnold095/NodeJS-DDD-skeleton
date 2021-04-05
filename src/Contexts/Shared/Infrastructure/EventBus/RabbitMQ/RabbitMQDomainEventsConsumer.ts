@@ -49,10 +49,12 @@ export class RabbitMQDomainEventsConsumer {
         } else {
             this.sendToRetry(msg, queue);
         }
+        this.connection.channel.ack(msg);
     }
 
     private hasBeenRedeliveredToMuch(msg: ConsumeMessage) {
-        return 0 > this.maxRetries;
+        const retries = msg.properties.headers['redelivery_count'] ?? 0;
+        return retries >= this.maxRetries;
     }
 
     private sendToRetry(msg: ConsumeMessage, queue: string) {
@@ -66,8 +68,16 @@ export class RabbitMQDomainEventsConsumer {
     }
 
     private sendMessageTo(exchangeName: string, msg: ConsumeMessage, queue: string) {
-        this.connection.channel.publish(exchangeName, '', Buffer.from(
+        const retries = msg.properties.headers.redelivery_count ?? 0;
+        this.connection.channel.publish(exchangeName, queue, Buffer.from(
             msg.content
-        ));
+        ), {
+            messageId: msg.properties.messageId,
+            contentType: msg.properties.contentType,
+            contentEncoding: msg.properties.contentEncoding,
+            headers: {
+                redelivery_count: parseInt(retries) + 1
+            }
+        });
     }
 }

@@ -46,8 +46,8 @@ export class RabbitMQConfigurator {
         const retryQueue = await this.declareQueue(retryQueueName, exchangeName, queueName, 1000);
         const deadLetterQueue = await this.declareQueue(deadLetterQueueName);
 
-        await channel.bindQueue(retryQueue.queue, retryExchangeName, '');
-        await channel.bindQueue(deadLetterQueue.queue, deadLetterExchangeName, '');
+        await channel.bindQueue(retryQueue.queue, retryExchangeName, queueName);
+        await channel.bindQueue(deadLetterQueue.queue, deadLetterExchangeName, queueName);
 
         subscriber.subscribedTo().map(async eventClass => {
             await channel.bindQueue(queue.queue, exchangeName, eventClass.eventName);
