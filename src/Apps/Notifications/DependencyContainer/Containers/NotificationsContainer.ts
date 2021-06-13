@@ -4,7 +4,7 @@ import {
   SendWelcomeDummyMail,
   SendWelcomeDummyMailOnDummyCreated,
   SendWelcomeUserMail,
-  SendWelcomeUserMailOnUserRegistered
+  SendWelcomeUserMailOnUserRegistered,
 } from '@notificationsMail';
 
 export class NotificationsContainer {

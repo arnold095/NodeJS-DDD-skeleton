@@ -1,14 +1,16 @@
-import { RabbitMQConnection } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConnection';
-import { RabbitMQConfigurator } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConfigurator';
-import { RabbitMQDomainEventsConsumer } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQDomainEventsConsumer';
-import { DomainEventMapping } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventMapping';
-import { DomainEventJsonDeserializer } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventJsonDeserializer';
-import { DomainEventSubscriberLocator } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventSubscriberLocator';
-import { TypeORMProvider } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMProvider';
-import { TypeORMClient } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient';
-import { RabbitMQDomainEventBus } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQDomainEventBus';
-import { KoaServer } from '@/src/Contexts/Shared/Infrastructure/Server/Koa/KoaServer';
-import { AdapterTypes } from '@/src/Contexts/Shared/Domain/Server/AdapterTypes';
+import {
+  DomainEventJsonDeserializer,
+  DomainEventMapping,
+  DomainEventSubscriberLocator,
+  KoaServer,
+  RabbitMQConfigurator,
+  RabbitMQConnection,
+  RabbitMQDomainEventBus,
+  RabbitMQDomainEventsConsumer,
+  TypeORMClient,
+  TypeORMProvider,
+} from '@sharedInfra';
+import { AdapterTypes } from '@sharedDomain';
 
 export class SharedContainer {
   public static container(): AdapterTypes {

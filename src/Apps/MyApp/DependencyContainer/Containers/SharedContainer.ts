@@ -1,10 +1,15 @@
 import { AdapterTypes } from '@sharedDomain';
 import {
   DomainEventJsonDeserializer,
-  DomainEventMapping, DomainEventSubscriberLocator, KoaServer,
+  DomainEventMapping,
+  DomainEventSubscriberLocator,
+  KoaServer,
   RabbitMQConfigurator,
-  RabbitMQConnection, RabbitMQDomainEventBus,
-  RabbitMQDomainEventsConsumer, TypeORMClient, TypeORMProvider
+  RabbitMQConnection,
+  RabbitMQDomainEventBus,
+  RabbitMQDomainEventsConsumer,
+  TypeORMClient,
+  TypeORMProvider,
 } from '@sharedInfra';
 
 export class SharedContainer {

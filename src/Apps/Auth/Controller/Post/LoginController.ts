@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { Body, Controller, Post } from 'routing-controllers';
-import { UserLogin } from '@/src/Contexts/Auth/Authentication/Application/UserLogin';
-import { UserLoginRequest } from '@/src/Contexts/Auth/Authentication/Application/UserLoginRequest';
+import { UserLogin, UserLoginRequest } from '@authentication';
 
 @injectable()
 @Controller('/auth')

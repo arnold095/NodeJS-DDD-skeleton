@@ -2,7 +2,12 @@ import { inject, injectable } from 'inversify';
 import { AuthorizationUserEncode } from '../Domain/AuthorizationUserEncode';
 import { UserEncoderRequest } from './UserEncoderRequest';
 import { AuthorizationUser } from '../Domain/AuthorizationUser';
-import { UserAuthEmail, UserAuthFirstName, UserAuthId, UserAuthLastName } from '@authentication';
+import {
+  UserAuthEmail,
+  UserAuthFirstName,
+  UserAuthId,
+  UserAuthLastName,
+} from '@authentication';
 
 @injectable()
 export class UserEncoder {

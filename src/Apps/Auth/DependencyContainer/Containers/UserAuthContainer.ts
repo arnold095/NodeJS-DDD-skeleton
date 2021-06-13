@@ -1,11 +1,8 @@
-import { RegisterController } from '@/src/Apps/Auth/Controller/Post/RegisterController';
-import { LoginController } from '@/src/Apps/Auth/Controller/Post/LoginController';
-import { UserLogin } from '@/src/Contexts/Auth/Authentication/Application/UserLogin';
-import { UserRegister } from '@/src/Contexts/Auth/Authentication/Application/UserRegister';
-import { UserEncoder } from '@/src/Contexts/Auth/Authorization/Application/UserEncoder';
-import { TypeOrmUserAuthRepository } from '@/src/Contexts/Auth/Authentication/Infrastructure/TypeOrmUserAuthRepository';
-import { JWTAuthorizationUserEncode } from '@/src/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode';
-import { AdapterTypes } from '@/src/Contexts/Shared/Domain/Server/AdapterTypes';
+import { AdapterTypes } from '@sharedDomain';
+import { RegisterController } from '../../Controller/Post/RegisterController';
+import { JWTAuthorizationUserEncode, UserEncoder } from '@authorization';
+import { LoginController } from '../../Controller/Post/LoginController';
+import { TypeOrmUserAuthRepository, UserLogin, UserRegister } from '@authentication';
 
 export class UserAuthContainer {
   public static container(): AdapterTypes {

@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { Body, Controller, HttpCode, Post } from 'routing-controllers';
-import { UserRegister } from '@/src/Contexts/Auth/Authentication/Application/UserRegister';
-import { UserRegisterRequest } from '@/src/Contexts/Auth/Authentication/Application/UserRegisterRequest';
+import { UserRegister, UserRegisterRequest } from '@authentication';
 
 @injectable()
 @Controller('/auth')
