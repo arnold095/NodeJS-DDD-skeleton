@@ -1,38 +1,36 @@
 import 'module-alias/register';
 import * as map from 'source-map-support';
-map.install()
 
-import "reflect-metadata";
-import "@/Contexts/Shared/Infrastructure/ApmClient";
-import { InversifyAdapter } from "./DependencyContainer/InversifyAdapter";
-import { KoaServer } from './Server/KoaServer';
-import { RedisConnection } from '@/Contexts/Shared/Infrastructure/Persistence/Redis/RedisConnection';
-import { EventBus } from "@/Contexts/Shared/Domain/Bus/Event/EventBus";
-
+import 'reflect-metadata';
+import '@/src/Contexts/Shared/Infrastructure/ApmClient';
+import { InversifyAdapter } from './DependencyContainer/InversifyAdapter';
+import { EventBus } from '@/src/Contexts/Shared/Domain/Bus/Event/EventBus';
+import { WebServer } from '@/src/Contexts/Shared/Domain/Server/WebServer';
+import { KoaServer } from '@/src/Contexts/Shared/Infrastructure/Server/Koa/KoaServer';
+import { join } from 'path';
+map.install();
 
 export class App {
-    private readonly server: KoaServer;
-    private readonly container: InversifyAdapter;
+  private readonly server: WebServer;
+  private readonly iocAdapter = new InversifyAdapter();
 
-    constructor() {
-        this.container = new InversifyAdapter();
-        this.server = new KoaServer(this.container);
-    }
+  constructor() {
+    this.server = this.iocAdapter.get(KoaServer);
+  }
 
-    public async bootStrap() {
-        await this.connectToServices();
-        this.server.load();
-        this.loadEventBus();
-    }
+  public async bootStrap(): Promise<void> {
+    this.server.load(this.iocAdapter, this.controllers());
+    this.loadEventBus();
+  }
 
-    private async connectToServices() {
-        await RedisConnection.connect();
-    }
+  private loadEventBus() {
+    const eventBus = this.iocAdapter.getClass<EventBus>('EventBus');
+    eventBus.load();
+  }
 
-    private loadEventBus() {
-        const eventBus = this.container.getClass<EventBus>('EventBus');
-        eventBus.load();
-    }
+  private controllers(): string[] {
+    return [join(__dirname, '/Controller/**/*.js')];
+  }
 }
 
 const app = new App();

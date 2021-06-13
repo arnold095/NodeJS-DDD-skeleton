@@ -1,1 +1,1 @@
-export class DummyNotFound extends Error{}
+export class DummyNotFound extends Error {}

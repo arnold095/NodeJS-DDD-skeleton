@@ -1,11 +1,3 @@
-import { StringValueObject } from '@/Contexts/Shared/Domain/ValueObject/StringValueObject';
+import { StringValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/StringValueObject';
 
-export class MailAddress extends StringValueObject {
-    contructor(value: string) {
-        this.ensureIsValid();
-    }
-
-    ensureIsValid() {
-
-    }
-}
+export class MailAddress extends StringValueObject {}

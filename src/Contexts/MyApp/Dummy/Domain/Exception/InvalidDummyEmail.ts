@@ -1,2 +1,1 @@
-export class InvalidDummyEmail extends Error {
-}
+export class InvalidDummyEmail extends Error {}

@@ -1,1 +1,1 @@
-export class DummyAlreadyExist extends Error { }
+export class DummyAlreadyExist extends Error {}

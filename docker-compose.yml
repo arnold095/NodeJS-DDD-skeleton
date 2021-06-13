@@ -9,6 +9,7 @@ volumes:
   rabbitmq-prometheus_grafana:
   esdata:
     driver: local
+  mongo_data:
 
 services:
   node_ddd_skeleton:
@@ -88,7 +89,7 @@ services:
     container_name: mongodb_ddd_skeleton
     image: library/mongo:4.4.4
     volumes:
-      - ./data/mongo:/data/db:delegated
+      - mongo_data:/data/db
     networks:
       - "node_ddd_skeleton"
     ports:

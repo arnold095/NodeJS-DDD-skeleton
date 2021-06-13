@@ -1,7 +1,3 @@
-import { Uuid } from '@/Contexts/Shared/Domain/ValueObject/Uuid';
+import { Uuid } from '@/src/Contexts/Shared/Domain/ValueObject/Uuid';
 
-export class UserAuthId extends Uuid {
-    public constructor(value) {
-        super(value);
-    }
-}
+export class UserAuthId extends Uuid {}

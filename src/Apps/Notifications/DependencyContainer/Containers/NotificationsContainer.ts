@@ -1,27 +1,24 @@
-import { SendWelcomeDummyMail } from "@/Contexts/Notifications/Mail/Application/SendWelcomeDummyMail";
-import { SendWelcomeDummyMailOnDummyCreated } from "@/Contexts/Notifications/Mail/Application/SendWelcomeDummyMailOnDummyCreated";
-import { NodeMailer } from "@/Contexts/Notifications/Mail/Infrastructure/NodeMailer";
-import { ContainerTypes } from "../ContainerTypes";
-import { SendWelcomeUserMailOnUserRegistered } from "@/Contexts/Notifications/Mail/Application/SendWelcomeUserMailOnUserRegistered";
-import { SendWelcomeUserMail } from "@/Contexts/Notifications/Mail/Application/SendWelcomeUserMail";
+import { SendWelcomeDummyMail } from '@/src/Contexts/Notifications/Mail/Application/SendWelcomeDummyMail';
+import { SendWelcomeDummyMailOnDummyCreated } from '@/src/Contexts/Notifications/Mail/Application/SendWelcomeDummyMailOnDummyCreated';
+import { NodeMailer } from '@/src/Contexts/Notifications/Mail/Infrastructure/NodeMailer';
+import { SendWelcomeUserMailOnUserRegistered } from '@/src/Contexts/Notifications/Mail/Application/SendWelcomeUserMailOnUserRegistered';
+import { SendWelcomeUserMail } from '@/src/Contexts/Notifications/Mail/Application/SendWelcomeUserMail';
+import { AdapterTypes } from '@/src/Contexts/Shared/Domain/Server/AdapterTypes';
 
 export class NotificationsContainer {
-    public static container(): ContainerTypes {
-        return {
-            services: [
-                SendWelcomeDummyMail,
-                SendWelcomeUserMail
-            ],
-            domainEventSubscribers: [
-                SendWelcomeDummyMailOnDummyCreated,
-                SendWelcomeUserMailOnUserRegistered
-            ],
-            repositories: [
-                {
-                    abstract: 'MailSender',
-                    concrete: NodeMailer
-                }
-            ]
-        }
-    }
+  public static container(): AdapterTypes {
+    return {
+      services: [SendWelcomeDummyMail, SendWelcomeUserMail],
+      domainEventSubscribers: [
+        SendWelcomeDummyMailOnDummyCreated,
+        SendWelcomeUserMailOnUserRegistered,
+      ],
+      domainContracts: [
+        {
+          abstract: 'MailSender',
+          concrete: NodeMailer,
+        },
+      ],
+    };
+  }
 }

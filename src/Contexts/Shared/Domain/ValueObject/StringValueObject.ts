@@ -1,7 +1,7 @@
 export class StringValueObject {
-    public constructor(private _value: string) { }
+  public constructor(private _value: string) {}
 
-    public get value(): string {
-        return this._value
-    }
+  public get value(): string {
+    return this._value;
+  }
 }

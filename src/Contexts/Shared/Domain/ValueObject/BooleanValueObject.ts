@@ -1,7 +1,7 @@
 export class BooleanValueObject {
-    constructor(private _value: boolean) { }
+  constructor(private _value: boolean) {}
 
-    public get value(): boolean {
-        return this._value;
-    }
+  public get value(): boolean {
+    return this._value;
+  }
 }

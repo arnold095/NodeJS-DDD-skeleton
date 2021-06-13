@@ -1,32 +1,34 @@
-
-import { injectable } from "inversify";
-import { UserAuthEntity } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/UserAuthEntity";
-import { TypeORMClient } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient";
-import { UserAuth } from "@/Contexts/Auth/Authentication/Domain/UserAuth";
-import { UserAuthRepository } from "@/Contexts/Auth/Authentication/Domain/UserAuthRepository";
-import { UserAuthEmail } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
+import { injectable } from 'inversify';
+import { UserAuthEntity } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/UserAuthEntity';
+import { TypeORMClient } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient';
+import { UserAuth } from '@/src/Contexts/Auth/Authentication/Domain/UserAuth';
+import { UserAuthRepository } from '@/src/Contexts/Auth/Authentication/Domain/UserAuthRepository';
+import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
+import { Nullable } from '@/src/Contexts/Shared/Domain/Utils/Nullable';
 
 @injectable()
-export class TypeOrmUserAuthRepository extends TypeORMClient implements UserAuthRepository {
-    public async find(email: UserAuthEmail): Promise<UserAuth> {
-        let user: UserAuth;
-        const repository = await this.repository(UserAuthEntity);
-        const entity = await repository.findOne({
-            where: {
-                _email: email.value
-            }
-        });
-        if (entity) {
-            user = entity.toDomainModel();
-        }
-        return user;
+export class TypeOrmUserAuthRepository
+  extends TypeORMClient
+  implements UserAuthRepository
+{
+  public async find(email: UserAuthEmail): Promise<Nullable<UserAuth>> {
+    let user;
+    const repository = await this.repository(UserAuthEntity);
+    const entity = await repository.findOne({
+      where: {
+        _email: email.value,
+      },
+    });
+    if (entity) {
+      user = entity.toDomainModel();
     }
+    return user;
+  }
 
-    public async save(user: UserAuth): Promise<void> {
-        const repository = await this.repository(UserAuthEntity);
-        const entity = UserAuthEntity.fromDomainClass(user);
+  public async save(user: UserAuth): Promise<void> {
+    const repository = await this.repository(UserAuthEntity);
+    const entity = UserAuthEntity.fromDomainClass(user);
 
-        await repository.save(entity);
-    }
-
+    await repository.save(entity);
+  }
 }

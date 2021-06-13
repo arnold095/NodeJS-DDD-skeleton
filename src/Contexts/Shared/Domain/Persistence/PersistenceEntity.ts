@@ -1,3 +1,3 @@
 export interface PersistenceEntity {
-    toDomainModel();
+  toDomainModel();
 }

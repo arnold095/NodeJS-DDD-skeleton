@@ -1,47 +1,80 @@
-import { inject, injectable } from "inversify";
-import { CollectionInsertManyOptions, CollectionInsertOneOptions } from "mongodb";
-import { MongoDbProvider } from "@/Contexts/Shared/Infrastructure/Persistence/MongoDb/MongoDbProvider";
+import { inject, injectable } from 'inversify';
+import {
+  Collection,
+  CollectionInsertManyOptions,
+  CollectionInsertOneOptions,
+  Cursor,
+  FilterQuery,
+  UpdateQuery,
+} from 'mongodb';
+import { MongoDbProvider } from '@/src/Contexts/Shared/Infrastructure/Persistence/MongoDb/MongoDbProvider';
 
 @injectable()
-export abstract class MongoDbClient {
+export class MongoDbClient {
+  protected collection!: string;
 
-    constructor(
-        @inject('MongoDbProvider') private provider: MongoDbProvider,
-    ) {
-    }
+  constructor(@inject('MongoDbProvider') private provider: MongoDbProvider) {}
 
-    public async searchOne(collection: string, query: any): Promise<any> {
-        const db = await this.provider.db();
-        return await db.collection(collection).findOne(query);
-    }
+  public async searchOne(query: FilterQuery<unknown>): Promise<unknown> {
+    const db = await this.provider.db();
+    return await db.collection(this.collection).findOne(query);
+  }
 
-    public async searchAll(collection: string): Promise<any> {
-        const db = await this.provider.db();
-        return db.collection(collection).find({});
-    }
+  public async searchAll(): Promise<Cursor<unknown>> {
+    const db = await this.provider.db();
+    return db.collection(this.collection).find({});
+  }
 
-    public async insertOne(collection: string, document: any, options: CollectionInsertOneOptions): Promise<void> {
-        const db = await this.provider.db();
-        await db.collection(collection).insertOne(document, options);
-    }
+  public async insertOne(
+    document: unknown,
+    options?: CollectionInsertOneOptions
+  ): Promise<void> {
+    const db = await this.provider.db();
+    await db.collection(this.collection).insertOne(document, options);
+  }
 
-    public async insertMany(collection: string, document, options: CollectionInsertManyOptions) {
-        const db = await this.provider.db();
-        await db.collection(collection).insertMany(document, options);
-    }
+  public async insertMany(
+    document: Array<unknown>,
+    options: CollectionInsertManyOptions
+  ): Promise<void> {
+    const db = await this.provider.db();
+    await db.collection(this.collection).insertMany(document, options);
+  }
 
-    public async updateOne(filter, update, options = {}, collection: string): Promise<void> {
-        const db = await this.provider.db();
-        new Promise((resolve, reject) => {
-            db.collection(collection).findOneAndUpdate(filter, update, options, (err, result) => {
-                if (err) reject(err);
-                resolve(result);
-            });
-        });
-    }
+  public async updateOne(
+    filter: FilterQuery<unknown>,
+    update: UpdateQuery<unknown>,
+    options = {}
+  ): Promise<void> {
+    const db = await this.provider.db();
+    await db.collection(this.collection).findOneAndUpdate(filter, update, options);
+  }
 
-    public async updateMany(filter, update, options = {}, collection: string) {
-        const db = await this.provider.db();
-        await db.collection(collection).updateMany(filter, update, options);
-    }
+  public async updateMany(
+    filter: FilterQuery<unknown>,
+    update: UpdateQuery<unknown>,
+    options = {}
+  ): Promise<void> {
+    const db = await this.provider.db();
+    await db.collection(this.collection).updateMany(filter, update, options);
+  }
+
+  public async upsert(
+    criteria: FilterQuery<unknown>,
+    document: Collection
+  ): Promise<void> {
+    const db = await this.provider.db();
+    await db
+      .collection(this.collection)
+      .updateOne(criteria, { $set: document }, { upsert: true });
+  }
+
+  public async drop(collection: string): Promise<void> {
+    const db = await this.provider.db();
+    await db.collection(collection).drop();
+  }
+
+  public async disconnect(): Promise<void> {
+    this.provider.close();
+  }
 }
