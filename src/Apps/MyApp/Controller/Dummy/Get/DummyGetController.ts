@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { Controller, Get, HttpCode, Param } from 'routing-controllers';
-import { DummyFinderRequest } from '@/src/Contexts/MyApp/Dummy/Application/Find/DummyFinderRequest';
-import { DummyFinder } from '@/src/Contexts/MyApp/Dummy/Application/Find/DummyFinder';
+import { DummyFinder, DummyFinderRequest } from '@dummy';
 
 @Controller('/dummy')
 @injectable()

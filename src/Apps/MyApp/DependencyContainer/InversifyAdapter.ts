@@ -2,10 +2,9 @@ import { Container } from 'inversify';
 import { ClassConstructor, IocAdapter as RoutingIocAdapter } from 'routing-controllers';
 import { DummyContainer } from './Containers/DummyContainer';
 import { SharedContainer } from './Containers/SharedContainer';
-import { IocAdapter } from '@/src/Contexts/Shared/Domain/Server/IocAdapter';
-import { AdapterTypes } from '@/src/Contexts/Shared/Domain/Server/AdapterTypes';
+import { AdapterTypes, IocAdapter } from '@sharedDomain';
 
-export class InversifyAdapter implements IocAdapter, RoutingIocAdapter {
+export class InversifyAdapter implements IocAdapter {
   private _container: Container = new Container();
 
   constructor() {

@@ -1,7 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { Body, Controller, OnUndefined, Post } from 'routing-controllers';
-import { DummyCreator } from '@/src/Contexts/MyApp/Dummy/Application/Create/DummyCreator';
-import { DummyCreatorRequest } from '@/src/Contexts/MyApp/Dummy/Application/Create/DummyCreatorRequest';
+import { DummyCreator, DummyCreatorRequest } from '@dummy';
 
 @injectable()
 @Controller('/dummy')
