@@ -2,8 +2,6 @@ export * from './Bus/Event/EventBus';
 export * from './Bus/Event/DomainEvent';
 export * from './Bus/Event/DomainEventSubscriber';
 
-export * from './Model/DomainModel';
-
 export * from './Utils/Nullable';
 export * from './Utils/GenericTypes';
 

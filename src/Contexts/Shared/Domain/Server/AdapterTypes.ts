@@ -1,4 +1,4 @@
-import { ClassConstructor } from '@/src/Contexts/Shared/Domain/Utils/GenericTypes';
+import { ClassConstructor } from '@sharedDomain';
 
 export type AdapterTypes = {
   controllers?: ClassConstructor<unknown>[];

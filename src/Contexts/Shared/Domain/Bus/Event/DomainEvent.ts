@@ -1,4 +1,4 @@
-import { Uuid } from '../../ValueObject/Uuid';
+import { Uuid } from '@sharedDomain';
 
 export abstract class DomainEvent {
   private _eventId: string;

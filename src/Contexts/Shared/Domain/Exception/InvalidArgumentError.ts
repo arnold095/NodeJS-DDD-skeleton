@@ -1,1 +1,3 @@
-export class InvalidArgumentError extends Error {}
+import { BaseError } from '@sharedDomain';
+
+export class InvalidArgumentError extends BaseError {}

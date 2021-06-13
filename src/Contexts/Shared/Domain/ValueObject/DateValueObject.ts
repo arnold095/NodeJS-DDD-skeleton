@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from '@/src/Contexts/Shared/Domain/Exception/InvalidArgumentError';
+import { InvalidArgumentError } from '../Exception/InvalidArgumentError';
 
 export class DateValueObject {
   constructor(private _value: Date) {

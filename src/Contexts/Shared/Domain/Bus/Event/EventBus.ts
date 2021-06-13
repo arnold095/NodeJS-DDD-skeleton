@@ -1,4 +1,4 @@
-import { DomainEvent } from './DomainEvent';
+import { DomainEvent } from '@sharedDomain';
 
 export interface EventBus {
   publish(domainEvents: DomainEvent[]): Promise<void>;
