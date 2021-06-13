@@ -1,4 +1,4 @@
-import { StringValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/StringValueObject';
+import { StringValueObject } from '@sharedDomain';
 
 export class UserAuthEmail extends StringValueObject {
   public constructor(value: string) {

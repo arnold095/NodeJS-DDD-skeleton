@@ -1,10 +1,9 @@
 import { injectable } from 'inversify';
-import { UserAuthEntity } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/UserAuthEntity';
-import { TypeORMClient } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient';
-import { UserAuth } from '@/src/Contexts/Auth/Authentication/Domain/UserAuth';
-import { UserAuthRepository } from '@/src/Contexts/Auth/Authentication/Domain/UserAuthRepository';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
-import { Nullable } from '@/src/Contexts/Shared/Domain/Utils/Nullable';
+import { TypeORMClient, UserAuthEntity } from '@sharedInfra';
+import { UserAuthRepository } from '../Domain/UserAuthRepository';
+import { UserAuthEmail } from '../Domain/ValueObject/UserAuthEmail';
+import { Nullable } from '@sharedDomain';
+import { UserAuth } from '../Domain/UserAuth';
 
 @injectable()
 export class TypeOrmUserAuthRepository

@@ -1,1 +1,3 @@
-export class UserAlreadyExists extends Error {}
+import { BaseError } from '@sharedDomain';
+
+export class UserAlreadyExists extends BaseError {}

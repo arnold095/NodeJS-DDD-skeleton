@@ -1,5 +1,5 @@
-import { Bcrypt } from '@/src/Contexts/Shared/Domain/ValueObject/Bcrypt';
-import { InvalidUserPassword } from '@/src/Contexts/Auth/Authentication/Domain/Exception/InvalidUserPassword';
+import { Bcrypt } from '@sharedDomain';
+import { InvalidUserPassword } from '@authentication';
 
 export class UserAuthPassword extends Bcrypt {
   private regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/;

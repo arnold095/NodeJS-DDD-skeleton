@@ -1,13 +1,14 @@
-import { UserAuthId } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId';
-import { AggregateRoot } from '@/src/Contexts/Shared/Domain/Aggregate/AggregateRoot';
-import { UserAuthFirstName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName';
-import { UserAuthLastName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
-import { UserAuthPassword } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword';
-import { UserAuthDateAdd } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateAdd';
-import { UserAuthDateUpd } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateUpd';
-import { DateValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/DateValueObject';
-import { UserRegisteredDomainEvent } from '@/src/Contexts/Auth/Authentication/Domain/UserRegisteredDomainEvent';
+import { AggregateRoot, DateValueObject } from '@sharedDomain';
+import {
+  UserRegisteredDomainEvent,
+  UserAuthId,
+  UserAuthFirstName,
+  UserAuthLastName,
+  UserAuthEmail,
+  UserAuthPassword,
+  UserAuthDateAdd,
+  UserAuthDateUpd,
+} from '@authentication';
 
 export class UserAuth extends AggregateRoot {
   public constructor(

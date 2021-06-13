@@ -1,5 +1,5 @@
-import { UserAuth } from '@/src/Contexts/Auth/Authentication/Domain/UserAuth';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
+import { UserAuth } from './UserAuth';
+import { UserAuthEmail } from './ValueObject/UserAuthEmail';
 
 export interface UserAuthRepository {
   save(user: UserAuth): Promise<void>;

@@ -1,11 +1,11 @@
 import { inject, injectable } from 'inversify';
-import { UserAuthRepository } from '@/src/Contexts/Auth/Authentication/Domain/UserAuthRepository';
-import { EventBus } from '@/src/Contexts/Shared/Domain/Bus/Event/EventBus';
-import { UserEncoder } from '@/src/Contexts/Auth/Authorization/Application/UserEncoder';
-import { UserLoginRequest } from '@/src/Contexts/Auth/Authentication/Application/UserLoginRequest';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
-import { UserAuth } from '@/src/Contexts/Auth/Authentication/Domain/UserAuth';
-import { InvalidCredentials } from '@/src/Contexts/Auth/Authentication/Domain/Exception/InvalidCredentials';
+import { UserAuthRepository } from '../Domain/UserAuthRepository';
+import { UserEncoder } from '@authorization';
+import { EventBus } from '@sharedDomain';
+import { UserLoginRequest } from './UserLoginRequest';
+import { UserAuthEmail } from '../Domain/ValueObject/UserAuthEmail';
+import { UserAuth } from '../Domain/UserAuth';
+import { InvalidCredentials } from '../Domain/Exception/InvalidCredentials';
 
 @injectable()
 export class UserLogin {
@@ -31,14 +31,14 @@ export class UserLogin {
 
   private ensureThatTheUserExists(user: UserAuth) {
     if (undefined === user) {
-      throw new InvalidCredentials('The email or password is not correct');
+      throw new InvalidCredentials(403, 'The email or password is not correct');
     }
   }
 
   private async ensureThatThePasswordIsCorrect(user: UserAuth, password: string) {
     const passwordComparison = await user.password.isEquals(password);
     if (!passwordComparison) {
-      throw new InvalidCredentials('The email or password is not correct');
+      throw new InvalidCredentials(403, 'The email or password is not correct');
     }
   }
 }

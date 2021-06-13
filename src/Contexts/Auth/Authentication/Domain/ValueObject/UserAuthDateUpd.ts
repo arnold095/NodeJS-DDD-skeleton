@@ -1,4 +1,4 @@
-import { DateValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/DateValueObject';
+import { DateValueObject } from '@sharedDomain';
 
 export class UserAuthDateUpd extends DateValueObject {
   public constructor(value: Date) {
