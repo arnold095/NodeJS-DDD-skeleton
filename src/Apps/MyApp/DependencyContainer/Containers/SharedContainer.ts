@@ -1,5 +1,6 @@
 import { AdapterTypes } from '@sharedDomain';
 import {
+  ConsoleLogger,
   DomainEventJsonDeserializer,
   DomainEventMapping,
   DomainEventSubscriberLocator,
@@ -8,8 +9,10 @@ import {
   RabbitMQConnection,
   RabbitMQDomainEventBus,
   RabbitMQDomainEventsConsumer,
-  TypeORMClient,
   TypeORMProvider,
+  TypeORMClient,
+  RedisProvider,
+  RedisClient,
 } from '@sharedInfra';
 
 export class SharedContainer {
@@ -24,6 +27,8 @@ export class SharedContainer {
         DomainEventSubscriberLocator,
         TypeORMProvider,
         TypeORMClient,
+        RedisProvider,
+        RedisClient,
       ],
       domainContracts: [
         {
@@ -33,6 +38,10 @@ export class SharedContainer {
         {
           abstract: 'WebServer',
           concrete: KoaServer,
+        },
+        {
+          abstract: 'Logger',
+          concrete: ConsoleLogger,
         },
       ],
     };

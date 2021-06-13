@@ -1,4 +1,5 @@
 import {
+  ConsoleLogger,
   DomainEventJsonDeserializer,
   DomainEventMapping,
   DomainEventSubscriberLocator,
@@ -33,6 +34,10 @@ export class SharedContainer {
         {
           abstract: 'WebServer',
           concrete: KoaServer,
+        },
+        {
+          abstract: 'Logger',
+          concrete: ConsoleLogger,
         },
       ],
     };

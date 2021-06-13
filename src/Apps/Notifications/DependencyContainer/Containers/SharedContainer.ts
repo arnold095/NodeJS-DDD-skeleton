@@ -1,5 +1,6 @@
 import { AdapterTypes } from '@sharedDomain';
 import {
+  ConsoleLogger,
   DomainEventJsonDeserializer,
   DomainEventMapping,
   DomainEventSubscriberLocator,
@@ -33,6 +34,10 @@ export class SharedContainer {
         {
           abstract: 'WebServer',
           concrete: KoaServer,
+        },
+        {
+          abstract: 'Logger',
+          concrete: ConsoleLogger,
         },
       ],
     };

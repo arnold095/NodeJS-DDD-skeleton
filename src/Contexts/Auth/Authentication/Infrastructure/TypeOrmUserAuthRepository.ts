@@ -1,9 +1,7 @@
 import { injectable } from 'inversify';
 import { TypeORMClient, UserAuthEntity } from '@sharedInfra';
-import { UserAuthRepository } from '../Domain/UserAuthRepository';
-import { UserAuthEmail } from '../Domain/ValueObject/UserAuthEmail';
 import { Nullable } from '@sharedDomain';
-import { UserAuth } from '../Domain/UserAuth';
+import { UserAuth, UserAuthEmail, UserAuthRepository } from '@authentication';
 
 @injectable()
 export class TypeOrmUserAuthRepository
@@ -27,7 +25,6 @@ export class TypeOrmUserAuthRepository
   public async save(user: UserAuth): Promise<void> {
     const repository = await this.repository(UserAuthEntity);
     const entity = UserAuthEntity.fromDomainClass(user);
-
     await repository.save(entity);
   }
 }

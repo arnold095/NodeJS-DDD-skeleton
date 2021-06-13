@@ -1,27 +1,20 @@
 import * as map from 'source-map-support';
 import 'reflect-metadata';
+import { InversifyAdapter } from '../../../../src/Apps/Auth/DependencyContainer/InversifyAdapter';
 map.install();
 
-import { RedisConnection } from "../../../../src/Contexts/Shared/Infrastructure/Persistence/Redis/RedisConnection";
-import { InversifyAdapter } from "../../../../src/Apps/Auth/DependencyContainer/InversifyAdapter";
-
 export class Arranger {
-    public static _container: InversifyAdapter;
+  public static _container: InversifyAdapter;
 
-    public static async run() {
-        await this.loadContainer();
-        await this.loadServices();
-    }
+  public static async run(): Promise<void> {
+    await this.loadContainer();
+  }
 
-    public static get container() {
-        return this._container;
-    }
+  public static get container(): InversifyAdapter {
+    return this._container;
+  }
 
-    private static async loadContainer() {
-        this._container = new InversifyAdapter();
-    }
-
-    private static async loadServices() {
-        await RedisConnection.connect();
-    }
+  private static async loadContainer(): Promise<void> {
+    this._container = new InversifyAdapter();
+  }
 }

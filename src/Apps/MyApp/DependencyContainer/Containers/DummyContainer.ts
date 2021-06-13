@@ -4,7 +4,7 @@ import {
   DummyAddressCreator,
   DummyCreator,
   DummyFinder,
-  TypeORMDummyRepository,
+  RedisDummyRepository,
 } from '@dummy';
 import { DummyGetController } from '../../Controller/Dummy/Get/DummyGetController';
 import { DummyAddressPostController } from '../../Controller/Dummy/Post/DummyAddressPostController';
@@ -17,7 +17,7 @@ export class DummyContainer {
       domainContracts: [
         {
           abstract: 'DummyRepository',
-          concrete: TypeORMDummyRepository,
+          concrete: RedisDummyRepository,
         },
       ],
     };

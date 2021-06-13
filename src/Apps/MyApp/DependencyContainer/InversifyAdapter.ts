@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { ClassConstructor, IocAdapter as RoutingIocAdapter } from 'routing-controllers';
+import { ClassConstructor } from 'routing-controllers';
 import { DummyContainer } from './Containers/DummyContainer';
 import { SharedContainer } from './Containers/SharedContainer';
 import { AdapterTypes, IocAdapter } from '@sharedDomain';
@@ -35,26 +35,26 @@ export class InversifyAdapter implements IocAdapter {
 
   private bindControllers(controllers) {
     for (const controller of controllers) {
-      this.container.bind(controller.name).to(controller).inRequestScope();
+      this.container().bind(controller.name).to(controller).inRequestScope();
     }
   }
 
   private bindServices(services) {
     for (const service of services) {
-      this.container.bind(service.name).to(service).inRequestScope();
+      this.container().bind(service.name).to(service).inRequestScope();
     }
   }
 
   private bindDomainContracts(repositories) {
     for (const repository of repositories) {
       const { abstract, concrete } = repository;
-      this.container.bind(abstract).to(concrete).inRequestScope();
+      this.container().bind(abstract).to(concrete).inRequestScope();
     }
   }
 
   private bindDomainEventSubscribers(subscribers) {
     for (const subscriber of subscribers) {
-      this.container.bind('DomainEventSubscriber').to(subscriber);
+      this.container().bind('DomainEventSubscriber').to(subscriber);
     }
   }
 }
