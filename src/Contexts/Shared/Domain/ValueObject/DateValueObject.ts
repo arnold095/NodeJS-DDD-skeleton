@@ -7,7 +7,7 @@ export class DateValueObject {
 
   private ensureTheDateIsValid() {
     if (!(this.value instanceof Date)) {
-      throw new InvalidArgumentError('The date format is not valid');
+      throw new InvalidArgumentError(400, 'The date format is not valid');
     }
   }
 
