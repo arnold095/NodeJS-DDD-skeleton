@@ -1,6 +1,11 @@
 import { AdapterTypes } from '@sharedDomain';
 import { DummyPostController } from '../../Controller/Dummy/Post/DummyPostController';
-import { DummyAddressCreator, DummyCreator, DummyFinder, TypeORMDummyRepository } from '@dummy';
+import {
+  DummyAddressCreator,
+  DummyCreator,
+  DummyFinder,
+  TypeORMDummyRepository,
+} from '@dummy';
 import { DummyGetController } from '../../Controller/Dummy/Get/DummyGetController';
 import { DummyAddressPostController } from '../../Controller/Dummy/Post/DummyAddressPostController';
 
