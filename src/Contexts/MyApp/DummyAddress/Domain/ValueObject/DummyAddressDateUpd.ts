@@ -1,3 +1,3 @@
-import { DateValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/DateValueObject';
+import { DateValueObject } from '@sharedDomain';
 
 export class DummyAddressDateUpd extends DateValueObject {}

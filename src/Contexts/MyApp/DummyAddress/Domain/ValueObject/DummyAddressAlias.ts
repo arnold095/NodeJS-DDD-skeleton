@@ -1,3 +1,3 @@
-import { StringValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/StringValueObject';
+import { StringValueObject } from '@sharedDomain';
 
 export class DummyAddressAlias extends StringValueObject {}

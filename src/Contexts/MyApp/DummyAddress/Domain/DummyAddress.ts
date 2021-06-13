@@ -1,16 +1,16 @@
-import { DummyAddressId } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId';
-import { DummyAddressAlias } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressAlias';
-import { DummyAddressCity } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCity';
-import { DummyAddressStreet } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressStreet';
-import { DummyAddressPostalCode } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressPostalCode';
-import { DummyAddressCountry } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCountry';
-import { DummyAddressDateAdd } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateAdd';
-import { DummyAddressDateUpd } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateUpd';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { DateValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/DateValueObject';
-import { DomainModel } from '@/src/Contexts/Shared/Domain/Model/DomainModel';
-
-export class DummyAddress implements DomainModel {
+import { DummyId } from '@dummy';
+import {
+  DummyAddressDateUpd,
+  DummyAddressId,
+  DummyAddressAlias,
+  DummyAddressStreet,
+  DummyAddressCity,
+  DummyAddressPostalCode,
+  DummyAddressCountry,
+  DummyAddressDateAdd,
+} from '@dummyAddress';
+import { DateValueObject } from '@sharedDomain';
+export class DummyAddress {
   public constructor(
     private _id: DummyAddressId,
     private _dummyId: DummyId,
