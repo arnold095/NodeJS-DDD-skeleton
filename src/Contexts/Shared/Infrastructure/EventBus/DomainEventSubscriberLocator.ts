@@ -11,14 +11,13 @@ export class DomainEventSubscriberLocator {
   ) {}
 
   public withRabbitMQQueueNamed(queueName: string): DomainEventSubscriber {
-    let subscriber: DomainEventSubscriber;
+    let subscriber;
     for (const eventSubscriber of this.domainEventSubscriber) {
       const mappedClassName = RabbitMQQueueNameFormatter.format(eventSubscriber);
       if (queueName === mappedClassName) {
         subscriber = eventSubscriber;
       }
     }
-
     if (undefined === subscriber) {
       throw new Error(`There are no subscribers for the <${queueName}> queue`);
     }

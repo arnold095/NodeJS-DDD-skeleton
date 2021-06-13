@@ -11,7 +11,7 @@ import { InversifyAdapter } from '../../DependencyContainer/InversifyAdapter';
 map.install();
 
 export class ConsumeRabbitMQDomainEventsCommand {
-  private exchangeName: string = process.env.RABBITMQ_EXCHANGE;
+  private exchangeName = process.env.RABBITMQ_EXCHANGE ?? 'domain_events';
   private readonly consumer: RabbitMQDomainEventsConsumer;
   private readonly configurator: RabbitMQConfigurator;
   private readonly locator: DomainEventSubscriberLocator;
@@ -33,7 +33,7 @@ export class ConsumeRabbitMQDomainEventsCommand {
 
   private queue(): string {
     const queue = process.argv.find((arg) => arg.includes('queue'));
-    if (queue === '') {
+    if (!queue) {
       throw new Error('This queue does not exist');
     }
     return queue.replace('queue:', '');

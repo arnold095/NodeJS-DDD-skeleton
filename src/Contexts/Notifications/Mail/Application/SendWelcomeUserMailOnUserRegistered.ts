@@ -10,13 +10,9 @@ import {
 
 @injectable()
 export class SendWelcomeUserMailOnUserRegistered implements DomainEventSubscriber {
-  private emailFrom: MailAddress;
-
   public constructor(
     @inject('SendWelcomeUserMail') private readonly sendMail: SendWelcomeUserMail
-  ) {
-    this.emailFrom = new MailAddress(process.env.MAIL_WELCOME_DUMMY);
-  }
+  ) {}
 
   public subscribedTo(): DomainEventClass[] {
     return [UserRegisteredDomainEvent];

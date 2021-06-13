@@ -25,7 +25,7 @@ export class ConsumeRabbitMQDomainEventsCommand {
 
   private queue(): string {
     const queue = process.argv.find((arg) => arg.includes('queue'));
-    if (queue === '') {
+    if (!queue) {
       throw new Error('This queue does not exist');
     }
     return queue.replace('queue:', '');

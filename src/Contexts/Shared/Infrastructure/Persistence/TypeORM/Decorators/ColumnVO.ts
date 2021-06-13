@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getMetadataArgsStorage } from 'typeorm';
+import { ColumnType, getMetadataArgsStorage } from 'typeorm';
 import { ColumnMetadataArgs } from 'typeorm/metadata-args/ColumnMetadataArgs';
 
 export function ColumnVO(
   columnName: string,
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   ValueObject: any,
-  type = 'varchar'
+  type: ColumnType = 'varchar'
   // eslint-disable-next-line @typescript-eslint/ban-types
 ): Function {
   // eslint-disable-next-line @typescript-eslint/ban-types

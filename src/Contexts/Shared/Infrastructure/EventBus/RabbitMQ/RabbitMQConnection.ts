@@ -4,19 +4,20 @@ import { Logger } from '@sharedDomain';
 
 @injectable()
 export class RabbitMQConnection {
-  private configuration: Options.Connect;
-  private connection: Connection;
-  private _channel: Channel;
+  private configuration!: Options.Connect;
+  private connection!: Connection;
+  private _channel!: Channel;
 
   public constructor(@inject('Logger') private readonly logger: Logger) {
     this.loadConfiguration();
   }
 
   private loadConfiguration(): void {
+    const port = parseInt(process.env.RABBITMQ_PORT ?? '5672');
     this.configuration = {
       protocol: process.env.RABBITMQ_PROTOCOL,
       hostname: process.env.RABBITMQ_HOSTNAME,
-      port: parseInt(process.env.RABBITMQ_PORT),
+      port,
       username: process.env.RABBITMQ_USERNAME,
       password: process.env.RABBITMQ_PASSWORD,
       locale: process.env.RABBITMQ_LOCALE,

@@ -10,8 +10,8 @@ export type RedisTypes = {
 };
 @injectable()
 export class RedisProvider {
-  private _client: RedisClient;
-  private config: RedisTypes;
+  private _client!: RedisClient;
+  private config!: RedisTypes;
 
   constructor(@inject('Logger') private readonly logger: Logger) {}
 
@@ -31,9 +31,9 @@ export class RedisProvider {
   private loadConfiguration() {
     const { REDIS_PORT, REDIS_HOST, REDIS_DEFAULT_DB } = process.env;
     this.config = {
-      host: REDIS_HOST,
-      port: parseInt(REDIS_PORT),
-      db: parseInt(REDIS_DEFAULT_DB),
+      host: REDIS_HOST ?? '127.0.0.1',
+      port: parseInt(REDIS_PORT ?? '6379'),
+      db: parseInt(REDIS_DEFAULT_DB ?? '0'),
     };
   }
 
@@ -51,35 +51,4 @@ export class RedisProvider {
       throw err;
     }
   }
-  //
-  // public static async connect(): Promise<void> {
-  //   this.loadConfiguration();
-  //   this.loadClient();
-  //   await this.onConnect();
-  // }
-  //
-  // public static get client(): RedisClient {
-  //   return this._client;
-  // }
-  //
-  // private static loadConfiguration() {
-  //   const { REDIS_PORT, REDIS_HOST, REDIS_DEFAULT_DB } = process.env;
-  //   this.config = {
-  //     host: REDIS_HOST,
-  //     port: parseInt(REDIS_PORT),
-  //     db: parseInt(REDIS_DEFAULT_DB),
-  //   };
-  // }
-  //
-  // private static loadClient() {
-  //   this._client = createClient(this.config);
-  // }
-  //
-  // private static async onConnect(): Promise<void> {
-  //   try {
-  //     await promisify(this.client.on)('connect');
-  //   } catch (e) {
-  //     this.logger.error("Can't connect to redis");
-  //   }
-  // }
 }

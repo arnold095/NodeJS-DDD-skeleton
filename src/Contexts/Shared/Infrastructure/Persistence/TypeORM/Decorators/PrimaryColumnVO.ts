@@ -7,7 +7,8 @@ export function PrimaryColumnVO(
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   ValueObject: any,
   type: ColumnType = 'uuid'
-): PropertyDecorator {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+): Function {
   // eslint-disable-next-line @typescript-eslint/ban-types
   return function (object: Object, propertyName: string) {
     // create and register a new column metadata

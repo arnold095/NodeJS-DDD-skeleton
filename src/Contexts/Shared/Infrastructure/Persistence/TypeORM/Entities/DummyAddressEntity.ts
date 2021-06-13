@@ -51,7 +51,7 @@ export class DummyAddressEntity implements PersistenceEntity {
     cascade: ['insert', 'update'],
   })
   @JoinColumn({ name: 'id_dummy' })
-  dummy: DummyEntity;
+  dummy!: DummyEntity;
 
   public toDomainModel(): DomainModel {
     return EntityTransformer.toDomainModel(this, DummyAddress);

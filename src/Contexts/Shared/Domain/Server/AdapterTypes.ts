@@ -1,11 +1,11 @@
-import { ClassConstructor } from '@sharedDomain';
+import { Instantiable } from '@sharedDomain';
 
 export type AdapterTypes = {
-  controllers?: ClassConstructor<unknown>[];
-  services?: ClassConstructor<unknown>[];
+  controllers?: Instantiable[];
+  services?: Instantiable[];
   domainContracts?: {
     abstract: string;
-    concrete: ClassConstructor<unknown>;
+    concrete: Instantiable;
   }[];
-  domainEventSubscribers?: ClassConstructor<unknown>[];
+  domainEventSubscribers?: Instantiable[];
 };

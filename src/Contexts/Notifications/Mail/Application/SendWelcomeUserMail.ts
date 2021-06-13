@@ -3,17 +3,15 @@ import { Mail, MailAddress, MailBody, MailSender, MailSubject } from '@notificat
 
 @injectable()
 export class SendWelcomeUserMail {
-  private emailFrom: MailAddress;
-  public constructor(@inject('MailSender') private readonly mailSender: MailSender) {
-    this.emailFrom = new MailAddress(process.env.MAIL_WELCOME_DUMMY);
-  }
+  private readonly emailFrom = process.env.MAIL_WELCOME_DUMMY ?? 'test@test.test';
+  public constructor(@inject('MailSender') private readonly mailSender: MailSender) {}
 
   public async run(
     email: MailAddress,
     subject: MailSubject,
     body: MailBody
   ): Promise<void> {
-    const mail = Mail.create(email, this.emailFrom, subject, body);
+    const mail = Mail.create(email, new MailAddress(this.emailFrom), subject, body);
     await this.mailSender.send(mail);
   }
 }

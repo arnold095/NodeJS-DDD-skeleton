@@ -47,10 +47,9 @@ export class MongoDbProvider {
   }
 
   private configuration(): MongoClientOptions {
-    const { MONGODB_POOL_SIZE } = process.env;
     return {
       useNewUrlParser: true,
-      poolSize: parseInt(MONGODB_POOL_SIZE),
+      poolSize: parseInt(process.env.MONGODB_POOL_SIZE ?? '10'),
       useUnifiedTopology: true,
     };
   }
