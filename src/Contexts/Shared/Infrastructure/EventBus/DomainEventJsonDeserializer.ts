@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
-import { DomainEvent } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
-import { DomainEventMapping } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventMapping';
+import { DomainEventMapping } from '@sharedInfra';
+import { DomainEvent } from '@sharedDomain';
 
 @injectable()
 export class DomainEventJsonDeserializer {

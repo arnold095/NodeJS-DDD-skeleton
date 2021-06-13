@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { inject, injectable } from 'inversify';
-import { TypeORMProvider } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMProvider';
 import { EntityTarget } from 'typeorm/common/EntityTarget';
+import { TypeORMProvider } from './TypeORMProvider';
 
 @injectable()
 export class TypeORMClient {

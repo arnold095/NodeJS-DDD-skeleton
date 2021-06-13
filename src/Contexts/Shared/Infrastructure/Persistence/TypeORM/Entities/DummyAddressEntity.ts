@@ -1,21 +1,21 @@
 import { Entity, JoinColumn, ManyToOne } from 'typeorm';
-import { PersistenceEntity } from '@/src/Contexts/Shared/Domain/Persistence/PersistenceEntity';
-import { DummyAddressId } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId';
-import { ColumnVO } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { DummyAddressAlias } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressAlias';
-import { DummyAddressCity } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCity';
-import { DummyAddressStreet } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressStreet';
-import { DummyAddressPostalCode } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressPostalCode';
-import { DummyAddressCountry } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCountry';
-import { DummyAddressDateAdd } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateAdd';
-import { DummyAddressDateUpd } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateUpd';
-import { DummyEntity } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyEntity';
-import { DummyAddress } from '@/src/Contexts/MyApp/DummyAddress/Domain/DummyAddress';
-import { DomainModel } from '@/src/Contexts/Shared/Domain/Model/DomainModel';
-import { EntityTransformer } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer';
-import { Dummy } from '@/src/Contexts/MyApp/Dummy/Domain/Dummy';
-import { PrimaryColumnVO } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO';
+import { DomainModel, PersistenceEntity } from '@sharedDomain';
+import {
+  DummyAddress,
+  DummyAddressAlias,
+  DummyAddressCity,
+  DummyAddressCountry,
+  DummyAddressDateAdd,
+  DummyAddressDateUpd,
+  DummyAddressId,
+  DummyAddressPostalCode,
+  DummyAddressStreet,
+} from '@dummyAddress';
+import { PrimaryColumnVO } from '../Decorators/PrimaryColumnVO';
+import { Dummy, DummyId } from '@dummy';
+import { ColumnVO } from '../Decorators/ColumnVO';
+import { DummyEntity } from './DummyEntity';
+import { EntityTransformer } from '../EntityTransformer';
 
 @Entity('dummy_address')
 export class DummyAddressEntity implements PersistenceEntity {

@@ -1,6 +1,6 @@
 import { Channel, connect, Connection, Options, Replies } from 'amqplib';
 import { inject, injectable } from 'inversify';
-import { Logger } from '@/src/Contexts/Shared/Domain/Services/Logger';
+import { Logger } from '@sharedDomain';
 
 @injectable()
 export class RabbitMQConnection {

@@ -1,4 +1,4 @@
-import { DomainEventSubscriber } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber';
+import { DomainEventSubscriber } from '@sharedDomain';
 
 export class RabbitMQQueueNameFormatter {
   public static format(subscriber: DomainEventSubscriber): string {

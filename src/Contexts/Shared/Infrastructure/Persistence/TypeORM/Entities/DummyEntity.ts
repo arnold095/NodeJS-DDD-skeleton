@@ -1,16 +1,11 @@
 import { Entity, OneToMany } from 'typeorm';
-import { PersistenceEntity } from '@/src/Contexts/Shared/Domain/Persistence/PersistenceEntity';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { DummyEmail } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyEmail';
-import { DummyTitle } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyTitle';
-import { DummyContent } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyContent';
-import { DummyAddressEntity } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyAddressEntity';
-import { PrimaryColumnVO } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO';
-import { ColumnVO } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO';
-import { DomainModel } from '@/src/Contexts/Shared/Domain/Model/DomainModel';
-import { EntityTransformer } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer';
-import { Dummy } from '@/src/Contexts/MyApp/Dummy/Domain/Dummy';
-import { DummyAddress } from '@/src/Contexts/MyApp/DummyAddress/Domain/DummyAddress';
+import { DomainModel, PersistenceEntity } from '@sharedDomain';
+import { Dummy, DummyContent, DummyEmail, DummyId, DummyTitle } from '@dummy';
+import { PrimaryColumnVO } from '../Decorators/PrimaryColumnVO';
+import { ColumnVO } from '../Decorators/ColumnVO';
+import { DummyAddressEntity } from './DummyAddressEntity';
+import { EntityTransformer } from '../EntityTransformer';
+import { DummyAddress } from '@dummyAddress';
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {

@@ -1,10 +1,7 @@
 import { useContainer, useKoaServer } from 'routing-controllers';
 import * as Koa from 'koa';
 import { inject, injectable } from 'inversify';
-import { Logger } from '@/src/Contexts/Shared/Domain/Services/Logger';
-import { WebServer } from '@/src/Contexts/Shared/Domain/Server/WebServer';
-import { IocAdapter } from '@/src/Contexts/Shared/Domain/Server/IocAdapter';
-import { RoutingControllersOptions } from 'routing-controllers/types/RoutingControllersOptions';
+import { IocAdapter, Logger, WebServer } from '@sharedDomain';
 
 @injectable()
 export class KoaServer implements WebServer {

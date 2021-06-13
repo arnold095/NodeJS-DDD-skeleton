@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { RedisClient as Client } from 'redis';
-import { RedisConnection } from './RedisConnection';
+import { RedisConnection } from '@sharedInfra';
 
 @injectable()
 export class RedisClient {

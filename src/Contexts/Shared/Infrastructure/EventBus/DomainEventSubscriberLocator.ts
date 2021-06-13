@@ -1,6 +1,6 @@
 import { injectable, multiInject, optional } from 'inversify';
-import { DomainEventSubscriber } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber';
-import { RabbitMQQueueNameFormatter } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQQueueNameFormatter';
+import { DomainEventSubscriber } from '@sharedDomain';
+import { RabbitMQQueueNameFormatter } from './RabbitMQ/RabbitMQQueueNameFormatter';
 
 @injectable()
 export class DomainEventSubscriberLocator {

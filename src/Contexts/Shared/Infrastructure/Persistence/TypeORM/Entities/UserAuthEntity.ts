@@ -1,17 +1,18 @@
-import { PrimaryColumnVO } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO';
-import { ColumnVO } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO';
 import { Entity } from 'typeorm';
-import { EntityTransformer } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer';
-import { PersistenceEntity } from '@/src/Contexts/Shared/Domain/Persistence/PersistenceEntity';
-import { DomainModel } from '@/src/Contexts/Shared/Domain/Model/DomainModel';
-import { UserAuthId } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId';
-import { UserAuthFirstName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName';
-import { UserAuthLastName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
-import { UserAuthPassword } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword';
-import { UserAuthDateAdd } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateAdd';
-import { UserAuthDateUpd } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthDateUpd';
-import { UserAuth } from '@/src/Contexts/Auth/Authentication/Domain/UserAuth';
+import { DomainModel, PersistenceEntity } from '@sharedDomain';
+import {
+  UserAuth,
+  UserAuthDateAdd,
+  UserAuthDateUpd,
+  UserAuthEmail,
+  UserAuthFirstName,
+  UserAuthId,
+  UserAuthLastName,
+  UserAuthPassword,
+} from '@authentication';
+import { EntityTransformer } from '../EntityTransformer';
+import { ColumnVO } from '../Decorators/ColumnVO';
+import { PrimaryColumnVO } from '../Decorators/PrimaryColumnVO';
 
 @Entity('user')
 export class UserAuthEntity implements PersistenceEntity {

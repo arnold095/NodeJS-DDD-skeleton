@@ -1,10 +1,9 @@
 import { inject, injectable } from 'inversify';
-import { DomainEventJsonDeserializer } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventJsonDeserializer';
-import { RabbitMQConnection } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConnection';
-import { DomainEventSubscriber } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber';
 import { ConsumeMessage } from 'amqplib/properties';
-import { RabbitMQExchangeNameFormatter } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQExchangeNameFormatter';
-import { Logger } from '@/src/Contexts/Shared/Domain/Services/Logger';
+import { RabbitMQConnection } from './RabbitMQConnection';
+import { DomainEventSubscriber, Logger } from '@sharedDomain';
+import { DomainEventJsonDeserializer } from '../DomainEventJsonDeserializer';
+import { RabbitMQExchangeNameFormatter } from './RabbitMQExchangeNameFormatter';
 
 @injectable()
 export class RabbitMQDomainEventsConsumer {

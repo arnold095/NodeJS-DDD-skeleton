@@ -19,9 +19,16 @@
     "emitDecoratorMetadata": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "*"
-      ]
+      "@sharedInfra": ["src/Contexts/Shared/Infrastructure"],
+      "@sharedDomain": ["src/Contexts/Shared/Domain"],
+
+      "@notificationsMail": ["src/Contexts/Notifications/Mail"],
+
+      "@dummy": ["src/Contexts/MyApp/Dummy"],
+      "@dummyAddress": ["src/Contexts/MyApp/DummyAddress"],
+
+      "@authentication": ["src/Contexts/Auth/Authentication"],
+      "@authorization": ["src/Contexts/Auth/Authorization"]
     }
   },
   "include": ["src/**/*.ts"],

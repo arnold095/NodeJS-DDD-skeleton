@@ -1,5 +1,5 @@
-import { Logger } from '@/src/Contexts/Shared/Domain/Services/Logger';
 import { injectable } from 'inversify';
+import { Logger } from '@sharedDomain';
 
 @injectable()
 export class ConsoleLogger implements Logger {

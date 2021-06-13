@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { DomainModel } from '@/src/Contexts/Shared/Domain/Model/DomainModel';
-import { PersistenceEntity } from '@/src/Contexts/Shared/Domain/Persistence/PersistenceEntity';
 
 // TODO:: Check class-transformer library.
+import { DomainModel, PersistenceEntity } from '@sharedDomain';
+
 export class EntityTransformer {
   static toDomainModels(entities: PersistenceEntity[], domain): DomainModel[] {
     const domainModels: DomainModel[] = [];

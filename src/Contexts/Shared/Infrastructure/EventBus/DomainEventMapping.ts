@@ -1,7 +1,5 @@
 import { injectable } from 'inversify';
-import { domainEvents } from '@/src/Contexts/Shared/Domain/Decorators/DomainEvent';
-import { DomainEvent } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
-import { Nullable } from '@/src/Contexts/Shared/Domain/Utils/Nullable';
+import { DomainEvent, domainEvents, Nullable } from '@sharedDomain';
 
 @injectable()
 export class DomainEventMapping {

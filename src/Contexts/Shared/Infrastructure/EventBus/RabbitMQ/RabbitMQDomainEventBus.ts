@@ -1,10 +1,8 @@
-import { EventBus } from '@/src/Contexts/Shared/Domain/Bus/Event/EventBus';
-import { DomainEvent } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
 import { inject, injectable } from 'inversify';
-import { RabbitMQConnection } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConnection';
-import { DomainEventJsonSerializer } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventJsonSerializer';
-import { RabbitMQConfigurator } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConfigurator';
-import { Logger } from '@/src/Contexts/Shared/Domain/Services/Logger';
+import { DomainEvent, EventBus, Logger } from '@sharedDomain';
+import { RabbitMQConnection } from './RabbitMQConnection';
+import { RabbitMQConfigurator } from './RabbitMQConfigurator';
+import { DomainEventJsonSerializer } from '../DomainEventJsonSerializer';
 
 @injectable()
 export class RabbitMQDomainEventBus implements EventBus {

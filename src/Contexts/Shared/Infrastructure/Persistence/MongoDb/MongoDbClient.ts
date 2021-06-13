@@ -7,7 +7,7 @@ import {
   FilterQuery,
   UpdateQuery,
 } from 'mongodb';
-import { MongoDbProvider } from '@/src/Contexts/Shared/Infrastructure/Persistence/MongoDb/MongoDbProvider';
+import { MongoDbProvider } from '@sharedInfra';
 
 @injectable()
 export class MongoDbClient {

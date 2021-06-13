@@ -1,4 +1,4 @@
-import { DomainEvent } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
+import { DomainEvent } from '@sharedDomain';
 
 export class DomainEventJsonSerializer {
   public static serialize(domainEvent: DomainEvent): string {
