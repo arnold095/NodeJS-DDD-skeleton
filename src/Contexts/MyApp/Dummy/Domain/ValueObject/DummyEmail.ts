@@ -11,7 +11,7 @@ export class DummyEmail extends StringValueObject {
 
   ensureIsValid(): void {
     if (!this.regex.test(this.value)) {
-      throw new InvalidDummyEmail(`The format email is invalid ${this.value}`);
+      throw new InvalidDummyEmail(400, `The format email is invalid ${this.value}`);
     }
   }
 }

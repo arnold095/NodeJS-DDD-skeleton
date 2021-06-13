@@ -1,15 +1,15 @@
 import { inject, injectable } from 'inversify';
-import { EventBus } from '@/src/Contexts/Shared/Domain/Bus/Event/EventBus';
-import { UserAuthRepository } from '@/src/Contexts/Auth/Authentication/Domain/UserAuthRepository';
-import { UserRegisterRequest } from '@/src/Contexts/Auth/Authentication/Application/UserRegisterRequest';
-import { UserAuthId } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId';
-import { UserAlreadyExists } from '@/src/Contexts/Auth/Authentication/Domain/Exception/UserAlreadyExists';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
-import { UserAuthFirstName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName';
-import { UserAuthLastName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName';
-import { UserAuthPassword } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthPassword';
-import { UserAuth } from '@/src/Contexts/Auth/Authentication/Domain/UserAuth';
-import { UserEncoder } from '@/src/Contexts/Auth/Authorization/Application/UserEncoder';
+import { UserAuthRepository } from '../Domain/UserAuthRepository';
+import { EventBus } from '@sharedDomain';
+import { UserEncoder } from '@authorization';
+import { UserRegisterRequest } from './UserRegisterRequest';
+import { UserAuth } from '../Domain/UserAuth';
+import { UserAuthId } from '../Domain/ValueObject/UserAuthId';
+import { UserAuthEmail } from '../Domain/ValueObject/UserAuthEmail';
+import { UserAuthFirstName } from '../Domain/ValueObject/UserAuthFirstName';
+import { UserAuthLastName } from '../Domain/ValueObject/UserAuthLastName';
+import { UserAlreadyExists } from '../Domain/Exception/UserAlreadyExists';
+import { UserAuthPassword } from '../Domain/ValueObject/UserAuthPassword';
 
 @injectable()
 export class UserRegister {
@@ -48,7 +48,7 @@ export class UserRegister {
   private async ensureEmailDoesNotExist(email: UserAuthEmail) {
     const user = await this.repository.find(email);
     if (undefined !== user) {
-      throw new UserAlreadyExists(`The email ${email.value} already exists`);
+      throw new UserAlreadyExists(403, `The email ${email.value} already exists`);
     }
   }
 

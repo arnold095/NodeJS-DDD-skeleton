@@ -13,6 +13,7 @@ export class Uuid {
   private ensureIsValidUuid(): void {
     if (!validate(this.value)) {
       throw new InvalidArgumentError(
+        400,
         `<${this.constructor.name}> does not allow the value <${this.value}>`
       );
     }

@@ -46,14 +46,14 @@ export class DummyAddressAdder {
 
   private ensureDummyExists(dummy) {
     if (undefined === dummy) {
-      throw new DummyNotFound(`Dummy doesn't exist`);
+      throw new DummyNotFound(404, `Dummy doesn't exist`);
     }
   }
 
   private ensureDummyAddressDoesntExists(dummy: Dummy, dummyAddressId: DummyAddressId) {
     const dummyAddress = dummy.findAddress(dummyAddressId);
     if (undefined !== dummyAddress) {
-      throw new DummyAddressAlreadyExists(`Address already exists`);
+      throw new DummyAddressAlreadyExists(400, `Address already exists`);
     }
   }
 
