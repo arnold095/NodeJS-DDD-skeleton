@@ -1,11 +1,11 @@
-import { DomainEvent } from '@sharedDomain';
+import { domainEvent, DomainEvent } from '@sharedDomain';
 
 export type DummyCreatedDomainEventBody = {
   readonly title: string;
   readonly content: string;
   readonly email: string;
 };
-
+@domainEvent()
 export class DummyCreatedDomainEvent extends DomainEvent {
   private static readonly _eventName = 'dummy.created';
 

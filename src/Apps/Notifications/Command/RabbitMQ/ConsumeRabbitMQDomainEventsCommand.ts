@@ -1,24 +1,32 @@
+import 'reflect-metadata';
 import 'module-alias/register';
 import * as map from 'source-map-support';
-import 'reflect-metadata';
-import { DomainEventSubscriberLocator, RabbitMQDomainEventsConsumer } from '@sharedInfra';
+import {
+  DomainEventSubscriberLocator,
+  RabbitMQConfigurator,
+  RabbitMQDomainEventsConsumer,
+} from '@sharedInfra';
 import { InversifyAdapter } from '../../DependencyContainer/InversifyAdapter';
 
 map.install();
 
 export class ConsumeRabbitMQDomainEventsCommand {
+  private exchangeName: string = process.env.RABBITMQ_EXCHANGE;
   private readonly consumer: RabbitMQDomainEventsConsumer;
+  private readonly configurator: RabbitMQConfigurator;
   private readonly locator: DomainEventSubscriberLocator;
   private readonly container: InversifyAdapter;
 
   constructor() {
     this.container = new InversifyAdapter();
+    this.configurator = this.container.getClass('RabbitMQConfigurator');
     this.consumer = this.container.getClass('RabbitMQDomainEventsConsumer');
     this.locator = this.container.getClass('DomainEventSubscriberLocator');
   }
 
   public async run(): Promise<void> {
     const queueName = this.queue();
+    await this.configurator.configure(this.exchangeName);
     const subscriber = this.locator.withRabbitMQQueueNamed(queueName);
     await this.consumer.consume(subscriber, queueName);
   }

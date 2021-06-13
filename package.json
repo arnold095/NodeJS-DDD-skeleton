@@ -15,7 +15,7 @@
     "test:i-watch": "jest -c jest.config.integration.js  --watch",
     "start:dev": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Apps/MyApp/App.ts -e ts",
     "auth:dev": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Apps/Auth/App.ts -e ts",
-    "consumer:start": "tsc && node ./dist/Apps/Notifications/Command/RabbitMQ/ConsumeRabbitMQDomainEventsCommand.js",
+    "consumer:start": "nodemon --exec ts-node -T -r tsconfig-paths/register src/Apps/Notifications/Command/RabbitMQ/ConsumeRabbitMQDomainEventsCommand.ts -e ts",
     "lint": "eslint '**/src/**/*.ts' --quiet --fix"
   },
   "repository": {

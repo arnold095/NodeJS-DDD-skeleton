@@ -1,9 +1,9 @@
-import { DomainEvent } from '@sharedDomain';
+import { DomainEventClass } from '../Bus/Event/DomainEvent';
 
-export const domainEvents: DomainEvent[] = [];
+export const domainEvents: DomainEventClass[] = [];
 
 export function domainEvent() {
-  return function (target: DomainEvent): void {
+  return function (target: DomainEventClass): void {
     domainEvents.push(target);
   };
 }
