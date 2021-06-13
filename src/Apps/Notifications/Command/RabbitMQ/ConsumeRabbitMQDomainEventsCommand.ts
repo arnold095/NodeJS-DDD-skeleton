@@ -1,9 +1,8 @@
 import 'module-alias/register';
 import * as map from 'source-map-support';
 import 'reflect-metadata';
-import { RabbitMQDomainEventsConsumer } from '@/src/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQDomainEventsConsumer';
-import { DomainEventSubscriberLocator } from '@/src/Contexts/Shared/Infrastructure/EventBus/DomainEventSubscriberLocator';
-import { InversifyAdapter } from '@/src/Apps/MyApp/DependencyContainer/InversifyAdapter';
+import { DomainEventSubscriberLocator, RabbitMQDomainEventsConsumer } from '@sharedInfra';
+import { InversifyAdapter } from '../../DependencyContainer/InversifyAdapter';
 
 map.install();
 

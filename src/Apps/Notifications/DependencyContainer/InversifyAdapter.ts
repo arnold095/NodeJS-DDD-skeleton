@@ -1,9 +1,8 @@
 import { Container } from 'inversify';
 import { ClassConstructor, IocAdapter as RoutingIocAdapter } from 'routing-controllers';
 import { SharedContainer } from './Containers/SharedContainer';
-import { IocAdapter } from '@/src/Contexts/Shared/Domain/Server/IocAdapter';
-import { AdapterTypes } from '@/src/Contexts/Shared/Domain/Server/AdapterTypes';
-import { NotificationsContainer } from '@/src/Apps/Notifications/DependencyContainer/Containers/NotificationsContainer';
+import { NotificationsContainer } from './Containers/NotificationsContainer';
+import { AdapterTypes, IocAdapter } from '@sharedDomain';
 
 export class InversifyAdapter implements IocAdapter, RoutingIocAdapter {
   private _container: Container = new Container();
