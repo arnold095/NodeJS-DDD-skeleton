@@ -1,1 +1,3 @@
-export class InvalidDummyEmail extends Error {}
+import { BaseError } from '@sharedDomain';
+
+export class InvalidDummyEmail extends BaseError {}

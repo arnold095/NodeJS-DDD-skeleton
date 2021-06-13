@@ -1,9 +1,8 @@
 import { inject, injectable } from 'inversify';
-import { DummyRepository } from '@/src/Contexts/MyApp/Dummy/Domain/DummyRepository';
-import { DummyFinderRequest } from '@/src/Contexts/MyApp/Dummy/Application/Find/DummyFinderRequest';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { Dummy } from '@/src/Contexts/MyApp/Dummy/Domain/Dummy';
-
+import { DummyRepository } from '../../Domain/DummyRepository';
+import { Dummy } from '../../Domain/Dummy';
+import { DummyFinderRequest } from './DummyFinderRequest';
+import { DummyId } from '../../Domain/ValueObject/DummyId';
 @injectable()
 export class DummyFinder {
   public constructor(

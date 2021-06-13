@@ -1,5 +1,5 @@
-import { StringValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/StringValueObject';
-import { InvalidDummyEmail } from '../Exception/InvalidDummyEmail';
+import { StringValueObject } from '@sharedDomain';
+import { InvalidDummyEmail } from '@dummy';
 
 export class DummyEmail extends StringValueObject {
   private regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z-]+)*$/;

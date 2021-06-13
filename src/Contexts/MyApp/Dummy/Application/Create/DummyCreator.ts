@@ -1,13 +1,15 @@
-import { EventBus } from '@/src/Contexts/Shared/Domain/Bus/Event/EventBus';
 import { inject, injectable } from 'inversify';
-import { Dummy } from '../../Domain/Dummy';
-import { DummyRepository } from '../../Domain/DummyRepository';
-import { DummyAlreadyExist } from '../../Domain/Exception/DummyAlreadyExist';
-import { DummyContent } from '../../Domain/ValueObject/DummyContent';
-import { DummyEmail } from '../../Domain/ValueObject/DummyEmail';
-import { DummyId } from '../../Domain/ValueObject/DummyId';
-import { DummyTitle } from '../../Domain/ValueObject/DummyTitle';
-import { DummyCreatorRequest } from './DummyCreatorRequest';
+import { EventBus } from '@sharedDomain';
+import {
+  Dummy,
+  DummyAlreadyExist,
+  DummyContent,
+  DummyCreatorRequest,
+  DummyEmail,
+  DummyId,
+  DummyRepository,
+  DummyTitle,
+} from '@dummy';
 @injectable()
 export class DummyCreator {
   constructor(
@@ -29,7 +31,7 @@ export class DummyCreator {
   private async ensureDoesNotExist(id: DummyId) {
     const dummy = await this.repository.find(id);
     if (undefined !== dummy) {
-      throw new DummyAlreadyExist('Dummy already exists');
+      throw new DummyAlreadyExist(403, 'Dummy already exists');
     }
   }
 }

@@ -1,4 +1,5 @@
-import { DomainEvent } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
+import { DomainEvent } from '@sharedDomain';
+
 type DummyAddressCreatedDomainEventBody = {
   id: string;
   dummyAddressId: string;

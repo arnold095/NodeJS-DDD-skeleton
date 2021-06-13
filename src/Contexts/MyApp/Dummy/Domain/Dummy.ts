@@ -1,20 +1,21 @@
-import { AggregateRoot } from '@/src/Contexts/Shared/Domain/Aggregate/AggregateRoot';
-import { DummyCreatedDomainEvent } from './DummyCreatedDomainEvent';
-import { DummyContent } from './ValueObject/DummyContent';
-import { DummyEmail } from './ValueObject/DummyEmail';
-import { DummyId } from './ValueObject/DummyId';
-import { DummyTitle } from './ValueObject/DummyTitle';
-import { DomainModel } from '@/src/Contexts/Shared/Domain/Model/DomainModel';
-import { DummyAddress } from '@/src/Contexts/MyApp/DummyAddress/Domain/DummyAddress';
-import { DummyAddressId } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId';
-import { DummyAddressCreatedDomainEvent } from '@/src/Contexts/MyApp/Dummy/Domain/DummyAddressCreatedDomainEvent';
+import { AggregateRoot } from '@sharedDomain';
+import { DummyAddress, DummyAddressId } from '@dummyAddress';
+import {
+  DummyId,
+  DummyTitle,
+  DummyContent,
+  DummyEmail,
+  DummyCreatedDomainEvent,
+  DummyAddressCreatedDomainEvent,
+} from '@dummy';
+
 export type DummyPrimitives = {
   id: string;
   title: string;
   content: string;
   email: string;
 };
-export class Dummy extends AggregateRoot implements DomainModel {
+export class Dummy extends AggregateRoot {
   private _addresses: DummyAddress[] = [];
 
   constructor(

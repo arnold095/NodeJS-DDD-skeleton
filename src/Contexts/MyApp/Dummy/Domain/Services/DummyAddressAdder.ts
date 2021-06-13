@@ -1,18 +1,20 @@
-import { DummyAddressId } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId';
-import { DummyAddressAlias } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressAlias';
-import { DummyAddressStreet } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressStreet';
-import { DummyAddressCity } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCity';
-import { DummyAddressPostalCode } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressPostalCode';
-import { DummyAddressCountry } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCountry';
-import { DummyRepository } from '@/src/Contexts/MyApp/Dummy/Domain/DummyRepository';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { DummyNotFound } from '@/src/Contexts/MyApp/Dummy/Domain/Exception/DummyNotFound';
-import { DummyAddress } from '@/src/Contexts/MyApp/DummyAddress/Domain/DummyAddress';
-import { Dummy } from '@/src/Contexts/MyApp/Dummy/Domain/Dummy';
-import { DummyAddressAlreadyExists } from '@/src/Contexts/MyApp/Dummy/Domain/Exception/DummyAddressAlreadyExists';
-import { DateValueObject } from '@/src/Contexts/Shared/Domain/ValueObject/DateValueObject';
-import { DummyAddressDateAdd } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateAdd';
-import { DummyAddressDateUpd } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressDateUpd';
+import { DummyRepository } from '../DummyRepository';
+import {
+  DummyAddress,
+  DummyAddressAlias,
+  DummyAddressCity,
+  DummyAddressCountry,
+  DummyAddressDateAdd,
+  DummyAddressDateUpd,
+  DummyAddressId,
+  DummyAddressPostalCode,
+  DummyAddressStreet,
+} from '@dummyAddress';
+import { DummyId } from '../ValueObject/DummyId';
+import { Dummy } from '../Dummy';
+import { DummyNotFound } from '../Exception/DummyNotFound';
+import { DummyAddressAlreadyExists } from '../Exception/DummyAddressAlreadyExists';
+import { DateValueObject } from '@sharedDomain';
 
 export class DummyAddressAdder {
   constructor(private repository: DummyRepository) {}

@@ -1,10 +1,7 @@
-import { DummyRepository } from '@/src/Contexts/MyApp/Dummy/Domain/DummyRepository';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { Dummy } from '@/src/Contexts/MyApp/Dummy/Domain/Dummy';
-import { TypeORMClient } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/TypeORMClient';
-import { DummyEntity } from '@/src/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyEntity';
 import { EntityRepository } from 'typeorm';
 import { injectable } from 'inversify';
+import { Dummy, DummyRepository, DummyId } from '@dummy';
+import { DummyEntity, TypeORMClient } from '@sharedInfra';
 
 @EntityRepository(Dummy)
 @injectable()

@@ -1,11 +1,14 @@
-import { RedisClient } from '@/src/Contexts/Shared/Infrastructure/Persistence/Redis/RedisClient';
-import { Dummy, DummyPrimitives } from '../Domain/Dummy';
-import { DummyRepository } from '../Domain/DummyRepository';
-import { DummyContent } from '../Domain/ValueObject/DummyContent';
-import { DummyEmail } from '../Domain/ValueObject/DummyEmail';
-import { DummyId } from '../Domain/ValueObject/DummyId';
-import { DummyTitle } from '../Domain/ValueObject/DummyTitle';
-import { Nullable } from '@/src/Contexts/Shared/Domain/Utils/Nullable';
+import { RedisClient } from '@sharedInfra';
+import {
+  Dummy,
+  DummyContent,
+  DummyEmail,
+  DummyId,
+  DummyPrimitives,
+  DummyRepository,
+  DummyTitle,
+} from '@dummy';
+import { Nullable } from '@sharedDomain';
 
 export class RedisDummyRepository extends RedisClient implements DummyRepository {
   public async find(id: DummyId): Promise<Nullable<Dummy>> {

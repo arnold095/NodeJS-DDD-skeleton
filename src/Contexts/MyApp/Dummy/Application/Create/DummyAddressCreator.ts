@@ -1,15 +1,15 @@
 import { inject, injectable } from 'inversify';
-import { DummyRepository } from '@/src/Contexts/MyApp/Dummy/Domain/DummyRepository';
-import { EventBus } from '@/src/Contexts/Shared/Domain/Bus/Event/EventBus';
-import { DummyAddressCreatorRequest } from '@/src/Contexts/MyApp/Dummy/Application/Create/DummyAddressCreatorRequest';
-import { DummyId } from '@/src/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId';
-import { DummyAddressId } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressId';
-import { DummyAddressAlias } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressAlias';
-import { DummyAddressStreet } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressStreet';
-import { DummyAddressCity } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCity';
-import { DummyAddressPostalCode } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressPostalCode';
-import { DummyAddressAdder } from '@/src/Contexts/MyApp/Dummy/Domain/Services/DummyAddressAdder';
-import { DummyAddressCountry } from '@/src/Contexts/MyApp/DummyAddress/Domain/ValueObject/DummyAddressCountry';
+import { DummyAddressCreatorRequest, DummyId, DummyRepository } from '@dummy';
+import { EventBus } from '@sharedDomain';
+import { DummyAddressAdder } from '../../Domain/Services/DummyAddressAdder';
+import {
+  DummyAddressAlias,
+  DummyAddressCity,
+  DummyAddressCountry,
+  DummyAddressId,
+  DummyAddressPostalCode,
+  DummyAddressStreet,
+} from '@dummyAddress';
 
 @injectable()
 export class DummyAddressCreator {

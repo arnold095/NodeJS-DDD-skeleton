@@ -1,5 +1,4 @@
-import { Dummy } from './Dummy';
-import { DummyId } from './ValueObject/DummyId';
+import { Dummy, DummyId } from '@dummy';
 
 export interface DummyRepository {
   find(id: DummyId): Promise<Dummy>;
