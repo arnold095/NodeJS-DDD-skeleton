@@ -24,7 +24,7 @@ services:
       - ./src:/code/src
     env_file:
       - ./dev.env
-    command: bash -c "npm run start:dev"
+    command: bash -c "npm i npm run start:dev"
     depends_on:
       - redis_ddd_skeleton
       - rabbitmq_ddd_skeleton
@@ -40,7 +40,7 @@ services:
       - ./src:/code/src
     env_file:
       - ./dev.env
-    command: bash -c "npm run auth:dev"
+    command: bash -c "npm i && npm run auth:dev"
     depends_on:
       - redis_ddd_skeleton
       - rabbitmq_ddd_skeleton

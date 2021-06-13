@@ -10,7 +10,7 @@ export class RedisClient {
     @inject('Logger') private readonly logger: Logger
   ) {}
 
-  protected async get<T>(key: string): Promise<T> {
+  public async get<T>(key: string): Promise<T> {
     try {
       const client = await this.provider.client();
       const getAsync = await promisify(client.get).bind(client);
@@ -22,7 +22,7 @@ export class RedisClient {
     }
   }
 
-  protected async set(key: string, body: unknown, ttl?: number): Promise<void> {
+  public async set(key: string, body: unknown, ttl?: number): Promise<void> {
     try {
       const client = await this.provider.client();
       const setAsync = await promisify(client.set).bind(client);
@@ -34,5 +34,10 @@ export class RedisClient {
       this.logger.error('An error occurred while saving the data');
       throw err;
     }
+  }
+
+  public async disconnect(): Promise<void> {
+    const client = await this.provider.client();
+    await client.quit();
   }
 }

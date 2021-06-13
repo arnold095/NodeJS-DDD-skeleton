@@ -1,10 +1,10 @@
+import 'reflect-metadata';
 import 'module-alias/register';
 import * as map from 'source-map-support';
-import 'reflect-metadata';
 import { InversifyAdapter } from './DependencyContainer/InversifyAdapter';
 import { join } from 'path';
 import { EventBus, WebServer } from '@sharedDomain';
-import { ApmClient } from '@sharedInfra';
+import { ApmClient } from '../../Contexts/Shared/Infrastructure/ApmClient';
 map.install();
 export class App {
   private readonly server: WebServer;

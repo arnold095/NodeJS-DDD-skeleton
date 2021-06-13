@@ -27,5 +27,3 @@ export * from './Persistence/TypeORM/Entities/DummyAddressEntity';
 export * from './Persistence/TypeORM/Decorators/ColumnVO';
 export * from './Persistence/TypeORM/Decorators/PrimaryColumnVO';
 export * from './Persistence/TypeORM/EntityTransformer';
-
-export * from './ApmClient';

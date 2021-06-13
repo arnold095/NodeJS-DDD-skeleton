@@ -1,7 +1,7 @@
-import { MotherCreator } from "./MotherCreator";
+import { MotherCreator } from './MotherCreator';
 
 export class PriceMother {
-    static create() {
-        return parseFloat(MotherCreator.random().commerce.price());
-    }
+  static create(): number {
+    return parseFloat(MotherCreator.random().commerce.price());
+  }
 }

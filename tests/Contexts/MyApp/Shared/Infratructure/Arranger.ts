@@ -1,5 +1,5 @@
-import * as map from 'source-map-support';
 import 'reflect-metadata';
+import * as map from 'source-map-support';
 import { InversifyAdapter } from '../../../../../src/Apps/MyApp/DependencyContainer/InversifyAdapter';
 map.install();
 
