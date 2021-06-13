@@ -1,4 +1,4 @@
-import { AuthorizationUser } from '@/src/Contexts/Auth/Authorization/Domain/AuthorizationUser';
+import { AuthorizationUser } from '@authorization';
 
 export interface AuthorizationUserEncode {
   encode(user: AuthorizationUser): string;

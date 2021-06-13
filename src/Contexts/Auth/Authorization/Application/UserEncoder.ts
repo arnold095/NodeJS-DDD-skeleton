@@ -1,11 +1,8 @@
 import { inject, injectable } from 'inversify';
-import { AuthorizationUserEncode } from '@/src/Contexts/Auth/Authorization/Domain/AuthorizationUserEncode';
-import { UserEncoderRequest } from '@/src/Contexts/Auth/Authorization/Application/UserEncoderRequest';
-import { AuthorizationUser } from '@/src/Contexts/Auth/Authorization/Domain/AuthorizationUser';
-import { UserAuthId } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
-import { UserAuthLastName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName';
-import { UserAuthFirstName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName';
+import { AuthorizationUserEncode } from '../Domain/AuthorizationUserEncode';
+import { UserEncoderRequest } from './UserEncoderRequest';
+import { AuthorizationUser } from '../Domain/AuthorizationUser';
+import { UserAuthEmail, UserAuthFirstName, UserAuthId, UserAuthLastName } from '@authentication';
 
 @injectable()
 export class UserEncoder {

@@ -1,7 +1,6 @@
-import { AuthorizationUserEncode } from '@/src/Contexts/Auth/Authorization/Domain/AuthorizationUserEncode';
-import { AuthorizationUser } from '@/src/Contexts/Auth/Authorization/Domain/AuthorizationUser';
 import { Algorithm, sign, SignOptions } from 'jsonwebtoken';
 import { injectable } from 'inversify';
+import { AuthorizationUser, AuthorizationUserEncode } from '@authorization';
 
 @injectable()
 export class JWTAuthorizationUserEncode implements AuthorizationUserEncode {

@@ -1,7 +1,10 @@
-import { UserAuthId } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthId';
-import { UserAuthFirstName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthFirstName';
-import { UserAuthLastName } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthLastName';
-import { UserAuthEmail } from '@/src/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail';
+import {
+  UserAuthEmail,
+  UserAuthFirstName,
+  UserAuthId,
+  UserAuthLastName,
+} from '@authentication';
+
 type UserPrimitives = {
   id: string;
   name: string;
