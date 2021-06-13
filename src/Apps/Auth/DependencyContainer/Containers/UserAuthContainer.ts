@@ -1,32 +1,24 @@
-import { ContainerTypes } from "@/Apps/Auth/DependencyContainer/ContainerTypes";
-import { RegisterController } from "@/Apps/Auth/Controller/Post/RegisterController";
-import { TypeOrmUserAuthRepository } from "@/Contexts/Auth/Authentication/Infrastructure/TypeOrmUserAuthRepository";
-import { UserRegister } from "@/Contexts/Auth/Authentication/Application/UserRegister";
-import { UserEncoder } from "@/Contexts/Auth/Authorization/Application/UserEncoder";
-import { JWTAuthorizationUserEncode } from "@/Contexts/Auth/Authorization/Infrastructure/JWTAuthorizationUserEncode";
-import { LoginController } from "@/Apps/Auth/Controller/Post/LoginController";
-import { UserLogin } from "@/Contexts/Auth/Authentication/Application/UserLogin";
+import { AdapterTypes } from '@sharedDomain';
+import { RegisterController } from '../../Controller/Post/RegisterController';
+import { JWTAuthorizationUserEncode, UserEncoder } from '@authorization';
+import { LoginController } from '../../Controller/Post/LoginController';
+import { TypeOrmUserAuthRepository, UserLogin, UserRegister } from '@authentication';
 
 export class UserAuthContainer {
-
-    public static container(): ContainerTypes {
-        return {
-            controllers: [
-                RegisterController, LoginController
-            ],
-            services: [
-                UserRegister, UserEncoder, UserLogin
-            ],
-            repositories: [
-                {
-                    abstract: 'UserAuthRepository',
-                    concrete: TypeOrmUserAuthRepository
-                },
-                {
-                    abstract: 'AuthorizationUserEncode',
-                    concrete: JWTAuthorizationUserEncode
-                }
-            ]
-        };
-    }
+  public static container(): AdapterTypes {
+    return {
+      controllers: [RegisterController, LoginController],
+      services: [UserRegister, UserEncoder, UserLogin],
+      domainContracts: [
+        {
+          abstract: 'UserAuthRepository',
+          concrete: TypeOrmUserAuthRepository,
+        },
+        {
+          abstract: 'AuthorizationUserEncode',
+          concrete: JWTAuthorizationUserEncode,
+        },
+      ],
+    };
+  }
 }

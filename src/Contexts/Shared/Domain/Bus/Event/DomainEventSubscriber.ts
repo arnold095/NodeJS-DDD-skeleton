@@ -1,7 +1,7 @@
-import { DomainEvent } from "./DomainEvent";
+import { DomainEvent, DomainEventClass } from '@sharedDomain';
 
 export interface DomainEventSubscriber {
-    subscribedTo(): DomainEvent[];
+  subscribedTo(): DomainEventClass[];
 
-    on(domainEvent: DomainEvent): Promise<void>;
+  on(domainEvent: DomainEvent): Promise<void>;
 }

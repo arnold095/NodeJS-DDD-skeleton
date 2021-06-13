@@ -1,12 +1,3 @@
-import { StringValueObject } from '@/Contexts/Shared/Domain/ValueObject/StringValueObject';
+import { StringValueObject } from '@sharedDomain';
 
-export class DummyAddressStreet extends StringValueObject {
-    public constructor(value: string) {
-        super(value);
-        this.ensureIsValid();
-    }
-
-    public ensureIsValid() {
-
-    }
-}
+export class DummyAddressStreet extends StringValueObject {}

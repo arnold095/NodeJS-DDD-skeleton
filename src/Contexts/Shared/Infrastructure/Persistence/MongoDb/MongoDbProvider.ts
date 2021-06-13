@@ -1,44 +1,57 @@
-import { Db, MongoClient, MongoClientOptions } from "mongodb";
-import { injectable } from "inversify";
+import { Db, MongoClient, MongoClientOptions } from 'mongodb';
+import { inject, injectable } from 'inversify';
+import { Logger } from '@sharedDomain';
 
 @injectable()
 export class MongoDbProvider {
-    private static db: Db;
+  private static db: Db;
+  private static mongoClient: MongoClient;
+  constructor(@inject('Logger') private readonly logger: Logger) {}
 
-    public async db(): Promise<Db> {
-        if (undefined === MongoDbProvider.db) {
-            await this.load();
-        }
-        return MongoDbProvider.db;
+  public async db(): Promise<Db> {
+    if (undefined === MongoDbProvider.db) {
+      await this.load();
     }
+    return MongoDbProvider.db;
+  }
 
-    private async load(): Promise<void> {
-        await this.connect();
-    }
+  public close(): void {
+    MongoDbProvider.mongoClient.close();
+  }
 
-    private async connect() {
-        const dataBase = process.env.MONGODB_DATABASE;
-        try {
-            console.log(`connecting to mongodb ${dataBase}...`);
-            const client = new MongoClient(this.uri(), this.configuration());
-            await client.connect();
-            MongoDbProvider.db = await client.db(dataBase);
-        } catch (err) {
-            console.log(`connection timeout on database ${dataBase}`, err);
-        }
-    }
+  private async load(): Promise<void> {
+    await this.connect();
+  }
 
-    private uri(): string {
-        const {MONGODB_USER, MONGODB_PASSWORD, MONGODB_HOST, MONGODB_PORT, MONGODB_DATABASE_AUTH} = process.env;
-        return `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE_AUTH}`;
+  private async connect() {
+    const dataBase = process.env.MONGODB_DATABASE;
+    try {
+      this.logger.info(`connecting to mongodb ${dataBase}...`);
+      const client = new MongoClient(this.uri(), this.configuration());
+      MongoDbProvider.mongoClient = await client.connect();
+      MongoDbProvider.db = await client.db(dataBase);
+    } catch (err) {
+      this.logger.error(`connection timeout on database ${dataBase}`, err);
     }
+  }
 
-    private configuration(): MongoClientOptions {
-        const {MONGODB_POOL_SIZE} = process.env;
-        return {
-            useNewUrlParser: true,
-            poolSize: parseInt(MONGODB_POOL_SIZE),
-            useUnifiedTopology: true,
-        };
-    }
+  private uri(): string {
+    const {
+      MONGODB_USER,
+      MONGODB_PASSWORD,
+      MONGODB_HOST,
+      MONGODB_PORT,
+      MONGODB_DATABASE_AUTH,
+    } = process.env;
+    return `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE_AUTH}`;
+  }
+
+  private configuration(): MongoClientOptions {
+    const { MONGODB_POOL_SIZE } = process.env;
+    return {
+      useNewUrlParser: true,
+      poolSize: parseInt(MONGODB_POOL_SIZE),
+      useUnifiedTopology: true,
+    };
+  }
 }

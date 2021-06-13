@@ -1,3 +1,3 @@
-import { StringValueObject } from "@/Contexts/Shared/Domain/ValueObject/StringValueObject";
+import { StringValueObject } from '@sharedDomain';
 
-export class DummyContent extends StringValueObject { }
+export class DummyContent extends StringValueObject {}

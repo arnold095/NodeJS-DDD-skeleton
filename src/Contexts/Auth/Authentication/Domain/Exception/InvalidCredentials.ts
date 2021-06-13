@@ -1,2 +1,3 @@
-export class InvalidCredentials extends Error {
-}
+import { BaseError } from '@sharedDomain';
+
+export class InvalidCredentials extends BaseError {}

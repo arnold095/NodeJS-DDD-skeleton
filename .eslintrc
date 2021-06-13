@@ -1,40 +1,28 @@
 {
     "root": true,
+    "env": {
+        "node": true,
+        "es2021": true
+    },
     "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "module"
+    },
+    "plugins": ["prettier", "@typescript-eslint"],
     "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        "standard",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
     ],
     "rules": {
-        "no-console": false,
-        "quotemark": [
-            false,
-            "single"
-        ],
-        "object-literal-sort-keys": false,
-        "trailing-comma": false,
-        "no-empty": false,
-        "no-shadowed-variable": false,
-        "no-trailing-whitespace": false,
-        "ordered-imports": false,
-        "member-access": false,
-        "arrow-parens": false,
-        "curly": false,
-        "member-ordering": false,
-        "triple-equals": false,
-        "newline-before-return": false,
-        "newline-per-chained-call": false,
-        "one-line": false,
-        "variable-name": false,
-        "max-line-length": false,
-        "eofline": false,
-        "radix": false,
-        "prefer-for-of": false
-    },
-    "rulesDirectory": [],
-    "jsRules": {}
+        "no-console": ["error", { "allow": ["info", "error"] }],
+        "no-useless-constructor": "off",
+        "object-shorthand": "error",
+        "prettier/prettier": "error",
+        "prefer-template": "error",
+        "prefer-rest-params": "warn",
+        "prefer-spread": "warn",
+        "prefer-destructuring": "warn"
+    }
 }

@@ -1,9 +1,8 @@
-import { UserAuth } from "@/Contexts/Auth/Authentication/Domain/UserAuth";
-import { UserAuthEmail } from "@/Contexts/Auth/Authentication/Domain/ValueObject/UserAuthEmail";
-
+import { UserAuth } from './UserAuth';
+import { UserAuthEmail } from './ValueObject/UserAuthEmail';
 
 export interface UserAuthRepository {
-    save(user: UserAuth): Promise<void>;
+  save(user: UserAuth): Promise<void>;
 
-    find(email: UserAuthEmail): Promise<UserAuth>
+  find(email: UserAuthEmail): Promise<UserAuth>;
 }

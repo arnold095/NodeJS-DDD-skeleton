@@ -1,30 +1,25 @@
-import { DummyCreatedDomainEvent } from "@/Contexts/MyApp/Dummy/Domain/DummyCreatedDomainEvent";
-import { DomainEvent } from "@/Contexts/Shared/Domain/Bus/Event/DomainEvent";
-import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
-import { inject, injectable } from "inversify";
-import { MailAddress } from "../Domain/ValueObject/MailAddress";
-import { MailBody } from "../Domain/ValueObject/MailBody";
-import { MailSubject } from "../Domain/ValueObject/MailSubject";
-import { SendWelcomeDummyMail } from "./SendWelcomeDummyMail";
+import { inject, injectable } from 'inversify';
+import { DomainEventClass, DomainEventSubscriber } from '@sharedDomain';
+import { SendWelcomeDummyMail } from './SendWelcomeDummyMail';
+import { DummyCreatedDomainEvent } from '@dummy';
+import { MailAddress } from '../Domain/ValueObject/MailAddress';
+import { MailSubject } from '../Domain/ValueObject/MailSubject';
+import { MailBody } from '../Domain/ValueObject/MailBody';
 
 @injectable()
 export class SendWelcomeDummyMailOnDummyCreated implements DomainEventSubscriber {
-    constructor(
-        @inject('SendWelcomeDummyMail') private readonly sendMail: SendWelcomeDummyMail
-    ) {
+  constructor(
+    @inject('SendWelcomeDummyMail') private readonly sendMail: SendWelcomeDummyMail
+  ) {}
 
-    }
+  subscribedTo(): DomainEventClass[] {
+    return [DummyCreatedDomainEvent];
+  }
 
-    subscribedTo(): DomainEvent[] {
-        // @ts-ignore
-        return [DummyCreatedDomainEvent];
-    }
-
-    public async on(domainEvent: DummyCreatedDomainEvent): Promise<void> {
-        const email = new MailAddress(domainEvent.email);
-        const subject = new MailSubject(domainEvent.title);
-        const body = new MailBody(domainEvent.content);
-        await this.sendMail.run(email, subject, body);
-    }
-
+  public async on(domainEvent: DummyCreatedDomainEvent): Promise<void> {
+    const email = new MailAddress(domainEvent.email);
+    const subject = new MailSubject(domainEvent.title);
+    const body = new MailBody(domainEvent.content);
+    await this.sendMail.run(email, subject, body);
+  }
 }

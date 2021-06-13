@@ -1,38 +1,34 @@
+import 'reflect-metadata';
 import 'module-alias/register';
 import * as map from 'source-map-support';
-map.install()
-
-import "reflect-metadata";
-import "@/Contexts/Shared/Infrastructure/ApmClient";
-import { InversifyAdapter } from "./DependencyContainer/InversifyAdapter";
-import { KoaServer } from './Server/KoaServer';
-import { RedisConnection } from '@/Contexts/Shared/Infrastructure/Persistence/Redis/RedisConnection';
-import { EventBus } from "@/Contexts/Shared/Domain/Bus/Event/EventBus";
-
-
+import { InversifyAdapter } from './DependencyContainer/InversifyAdapter';
+import { join } from 'path';
+import { EventBus, WebServer } from '@sharedDomain';
+import { ApmClient } from '../../Contexts/Shared/Infrastructure/ApmClient';
+map.install();
 export class App {
-    private readonly server: KoaServer;
-    private readonly container: InversifyAdapter;
+  private readonly server: WebServer;
+  private readonly iocAdapter = new InversifyAdapter();
+  private readonly serverPort = parseInt(process.env.SERVER_PORT);
 
-    constructor() {
-        this.container = new InversifyAdapter();
-        this.server = new KoaServer(this.container);
-    }
+  constructor() {
+    this.server = this.iocAdapter.getClass('WebServer');
+  }
 
-    public async bootStrap() {
-        await this.connectToServices();
-        this.server.load();
-        this.loadEventBus();
-    }
+  public async bootStrap(): Promise<void> {
+    this.server.load(this.iocAdapter, this.serverPort, this.controllers());
+    this.loadEventBus();
+    ApmClient.connect();
+  }
 
-    private async connectToServices() {
-        await RedisConnection.connect();
-    }
+  private loadEventBus() {
+    const eventBus = this.iocAdapter.getClass<EventBus>('EventBus');
+    eventBus.load();
+  }
 
-    private loadEventBus() {
-        const eventBus = this.container.getClass<EventBus>('EventBus');
-        eventBus.load();
-    }
+  private controllers(): string[] {
+    return [join(__dirname, '/Controller/**/*.ts')];
+  }
 }
 
 const app = new App();

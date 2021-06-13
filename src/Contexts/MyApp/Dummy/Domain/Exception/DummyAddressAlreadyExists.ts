@@ -1,2 +1,3 @@
-export class DummyAddressAlreadyExists extends Error {
-}
+import { BaseError } from '@sharedDomain';
+
+export class DummyAddressAlreadyExists extends BaseError {}

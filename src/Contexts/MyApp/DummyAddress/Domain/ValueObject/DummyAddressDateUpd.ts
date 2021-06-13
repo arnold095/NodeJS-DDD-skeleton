@@ -1,12 +1,3 @@
-import { DateValueObject } from '@/Contexts/Shared/Domain/ValueObject/DateValueObject';
+import { DateValueObject } from '@sharedDomain';
 
-export class DummyAddressDateUpd extends DateValueObject {
-    public constructor(value: Date) {
-        super(value);
-        this.ensureIsValid();
-    }
-
-    public ensureIsValid() {
-
-    }
-}
+export class DummyAddressDateUpd extends DateValueObject {}

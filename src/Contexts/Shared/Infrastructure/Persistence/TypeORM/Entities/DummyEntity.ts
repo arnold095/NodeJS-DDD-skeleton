@@ -1,47 +1,45 @@
-import { Entity, OneToMany } from "typeorm";
-import { DummyId } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId";
-import { PersistenceEntity } from "@/Contexts/Shared/Domain/Persistence/PersistenceEntity";
-import { DummyEmail } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyEmail";
-import { DummyContent } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyContent";
-import { DummyTitle } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyTitle";
-import { Dummy } from "@/Contexts/MyApp/Dummy/Domain/Dummy";
-import { ColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/ColumnVO";
-import { DomainModel } from "@/Contexts/Shared/Domain/Model/DomainModel";
-import { EntityTransformer } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/EntityTransformer";
-import { DummyAddressEntity } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Entities/DummyAddressEntity";
-import { DummyAddress } from "@/Contexts/MyApp/DummyAddress/Domain/DummyAddress";
-import { PrimaryColumnVO } from "@/Contexts/Shared/Infrastructure/Persistence/TypeORM/Decorators/PrimaryColumnVO";
+import { Entity, OneToMany } from 'typeorm';
+import { DomainModel, PersistenceEntity } from '@sharedDomain';
+import { Dummy, DummyContent, DummyEmail, DummyId, DummyTitle } from '@dummy';
+import { PrimaryColumnVO } from '../Decorators/PrimaryColumnVO';
+import { ColumnVO } from '../Decorators/ColumnVO';
+import { DummyAddressEntity } from './DummyAddressEntity';
+import { EntityTransformer } from '../EntityTransformer';
+import { DummyAddress } from '@dummyAddress';
 
 @Entity('dummy')
 export class DummyEntity implements PersistenceEntity {
-    @PrimaryColumnVO('id_dummy', DummyId)
-    private _id;
+  @PrimaryColumnVO('id_dummy', DummyId)
+  private _id;
 
-    @ColumnVO('email', DummyEmail)
-    private _email;
+  @ColumnVO('email', DummyEmail)
+  private _email;
 
-    @ColumnVO('title', DummyTitle)
-    private _title;
+  @ColumnVO('title', DummyTitle)
+  private _title;
 
-    @ColumnVO('content', DummyContent)
-    private _content;
+  @ColumnVO('content', DummyContent)
+  private _content;
 
-    @OneToMany(type => DummyAddressEntity, address => address.dummy, {
-        eager: true,
-        cascade: ['insert', "update"]
-    })
-    public _addresses;
+  @OneToMany(() => DummyAddressEntity, (address) => address.dummy, {
+    eager: true,
+    cascade: ['insert', 'update'],
+  })
+  public _addresses;
 
-    public toDomainModel(): DomainModel {
-        this._addresses = EntityTransformer.toDomainModels(this._addresses, DummyAddress);
-        return EntityTransformer.toDomainModel(this, Dummy);
+  public toDomainModel(): DomainModel {
+    this._addresses = EntityTransformer.toDomainModels(this._addresses, DummyAddress);
+    return EntityTransformer.toDomainModel(this, Dummy);
+  }
+
+  public static fromDomainClass(dummy: Dummy): PersistenceEntity {
+    const dummyEntity = EntityTransformer.toEntity(dummy, DummyEntity);
+    if (dummy.addresses) {
+      dummyEntity._addresses = EntityTransformer.toEntities(
+        dummy.addresses,
+        DummyAddressEntity
+      );
     }
-
-    public static fromDomainClass(dummy: Dummy): PersistenceEntity {
-        const dummyEntity = EntityTransformer.toEntity(dummy, DummyEntity);
-        if (dummy.addresses) {
-            dummyEntity._addresses = EntityTransformer.toEntities(dummy.addresses, DummyAddressEntity);
-        }
-        return dummyEntity;
-    }
+    return dummyEntity;
+  }
 }

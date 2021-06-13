@@ -1,26 +1,27 @@
-import { DomainEventSubscriber } from "@/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber";
-import { injectable, multiInject } from "inversify";
-import { RabbitMQQueueNameFormatter } from "@/Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQQueueNameFormatter";
+import { injectable, multiInject, optional } from 'inversify';
+import { DomainEventSubscriber } from '@sharedDomain';
+import { RabbitMQQueueNameFormatter } from './RabbitMQ/RabbitMQQueueNameFormatter';
 
 @injectable()
 export class DomainEventSubscriberLocator {
+  constructor(
+    @optional()
+    @multiInject('DomainEventSubscriber')
+    private readonly domainEventSubscriber: DomainEventSubscriber[]
+  ) {}
 
-    constructor(
-        @multiInject('DomainEventSubscriber') private readonly domainEventSubscriber
-    ) {
+  public withRabbitMQQueueNamed(queueName: string): DomainEventSubscriber {
+    let subscriber: DomainEventSubscriber;
+    for (const eventSubscriber of this.domainEventSubscriber) {
+      const mappedClassName = RabbitMQQueueNameFormatter.format(eventSubscriber);
+      if (queueName === mappedClassName) {
+        subscriber = eventSubscriber;
+      }
     }
 
-    public withRabbitMQQueueNamed(queueName: string): DomainEventSubscriber {
-        let subscriber: DomainEventSubscriber;
-        this.domainEventSubscriber.map(eventSubscriber => {
-            const mappedClassName = RabbitMQQueueNameFormatter.format(eventSubscriber);
-            if (queueName === mappedClassName) {
-                subscriber = eventSubscriber;
-            }
-        });
-        if (undefined === subscriber) {
-            throw new Error(`There are no subscribers for the <${queueName}> queue`)
-        }
-        return subscriber;
+    if (undefined === subscriber) {
+      throw new Error(`There are no subscribers for the <${queueName}> queue`);
     }
+    return subscriber;
+  }
 }

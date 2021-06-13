@@ -11,27 +11,32 @@
       "reflect-metadata", "jest"
     ],
     "typeRoots": [
-      "./types",
       "./node_modules/@types"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "*"
-      ]
+      "@sharedDomain": ["src/Contexts/Shared/Domain"],
+      "@sharedInfra": ["src/Contexts/Shared/Infrastructure"],
+
+      "@notificationsMail": ["src/Contexts/Notifications/Mail"],
+
+      "@dummy": ["src/Contexts/MyApp/Dummy"],
+      "@dummyAddress": ["src/Contexts/MyApp/DummyAddress"],
+
+      "@authentication": ["src/Contexts/Auth/Authentication"],
+      "@authorization": ["src/Contexts/Auth/Authorization"]
     }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "tests",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "removeComments": true,
+  "noEmitOnError": true,
+  "noUnusedLocals": true,
+  "noUnusedParameters": true,
+  "noImplicitReturns": true,
+  "esModuleInterop": true,
+  "forceConsistentCasingInFileNames": true
 }

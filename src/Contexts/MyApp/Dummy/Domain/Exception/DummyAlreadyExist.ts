@@ -1,1 +1,3 @@
-export class DummyAlreadyExist extends Error { }
+import { BaseError } from '@sharedDomain';
+
+export class DummyAlreadyExist extends BaseError {}

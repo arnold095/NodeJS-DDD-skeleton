@@ -1,18 +1,16 @@
 import { inject, injectable } from 'inversify';
-import { DummyRepository } from "@/Contexts/MyApp/Dummy/Domain/DummyRepository";
-import { DummyFinderRequest } from "@/Contexts/MyApp/Dummy/Application/Find/DummyFinderRequest";
-import { DummyId } from "@/Contexts/MyApp/Dummy/Domain/ValueObject/DummyId";
-import { Dummy } from "@/Contexts/MyApp/Dummy/Domain/Dummy";
-
+import { DummyRepository } from '../../Domain/DummyRepository';
+import { Dummy } from '../../Domain/Dummy';
+import { DummyFinderRequest } from './DummyFinderRequest';
+import { DummyId } from '../../Domain/ValueObject/DummyId';
 @injectable()
 export class DummyFinder {
-    public constructor(
-        @inject('DummyRepository') private readonly repository: DummyRepository
-    ) {
-    }
+  public constructor(
+    @inject('DummyRepository') private readonly repository: DummyRepository
+  ) {}
 
-    public async run(params: DummyFinderRequest): Promise<Dummy> {
-        const id = new DummyId(params.id);
-        return await this.repository.find(id);
-    }
+  public async run(params: DummyFinderRequest): Promise<Dummy> {
+    const id = new DummyId(params.id);
+    return await this.repository.find(id);
+  }
 }

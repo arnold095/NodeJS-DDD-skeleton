@@ -1,2 +1,3 @@
-export class InvalidUserPassword extends Error {
-}
+import { BaseError } from '@sharedDomain';
+
+export class InvalidUserPassword extends BaseError {}

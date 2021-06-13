@@ -9,6 +9,7 @@ volumes:
   rabbitmq-prometheus_grafana:
   esdata:
     driver: local
+  mongo_data:
 
 services:
   node_ddd_skeleton:
@@ -23,7 +24,7 @@ services:
       - ./src:/code/src
     env_file:
       - ./dev.env
-    command: bash -c "npm run start:dev"
+    command: bash -c "npm i && npm run start:dev"
     depends_on:
       - redis_ddd_skeleton
       - rabbitmq_ddd_skeleton
@@ -39,7 +40,7 @@ services:
       - ./src:/code/src
     env_file:
       - ./dev.env
-    command: bash -c "npm run auth:dev"
+    command: bash -c "npm i && npm run auth:dev"
     depends_on:
       - redis_ddd_skeleton
       - rabbitmq_ddd_skeleton
@@ -56,7 +57,7 @@ services:
       - ./src:/code/src
     env_file:
       - ./dev.env
-    command: bash -c "npm run consumer:start -- queue:_send_welcome_user_mail_on_user_registered"
+    command: bash -c "npm i && npm run consumer:start -- queue:_send_welcome_dummy_mail_on_dummy_created"
     depends_on:
       - redis_ddd_skeleton
       - rabbitmq_ddd_skeleton
@@ -88,7 +89,7 @@ services:
     container_name: mongodb_ddd_skeleton
     image: library/mongo:4.4.4
     volumes:
-      - ./data/mongo:/data/db:delegated
+      - mongo_data:/data/db
     networks:
       - "node_ddd_skeleton"
     ports:
