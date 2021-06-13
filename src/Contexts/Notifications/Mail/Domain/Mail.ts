@@ -1,8 +1,5 @@
-import { Uuid } from '@/src/Contexts/Shared/Domain/ValueObject/Uuid';
-import { MailAddress } from './ValueObject/MailAddress';
-import { MailBody } from './ValueObject/MailBody';
-import { MailId } from './ValueObject/MailId';
-import { MailSubject } from './ValueObject/MailSubject';
+import { MailAddress, MailBody, MailId, MailSubject } from '@notificationsMail';
+import { Uuid } from '@sharedDomain';
 
 export class Mail {
   public constructor(

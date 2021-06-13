@@ -1,7 +1,6 @@
-import { Mail } from '../Domain/Mail';
-import { MailSender } from '../Domain/MailSender';
 import { createTransport, createTestAccount } from 'nodemailer';
 import { injectable } from 'inversify';
+import { MailSender, Mail } from '@notificationsMail';
 
 @injectable()
 export class NodeMailer implements MailSender {

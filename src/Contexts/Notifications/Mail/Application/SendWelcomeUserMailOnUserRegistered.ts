@@ -1,11 +1,12 @@
 import { injectable, inject } from 'inversify';
-import { DomainEventSubscriber } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEventSubscriber';
-import { DomainEventClass } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
-import { SendWelcomeUserMail } from '@/src/Contexts/Notifications/Mail/Application/SendWelcomeUserMail';
-import { UserRegisteredDomainEvent } from '@/src/Contexts/Auth/Authentication/Domain/UserRegisteredDomainEvent';
-import { MailAddress } from '@/src/Contexts/Notifications/Mail/Domain/ValueObject/MailAddress';
-import { MailSubject } from '@/src/Contexts/Notifications/Mail/Domain/ValueObject/MailSubject';
-import { MailBody } from '@/src/Contexts/Notifications/Mail/Domain/ValueObject/MailBody';
+import { DomainEventClass, DomainEventSubscriber } from '@sharedDomain';
+import { UserRegisteredDomainEvent } from '@authentication';
+import {
+  MailAddress,
+  SendWelcomeUserMail,
+  MailSubject,
+  MailBody,
+} from '@notificationsMail';
 
 @injectable()
 export class SendWelcomeUserMailOnUserRegistered implements DomainEventSubscriber {

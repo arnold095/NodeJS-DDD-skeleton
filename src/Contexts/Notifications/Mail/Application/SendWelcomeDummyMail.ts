@@ -1,9 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Mail } from '../Domain/Mail';
-import { MailSender } from '../Domain/MailSender';
-import { MailAddress } from '../Domain/ValueObject/MailAddress';
-import { MailBody } from '../Domain/ValueObject/MailBody';
-import { MailSubject } from '../Domain/ValueObject/MailSubject';
+import { Mail, MailAddress, MailBody, MailSender, MailSubject } from '@notificationsMail';
 
 @injectable()
 export class SendWelcomeDummyMail {

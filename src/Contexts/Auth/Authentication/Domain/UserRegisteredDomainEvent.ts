@@ -1,4 +1,4 @@
-import { DomainEvent } from '@/src/Contexts/Shared/Domain/Bus/Event/DomainEvent';
+import { DomainEvent } from '@sharedDomain';
 
 type UserRegisteredEventBody = {
   id: string;

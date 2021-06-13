@@ -1,9 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { MailAddress } from '@/src/Contexts/Notifications/Mail/Domain/ValueObject/MailAddress';
-import { MailSubject } from '@/src/Contexts/Notifications/Mail/Domain/ValueObject/MailSubject';
-import { MailBody } from '@/src/Contexts/Notifications/Mail/Domain/ValueObject/MailBody';
-import { MailSender } from '@/src/Contexts/Notifications/Mail/Domain/MailSender';
-import { Mail } from '@/src/Contexts/Notifications/Mail/Domain/Mail';
+import { Mail, MailAddress, MailBody, MailSender, MailSubject } from '@notificationsMail';
 
 @injectable()
 export class SendWelcomeUserMail {
