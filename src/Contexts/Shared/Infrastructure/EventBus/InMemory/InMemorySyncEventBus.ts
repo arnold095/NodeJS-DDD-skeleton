@@ -12,7 +12,7 @@ export class InMemorySyncEventBus implements EventBus {
   public load(): void {
     for (const subscriber of this.subscribers) {
       for (const domainEvent of subscriber.subscribedTo()) {
-        this.subscribe(domainEvent.eventName, subscriber);
+        this.subscribe(domainEvent.EVENT_NAME, subscriber);
       }
     }
   }

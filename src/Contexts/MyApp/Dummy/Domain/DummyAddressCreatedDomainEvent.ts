@@ -14,62 +14,22 @@ type DummyAddressCreatedDomainEventBody = {
 
 @domainEvent()
 export class DummyAddressCreatedDomainEvent extends DomainEvent {
-  private static readonly _eventName = 'dummy_address.created';
+  static readonly EVENT_NAME = 'dummy_address.created';
 
   public constructor(
-    private readonly _id: string,
-    private readonly _dummyAddressId: string,
-    private readonly _alias: string,
-    private readonly _street: string,
-    private readonly _city: string,
-    private readonly _postalCode: string,
-    private readonly _country: string,
-    private readonly _dateAdd: Date,
-    private readonly _dateUpd: Date,
+    private readonly id: string,
+    private readonly dummyAddressId: string,
+    private readonly alias: string,
+    private readonly street: string,
+    private readonly city: string,
+    private readonly postalCode: string,
+    private readonly country: string,
+    private readonly dateAdd: Date,
+    private readonly dateUpd: Date,
     eventId?: string,
     occurredOn?: Date
   ) {
-    super(_id, DummyAddressCreatedDomainEvent.eventName, eventId, occurredOn);
-  }
-
-  public static get eventName(): string {
-    return this._eventName;
-  }
-
-  get id(): string {
-    return this._id;
-  }
-
-  get dummyAddressId(): string {
-    return this._dummyAddressId;
-  }
-
-  get alias(): string {
-    return this._alias;
-  }
-
-  get street(): string {
-    return this._street;
-  }
-
-  get city(): string {
-    return this._city;
-  }
-
-  get postalCode(): string {
-    return this._postalCode;
-  }
-
-  get country(): string {
-    return this._country;
-  }
-
-  get dateAdd(): Date {
-    return this._dateAdd;
-  }
-
-  get dateUpd(): Date {
-    return this._dateUpd;
+    super(id, DummyAddressCreatedDomainEvent.EVENT_NAME, eventId, occurredOn);
   }
 
   public toPrimitives(): DummyAddressCreatedDomainEventBody {

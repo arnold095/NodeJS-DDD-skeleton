@@ -68,7 +68,7 @@ export class RabbitMQConfigurator {
     await channel.bindQueue(deadLetterQueue.queue, deadLetterExchangeName, queueName);
 
     subscriber.subscribedTo().map(async (eventClass) => {
-      await channel.bindQueue(queue.queue, exchangeName, eventClass.eventName);
+      await channel.bindQueue(queue.queue, exchangeName, eventClass.EVENT_NAME);
     });
   }
 

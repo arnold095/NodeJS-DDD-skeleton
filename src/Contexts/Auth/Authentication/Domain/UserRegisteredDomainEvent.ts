@@ -12,7 +12,7 @@ type UserRegisteredEventBody = {
 
 @domainEvent()
 export class UserRegisteredDomainEvent extends DomainEvent {
-  private static readonly _eventName = 'user.registered';
+  static readonly EVENT_NAME = 'user.registered';
 
   public constructor(
     readonly id: string,
@@ -25,11 +25,7 @@ export class UserRegisteredDomainEvent extends DomainEvent {
     eventId?: string,
     occurredOn?: Date
   ) {
-    super(id, UserRegisteredDomainEvent.eventName, eventId, occurredOn);
-  }
-
-  public static get eventName(): string {
-    return this._eventName;
+    super(id, UserRegisteredDomainEvent.EVENT_NAME, eventId, occurredOn);
   }
 
   public toPrimitives(): UserRegisteredEventBody {

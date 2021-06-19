@@ -1,4 +1,4 @@
-import { AggregateRoot } from '@sharedDomain';
+import { AggregateRoot, Nullable } from '@sharedDomain';
 import { DummyAddress, DummyAddressId } from '@dummyAddress';
 import {
   DummyId,
@@ -7,6 +7,7 @@ import {
   DummyEmail,
   DummyCreatedDomainEvent,
   DummyAddressCreatedDomainEvent,
+  DummyAddressAlreadyExists,
 } from '@dummy';
 
 export type DummyPrimitives = {
@@ -41,6 +42,7 @@ export class Dummy extends AggregateRoot {
   }
 
   public saveAddress(dummyAddress: DummyAddress): void {
+    this.ensureThatTheAddressDoesNotExist(dummyAddress);
     this._addresses.push(dummyAddress);
     const domainEvent = new DummyAddressCreatedDomainEvent(
       this.id.value,
@@ -54,6 +56,13 @@ export class Dummy extends AggregateRoot {
       dummyAddress.dateUpd.value
     );
     this.record(domainEvent);
+  }
+
+  private ensureThatTheAddressDoesNotExist(dummyAddress: DummyAddress) {
+    const addressFound = this.findAddress(dummyAddress.id);
+    if (undefined !== addressFound) {
+      throw new DummyAddressAlreadyExists(400, `Address already exists`);
+    }
   }
 
   public get id(): DummyId {
@@ -76,7 +85,7 @@ export class Dummy extends AggregateRoot {
     return this._addresses;
   }
 
-  public findAddress(id: DummyAddressId): DummyAddress {
+  public findAddress(id: DummyAddressId): Nullable<DummyAddress> {
     return this.addresses.find((address) => address.id.equals(id));
   }
 }

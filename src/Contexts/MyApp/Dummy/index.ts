@@ -17,7 +17,5 @@ export * from './Domain/Exception/DummyAddressAlreadyExists';
 export * from './Domain/Exception/DummyAlreadyExist';
 export * from './Domain/Exception/DummyNotFound';
 export * from './Domain/Exception/InvalidDummyEmail';
-export * from './Domain/Services/DummyAddressAdder';
 
 export * from './Infrastructure/RedisDummyRepository';
-export * from './Infrastructure/TypeORMDummyRepository';

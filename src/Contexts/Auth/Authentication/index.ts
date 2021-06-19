@@ -16,5 +16,3 @@ export * from './Domain/ValueObject/UserAuthId';
 export * from './Domain/ValueObject/UserAuthEmail';
 export * from './Domain/ValueObject/UserAuthDateUpd';
 export * from './Domain/ValueObject/UserAuthPassword';
-
-export * from './Infrastructure/TypeOrmUserAuthRepository';

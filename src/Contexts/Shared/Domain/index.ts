@@ -2,8 +2,6 @@ export * from './Bus/Event/EventBus';
 export * from './Bus/Event/DomainEvent';
 export * from './Bus/Event/DomainEventSubscriber';
 
-export * from './Model/DomainModel';
-
 export * from './Utils/Nullable';
 export * from './Utils/GenericTypes';
 
@@ -16,7 +14,6 @@ export * from './Aggregate/AggregateRoot';
 export * from './Exception/BaseError';
 export * from './Exception/InvalidArgumentError';
 export * from './Decorators/DomainEvent';
-export * from './Persistence/PersistenceEntity';
 
 export * from './ValueObject/Uuid';
 export * from './ValueObject/Bcrypt';

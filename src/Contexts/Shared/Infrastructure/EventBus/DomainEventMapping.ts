@@ -11,7 +11,7 @@ export class DomainEventMapping {
 
   public addSubscribers(domainEvents: DomainEventClass[]): void {
     for (const domainEvent of domainEvents) {
-      this.mapping.set(domainEvent.eventName, domainEvent);
+      this.mapping.set(domainEvent.EVENT_NAME, domainEvent);
     }
   }
 

@@ -5,39 +5,19 @@ export type DummyCreatedDomainEventBody = {
   readonly content: string;
   readonly email: string;
 };
+
 @domainEvent()
 export class DummyCreatedDomainEvent extends DomainEvent {
-  private static readonly _eventName = 'dummy.created';
-
+  static readonly EVENT_NAME = 'dummy.created';
   public constructor(
-    private readonly _id: string,
-    private readonly _title: string,
-    private readonly _content: string,
-    private readonly _email: string,
+    readonly id: string,
+    readonly title: string,
+    readonly content: string,
+    readonly email: string,
     eventId?: string,
     occurredOn?: Date
   ) {
-    super(_id, DummyCreatedDomainEvent.eventName, eventId, occurredOn);
-  }
-
-  public static get eventName(): string {
-    return DummyCreatedDomainEvent._eventName;
-  }
-
-  public get id(): string {
-    return this._id;
-  }
-
-  public get title(): string {
-    return this._title;
-  }
-
-  public get content(): string {
-    return this._content;
-  }
-
-  public get email(): string {
-    return this._email;
+    super(id, DummyCreatedDomainEvent.EVENT_NAME, eventId, occurredOn);
   }
 
   public toPrimitives(): DummyCreatedDomainEventBody {
