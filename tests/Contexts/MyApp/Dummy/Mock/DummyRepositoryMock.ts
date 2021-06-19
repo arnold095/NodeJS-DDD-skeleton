@@ -4,7 +4,7 @@ import { Nullable } from '../../../../../src/Contexts/Shared/Domain';
 export class DummyRepositoryMock implements DummyRepository {
   private mockedDummy: Dummy[] = [];
 
-  public async find(id: DummyId): Promise<Dummy> {
+  public async find(id: DummyId): Promise<Nullable<Dummy>> {
     return this.mockedDummy.find((dummy) => dummy.id.equals(id));
   }
 

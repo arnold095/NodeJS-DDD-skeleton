@@ -17,6 +17,6 @@ describe('DummyCreator', () => {
     const dummyCreator = new DummyCreator(repository, mock);
     await dummyCreator.run(dummyRequest);
     const dummyFound = await repository.find(dummyId);
-    expect(dummyRequest.id).toEqual(dummyFound.id.value);
+    expect(dummyRequest.id).toEqual(dummyFound?.id.value);
   });
 });

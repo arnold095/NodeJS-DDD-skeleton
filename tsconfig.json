@@ -42,5 +42,5 @@
       "@authorization": ["src/Contexts/Auth/Authorization"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts"]
 }

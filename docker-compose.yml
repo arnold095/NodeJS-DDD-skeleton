@@ -21,7 +21,7 @@ services:
       - "3000:3000"
     volumes:
       - ./package.json:/code/package.json
-      - ./src:/code/src
+      - ./src:/home/node/app/src
     env_file:
       - ./dev.env
     command: bash -c "npm i && npm run start:dev"
@@ -37,7 +37,7 @@ services:
       - "3001:3001"
     volumes:
       - ./package.json:/code/package.json
-      - ./src:/code/src
+      - ./src:/home/node/app/src
     env_file:
       - ./dev.env
     command: bash -c "npm i && npm run auth:dev"
@@ -54,7 +54,7 @@ services:
       - "3002:3002"
     volumes:
       - ./package.json:/code/package.json
-      - ./src:/code/src
+      - ./src:/home/node/app/src
     env_file:
       - ./dev.env
     command: bash -c "npm i && npm run consumer:start -- queue:_send_welcome_dummy_mail_on_dummy_created"

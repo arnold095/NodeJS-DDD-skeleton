@@ -17,12 +17,19 @@ const mock = new EventBusMock();
 const encoder = new UserEncoder(new JWTAuthorizationUserEncode());
 
 describe('UserRegister', () => {
-  it('On register user...', async () => {
+  beforeEach(async () => {
+    await repository.generate();
+  });
+  afterEach(() => {
+    repository.clear();
+  });
+
+  it('Should register a user.', async () => {
     const email = UserAuthEmailMother.create();
-    const request = UserRegisterRequestMother.create(undefined, email.value);
+    const request = UserRegisterRequestMother.create({ email: email.value });
     const userRegister = new UserRegister(repository, mock, encoder);
     await userRegister.run(request);
     const userFound = await repository.find(email);
-    expect(request.id).toEqual(userFound.id.value);
+    expect(request.id).toEqual(userFound?.id.value);
   });
 });

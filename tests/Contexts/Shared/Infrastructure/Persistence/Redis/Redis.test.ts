@@ -3,9 +3,9 @@ import {
   ConsoleLogger,
   RedisClient,
   RedisProvider,
-} from '../../../../../src/Contexts/Shared/Infrastructure';
-import { WordMother } from '../../Domain/WordMother';
-import { MotherCreator } from '../../Domain/MotherCreator';
+} from '../../../../../../src/Contexts/Shared/Infrastructure';
+import { WordMother } from '../../../Domain/WordMother';
+import { MotherCreator } from '../../../Domain/MotherCreator';
 const logger = new ConsoleLogger();
 const redisProvider = new RedisProvider(logger);
 const redisClient = new RedisClient(redisProvider, logger);

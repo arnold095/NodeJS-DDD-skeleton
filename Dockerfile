@@ -1,9 +1,7 @@
-FROM node:15.5.1-slim
+FROM node:16.3.0-buster
+USER node
+COPY --chown=node . /home/node/app
 
-WORKDIR /code
-
-COPY package*.json ./
+WORKDIR /home/node/app
 
 RUN npm install
-
-COPY . .
