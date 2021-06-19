@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { RedisProvider } from '@sharedInfra';
 import { promisify } from 'util';
-import { Logger } from '@sharedDomain';
+import { Logger, Nullable } from '@sharedDomain';
 
 @injectable()
 export class RedisClient {
@@ -10,25 +10,29 @@ export class RedisClient {
     @inject('Logger') private readonly logger: Logger
   ) {}
 
-  public async get<T>(key: string): Promise<T> {
+  public async get<T>(key: string): Promise<Nullable<T>> {
     try {
+      let foundObject;
       const client = await this.provider.client();
       const getAsync = await promisify(client.get).bind(client);
       const result = await getAsync(key);
-      return JSON.parse(result);
+      if (result) {
+        foundObject = JSON.parse(result);
+      }
+      return foundObject;
     } catch (err) {
       this.logger.error('An error occurred while retrieving the data');
       throw err;
     }
   }
 
-  public async set(key: string, body: unknown, ttl?: number): Promise<void> {
+  public async set(key: string, body: unknown): Promise<void> {
     try {
       const client = await this.provider.client();
       const setAsync = await promisify(client.set).bind(client);
       body = JSON.stringify(body);
       if (typeof body === 'string') {
-        setAsync(key, body, 'EX', ttl ?? parseInt(process.env.REDIS_TTL));
+        setAsync(key, body);
       }
     } catch (err) {
       this.logger.error('An error occurred while saving the data');

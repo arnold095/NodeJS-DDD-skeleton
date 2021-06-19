@@ -1,4 +1,4 @@
-import { DomainEventClass } from '../Bus/Event/DomainEvent';
+import { DomainEventClass } from '@sharedDomain';
 
 export const domainEvents: DomainEventClass[] = [];
 

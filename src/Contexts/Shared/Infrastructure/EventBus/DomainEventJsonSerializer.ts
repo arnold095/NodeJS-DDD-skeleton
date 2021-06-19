@@ -4,7 +4,7 @@ export class DomainEventJsonSerializer {
   public static serialize(domainEvent: DomainEvent): string {
     const attributes = {
       ...domainEvent.toPrimitives(),
-      ...{ eventId: domainEvent.aggregateId },
+      ...{ id: domainEvent.aggregateId },
     };
     return JSON.stringify({
       data: {

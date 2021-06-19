@@ -1,3 +1,2 @@
-export declare type ClassConstructor<T> = {
-  new (...args: unknown[]): T;
-};
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type Instantiable = new (...args: any[]) => unknown;

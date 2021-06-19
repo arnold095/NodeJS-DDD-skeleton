@@ -11,16 +11,17 @@ export class DomainEventMapping {
 
   public addSubscribers(domainEvents: DomainEventClass[]): void {
     for (const domainEvent of domainEvents) {
-      this.mapping.set(domainEvent.eventName, domainEvent);
+      this.mapping.set(domainEvent.EVENT_NAME, domainEvent);
     }
   }
 
   public for(name: string): DomainEventClass {
-    if (undefined === this.mapping.get(name)) {
+    const domainEvent = this.mapping.get(name);
+    if (undefined === domainEvent) {
       throw new Error(
         `The Domain event class for ${name} doesn't exists or have no subscribers`
       );
     }
-    return this.mapping.get(name);
+    return domainEvent;
   }
 }

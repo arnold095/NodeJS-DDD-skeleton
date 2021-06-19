@@ -7,18 +7,15 @@ import { RabbitMQExchangeNameFormatter } from './RabbitMQExchangeNameFormatter';
 
 @injectable()
 export class RabbitMQDomainEventsConsumer {
-  private readonly exchangeName: string;
-  private readonly maxRetries: number;
+  private readonly exchangeName = process.env.RABBITMQ_EXCHANGE ?? 'domain_events';
+  private readonly maxRetries = parseInt(process.env.RABBITMQ_MAX_RETRIES ?? '5');
 
   public constructor(
     @inject('RabbitMQConnection') private readonly connection: RabbitMQConnection,
     @inject('DomainEventJsonDeserializer')
     private readonly deserializer: DomainEventJsonDeserializer,
     @inject('Logger') private readonly logger: Logger
-  ) {
-    this.exchangeName = process.env.RABBITMQ_EXCHANGE;
-    this.maxRetries = parseInt(process.env.RABBITMQ_MAX_RETRIES);
-  }
+  ) {}
 
   public async consume(
     subscriber: DomainEventSubscriber,
@@ -27,8 +24,10 @@ export class RabbitMQDomainEventsConsumer {
     try {
       await this.connection.checkConnection();
       await this.connection.channel.consume(queueName, async (msg) => {
-        await this.consumer(msg, subscriber, queueName);
-        this.connection.channel.ack(msg);
+        if (msg) {
+          await this.consumer(msg, subscriber, queueName);
+          this.connection.channel.ack(msg);
+        }
       });
     } catch (err) {
       // We don't want to raise an error if there are no messages in the queue

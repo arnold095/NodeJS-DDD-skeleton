@@ -22,7 +22,7 @@ export class NodeMailer implements MailSender {
     }
     return {
       host: process.env.NODE_MAILER_HOST,
-      port: parseInt(process.env.NODE_MAILER_PORT),
+      port: parseInt(process.env.NODE_MAILER_PORT ?? '587'),
       secure: process.env.NODE_MAILER_SECURE === 'true',
       auth,
     };

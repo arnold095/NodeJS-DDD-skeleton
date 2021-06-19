@@ -9,8 +9,6 @@ import {
   RabbitMQConnection,
   RabbitMQDomainEventBus,
   RabbitMQDomainEventsConsumer,
-  TypeORMClient,
-  TypeORMProvider,
 } from '@sharedInfra';
 
 export class SharedContainer {
@@ -23,8 +21,6 @@ export class SharedContainer {
         DomainEventMapping,
         DomainEventJsonDeserializer,
         DomainEventSubscriberLocator,
-        TypeORMProvider,
-        TypeORMClient,
       ],
       domainContracts: [
         {

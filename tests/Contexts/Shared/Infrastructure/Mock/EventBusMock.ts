@@ -8,6 +8,6 @@ export class EventBusMock implements EventBus {
   }
 
   public async publish(domainEvents: DomainEvent[]): Promise<void> {
-    return Promise.resolve(undefined);
+    this.publishSpy(domainEvents);
   }
 }

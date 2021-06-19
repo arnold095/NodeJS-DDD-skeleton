@@ -6,15 +6,13 @@ import { DomainEventJsonSerializer } from '../DomainEventJsonSerializer';
 
 @injectable()
 export class RabbitMQDomainEventBus implements EventBus {
-  private readonly exchangeName: string;
+  private readonly exchangeName = process.env.RABBITMQ_EXCHANGE ?? 'domain_events';
 
   public constructor(
     @inject('RabbitMQConnection') private readonly connection: RabbitMQConnection,
     @inject('RabbitMQConfigurator') private readonly configurator: RabbitMQConfigurator,
     @inject('Logger') private readonly logger: Logger
-  ) {
-    this.exchangeName = process.env.RABBITMQ_EXCHANGE;
-  }
+  ) {}
 
   public async load(): Promise<void> {
     this.logger.info('Declare exchange and queues...', this.exchangeName);

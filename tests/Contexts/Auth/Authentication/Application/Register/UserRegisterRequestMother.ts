@@ -5,14 +5,22 @@ import { UserAuthLastNameMother } from '../../Domain/UserAuthLastNameMother';
 import { UserAuthEmailMother } from '../../Domain/UserAuthEmailMother';
 import { UserAuthPasswordMother } from '../../Domain/UserAuthPasswordMother';
 
+type RegisterTypes = {
+  id?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+};
+
 export class UserRegisterRequestMother {
-  public static create(
-    id?: string,
-    email?: string,
-    firstName?: string,
-    lastName?: string,
-    password?: string
-  ): UserRegisterRequest {
+  public static create({
+    id,
+    email,
+    firstName,
+    lastName,
+    password,
+  }: RegisterTypes): UserRegisterRequest {
     return new UserRegisterRequest(
       id ?? UserAuthIdMother.create().value,
       firstName ?? UserAuthFirstNameMother.create().value,

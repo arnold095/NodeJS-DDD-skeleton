@@ -1,40 +1,25 @@
 import { Uuid } from '@sharedDomain';
 
 export abstract class DomainEvent {
-  private _eventId: string;
-  private _occurredOn: Date;
+  static EVENT_NAME: string;
+  readonly eventId: string;
+  readonly occurredOn: Date;
 
-  constructor(
-    private _aggregateId: string,
-    private _eventName: string,
+  protected constructor(
+    readonly aggregateId: string,
+    readonly eventName: string,
     eventId?: string,
     occurredOn?: Date
   ) {
-    this._eventId = eventId ?? Uuid.random().value;
-    this._occurredOn = occurredOn ?? new Date();
-  }
-
-  public get aggregateId(): string {
-    return this._aggregateId;
-  }
-
-  public get eventId(): string {
-    return this._eventId;
-  }
-
-  public get occurredOn(): Date {
-    return this._occurredOn;
-  }
-
-  public get eventName(): string {
-    return this._eventName;
+    this.eventId = eventId ?? Uuid.random().value;
+    this.occurredOn = occurredOn ?? new Date();
   }
 
   public abstract toPrimitives(): Record<string, unknown>;
 
-  public static fromPrimitives: (...args: unknown[]) => DomainEvent;
+  public static fromPrimitives: (...args: never[]) => DomainEvent;
 }
 export type DomainEventClass = {
-  eventName: string;
+  EVENT_NAME: string;
   fromPrimitives(...args: unknown[]): DomainEvent;
 };

@@ -10,7 +10,9 @@ map.install();
 export class App {
   private readonly server: WebServer;
   private readonly iocAdapter = new InversifyAdapter();
-  private readonly serverPort = parseInt(process.env.SERVER_AUTHENTICATION_PORT);
+  private readonly serverPort = parseInt(
+    process.env.SERVER_AUTHENTICATION_PORT ?? '3001'
+  );
 
   constructor() {
     this.server = this.iocAdapter.getClass('WebServer');

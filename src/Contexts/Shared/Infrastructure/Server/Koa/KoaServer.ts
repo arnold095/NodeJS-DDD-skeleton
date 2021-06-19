@@ -1,5 +1,5 @@
 import { useContainer, useKoaServer } from 'routing-controllers';
-import * as Koa from 'koa';
+import Koa from 'koa';
 import { inject, injectable } from 'inversify';
 import { IocAdapter, Logger, WebServer } from '@sharedDomain';
 

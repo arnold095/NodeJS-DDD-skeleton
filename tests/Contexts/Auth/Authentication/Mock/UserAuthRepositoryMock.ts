@@ -3,15 +3,36 @@ import {
   UserAuthEmail,
   UserAuthRepository,
 } from '../../../../../src/Contexts/Auth/Authentication';
+import { Nullable } from '../../../../../src/Contexts/Shared/Domain';
+import { UserAuthMother } from '../Domain/UserAuthMother';
 
 export class UserAuthRepositoryMock implements UserAuthRepository {
-  private mockedUser: UserAuth[] = [];
+  private mockedUsers: Map<string, UserAuth> = new Map();
 
-  public async find(email: UserAuthEmail): Promise<UserAuth> {
-    return this.mockedUser.find((user) => user.email.value === email.value);
+  public async find(email: UserAuthEmail): Promise<Nullable<UserAuth>> {
+    return this.mockedUsers.get(email.value);
   }
 
   public async save(user: UserAuth): Promise<void> {
-    this.mockedUser.push(user);
+    this.mockedUsers.set(user.email.value, user);
+  }
+
+  public async generate(max = 10): Promise<void> {
+    const users = await this.generateUsers(max);
+    for (const user of users) {
+      this.mockedUsers.set(user.email.value, user);
+    }
+  }
+
+  private async generateUsers(max: number): Promise<UserAuth[]> {
+    const promises = [];
+    for (let i = 0; i <= max; i++) {
+      promises.push(UserAuthMother.create());
+    }
+    return await Promise.all(promises);
+  }
+
+  public clear(): void {
+    this.mockedUsers.clear();
   }
 }

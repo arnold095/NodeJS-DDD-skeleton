@@ -2,13 +2,12 @@ import { inject, injectable, multiInject, optional } from 'inversify';
 import { Replies } from 'amqplib';
 import { RabbitMQConnection } from './RabbitMQConnection';
 import { RabbitMQExchangeNameFormatter } from './RabbitMQExchangeNameFormatter';
-import { DomainEventSubscriber, Logger } from '@sharedDomain';
+import { DomainEventSubscriber } from '@sharedDomain';
 import { RabbitMQQueueNameFormatter } from './RabbitMQQueueNameFormatter';
 
 @injectable()
 export class RabbitMQConfigurator {
   public constructor(
-    @inject('Logger') private readonly logger: Logger,
     @inject('RabbitMQConnection') private connection: RabbitMQConnection,
     @optional()
     @multiInject('DomainEventSubscriber')
@@ -68,7 +67,7 @@ export class RabbitMQConfigurator {
     await channel.bindQueue(deadLetterQueue.queue, deadLetterExchangeName, queueName);
 
     subscriber.subscribedTo().map(async (eventClass) => {
-      await channel.bindQueue(queue.queue, exchangeName, eventClass.eventName);
+      await channel.bindQueue(queue.queue, exchangeName, eventClass.EVENT_NAME);
     });
   }
 
