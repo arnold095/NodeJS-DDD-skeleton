@@ -12,12 +12,14 @@ export class RedisClient {
 
   public async get<T>(key: string): Promise<Nullable<T>> {
     try {
+      let foundObject;
       const client = await this.provider.client();
       const getAsync = await promisify(client.get).bind(client);
       const result = await getAsync(key);
       if (result) {
-        return JSON.parse(result);
+        foundObject = JSON.parse(result);
       }
+      return foundObject;
     } catch (err) {
       this.logger.error('An error occurred while retrieving the data');
       throw err;
