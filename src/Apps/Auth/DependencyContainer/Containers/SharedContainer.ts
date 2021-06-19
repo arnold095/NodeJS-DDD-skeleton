@@ -4,6 +4,7 @@ import {
   DomainEventMapping,
   DomainEventSubscriberLocator,
   KoaServer,
+  MongoDbProvider,
   RabbitMQConfigurator,
   RabbitMQConnection,
   RabbitMQDomainEventBus,
@@ -21,6 +22,7 @@ export class SharedContainer {
         DomainEventMapping,
         DomainEventJsonDeserializer,
         DomainEventSubscriberLocator,
+        MongoDbProvider,
       ],
       domainContracts: [
         {

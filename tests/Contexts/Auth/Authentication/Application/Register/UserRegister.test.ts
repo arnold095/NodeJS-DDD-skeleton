@@ -1,21 +1,17 @@
 import * as map from 'source-map-support';
 import 'reflect-metadata';
-import {
-  JWTAuthorizationUserEncode,
-  UserEncoder,
-} from '../../../../../../src/Contexts/Auth/Authorization';
 import { UserAuthRepositoryMock } from '../../Mock/UserAuthRepositoryMock';
 import { EventBusMock } from '../../../../Shared/Infrastructure/Mock/EventBusMock';
 import { UserAuthEmailMother } from '../../Domain/UserAuthEmailMother';
 import { UserRegisterRequestMother } from './UserRegisterRequestMother';
-import { UserRegister } from '../../../../../../src/Contexts/Auth/Authentication';
+import { UserRegister } from '@authentication';
+import { JWTAuthorizationUserEncode, UserEncoder } from '@authorization';
 
 map.install();
 
 const repository = new UserAuthRepositoryMock();
 const mock = new EventBusMock();
 const encoder = new UserEncoder(new JWTAuthorizationUserEncode());
-
 describe('UserRegister', () => {
   beforeEach(async () => {
     await repository.generate();
