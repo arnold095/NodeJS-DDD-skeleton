@@ -1,23 +1,20 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": [
-      "es2020",
-      "DOM"
-    ],
+    "lib": ["ES2020", "DOM"],
     "sourceMap": true,
     "outDir": "dist",
     "types": [
       "reflect-metadata", "jest"
     ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
     "baseUrl": "./",
+    "strict": true,
     "paths": {
       "@sharedDomain": ["src/Contexts/Shared/Domain"],
       "@sharedInfra": ["src/Contexts/Shared/Infrastructure"],

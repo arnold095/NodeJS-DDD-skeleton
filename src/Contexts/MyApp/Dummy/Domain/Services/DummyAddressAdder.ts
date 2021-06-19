@@ -44,7 +44,7 @@ export class DummyAddressAdder {
     return dummy;
   }
 
-  private ensureDummyExists(dummy) {
+  private ensureDummyExists(dummy: Dummy) {
     if (undefined === dummy) {
       throw new DummyNotFound(404, `Dummy doesn't exist`);
     }
@@ -58,13 +58,13 @@ export class DummyAddressAdder {
   }
 
   private createAddress(
-    dummyAddressId,
-    dummyId,
-    alias,
-    street,
-    city,
-    postalCode,
-    country
+    dummyAddressId: DummyAddressId,
+    dummyId: DummyId,
+    alias: DummyAddressAlias,
+    street: DummyAddressStreet,
+    city: DummyAddressCity,
+    postalCode: DummyAddressPostalCode,
+    country: DummyAddressCountry
   ): DummyAddress {
     const date = DateValueObject.currentDate().value;
     const dateAdd = new DummyAddressDateAdd(date);

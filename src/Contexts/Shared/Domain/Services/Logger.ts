@@ -1,11 +1,11 @@
 export interface Logger {
-  log(message: string, ...obj): void;
+  log(message: string, ...obj: unknown[]): void;
 
-  info(message: string, ...obj): void;
+  info(message: string, ...obj: unknown[]): void;
 
-  error(message: string, ...obj): void;
+  error(message: string, ...obj: undefined[]): void;
 
-  warn(message: string, ...obj): void;
+  warn(message: string, ...obj: unknown[]): void;
 
-  debug(message: string, ...obj): void;
+  debug(message: string, ...obj: unknown[]): void;
 }
