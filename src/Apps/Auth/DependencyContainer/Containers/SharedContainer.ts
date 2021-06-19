@@ -11,6 +11,7 @@ import {
   RabbitMQDomainEventsConsumer,
 } from '@sharedInfra';
 import { AdapterTypes } from '@sharedDomain';
+import { ErrorHandler } from '../../../../Contexts/Shared/Infrastructure/Server/Koa/Middleware/ErrorHandler';
 
 export class SharedContainer {
   public static container(): AdapterTypes {
@@ -23,6 +24,7 @@ export class SharedContainer {
         DomainEventJsonDeserializer,
         DomainEventSubscriberLocator,
         MongoDbProvider,
+        ErrorHandler,
       ],
       domainContracts: [
         {
