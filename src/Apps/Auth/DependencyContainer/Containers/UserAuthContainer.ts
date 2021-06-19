@@ -3,6 +3,7 @@ import { RegisterController } from '../../Controller/Post/RegisterController';
 import { JWTAuthorizationUserEncode, UserEncoder } from '@authorization';
 import { LoginController } from '../../Controller/Post/LoginController';
 import { UserLogin, UserRegister } from '@authentication';
+import { MongoDbUserAuthRepository } from '../../../../Contexts/Auth/Authentication/Infrastructure/MongoDbUserAuthRepository';
 
 export class UserAuthContainer {
   public static container(): AdapterTypes {
@@ -13,6 +14,10 @@ export class UserAuthContainer {
         {
           abstract: 'AuthorizationUserEncode',
           concrete: JWTAuthorizationUserEncode,
+        },
+        {
+          abstract: 'UserAuthRepository',
+          concrete: MongoDbUserAuthRepository,
         },
       ],
     };

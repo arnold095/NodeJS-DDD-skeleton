@@ -9,6 +9,7 @@ export * from './Domain/UserRegisteredDomainEvent';
 export * from './Domain/Exception/InvalidUserPassword';
 export * from './Domain/Exception/InvalidCredentials';
 export * from './Domain/Exception/UserAlreadyExists';
+export * from './Domain/Services/UserAuthFinder';
 export * from './Domain/ValueObject/UserAuthFirstName';
 export * from './Domain/ValueObject/UserAuthLastName';
 export * from './Domain/ValueObject/UserAuthDateAdd';

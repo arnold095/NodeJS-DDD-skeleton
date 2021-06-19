@@ -8,7 +8,18 @@ import {
   UserAuthPassword,
   UserAuthDateAdd,
   UserAuthDateUpd,
+  InvalidCredentials,
 } from '@authentication';
+
+export type UserAuthPrimitives = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  dateAdd: Date;
+  dateUpd: Date;
+};
 
 export class UserAuth extends AggregateRoot {
   public constructor(
@@ -48,6 +59,13 @@ export class UserAuth extends AggregateRoot {
     return user;
   }
 
+  public async isValidPassword(otherPassword: string): Promise<void> {
+    const passwordComparison = await this.password.isEquals(otherPassword);
+    if (!passwordComparison) {
+      throw new InvalidCredentials();
+    }
+  }
+
   get id(): UserAuthId {
     return this._id;
   }
@@ -74,5 +92,29 @@ export class UserAuth extends AggregateRoot {
 
   get dateUpd(): UserAuthDateUpd {
     return this._dateUpd;
+  }
+
+  public toPrimitives(): UserAuthPrimitives {
+    return {
+      id: this.id.value,
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      email: this.email.value,
+      password: this.password.value,
+      dateAdd: this.dateAdd.value,
+      dateUpd: this.dateUpd.value,
+    };
+  }
+
+  public static fromPrimitives(primitives: UserAuthPrimitives): UserAuth {
+    return new UserAuth(
+      new UserAuthId(primitives.id),
+      new UserAuthFirstName(primitives.firstName),
+      new UserAuthLastName(primitives.lastName),
+      new UserAuthEmail(primitives.email),
+      new UserAuthPassword(primitives.password),
+      new UserAuthDateAdd(primitives.dateAdd),
+      new UserAuthDateUpd(primitives.dateUpd)
+    );
   }
 }
