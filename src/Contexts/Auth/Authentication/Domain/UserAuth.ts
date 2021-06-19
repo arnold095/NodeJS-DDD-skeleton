@@ -8,6 +8,7 @@ import {
   UserAuthPassword,
   UserAuthDateAdd,
   UserAuthDateUpd,
+  InvalidCredentials,
 } from '@authentication';
 
 export class UserAuth extends AggregateRoot {
@@ -46,6 +47,13 @@ export class UserAuth extends AggregateRoot {
       )
     );
     return user;
+  }
+
+  public async isValidPassword(otherPassword: string): Promise<void> {
+    const passwordComparison = await this.password.isEquals(otherPassword);
+    if (!passwordComparison) {
+      throw new InvalidCredentials();
+    }
   }
 
   get id(): UserAuthId {
