@@ -16,16 +16,26 @@ import {
   UserAuthPassword,
 } from '../../../../../src/Contexts/Auth/Authentication';
 
+type UserAuthMotherTypes = {
+  id?: UserAuthId;
+  firstName?: UserAuthFirstName;
+  lastName?: UserAuthLastName;
+  email?: UserAuthEmail;
+  password?: UserAuthPassword;
+  dateAdd?: UserAuthDateAdd;
+  dateUpd?: UserAuthDateUpd;
+};
+
 export class UserAuthMother {
-  public static create(
-    id?: UserAuthId,
-    firstName?: UserAuthFirstName,
-    lastName?: UserAuthLastName,
-    email?: UserAuthEmail,
-    password?: UserAuthPassword,
-    dateAdd?: UserAuthDateAdd,
-    dateUpd?: UserAuthDateUpd
-  ): UserAuth {
+  public static create({
+    id,
+    firstName,
+    lastName,
+    email,
+    password,
+    dateAdd,
+    dateUpd,
+  }: UserAuthMotherTypes): UserAuth {
     return new UserAuth(
       id ?? UserAuthIdMother.create(),
       firstName ?? UserAuthFirstNameMother.create(),
