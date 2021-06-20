@@ -5,9 +5,6 @@ type UserRegisteredEventBody = {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  dateAdd: Date;
-  dateUpd: Date;
 };
 
 @domainEvent()
@@ -19,9 +16,6 @@ export class UserRegisteredDomainEvent extends DomainEvent {
     readonly firstName: string,
     readonly lastName: string,
     readonly email: string,
-    readonly password: string,
-    readonly dateAdd: Date,
-    readonly dateUpd: Date,
     eventId?: string,
     occurredOn?: Date
   ) {
@@ -34,9 +28,6 @@ export class UserRegisteredDomainEvent extends DomainEvent {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      password: this.password,
-      dateAdd: this.dateAdd,
-      dateUpd: this.dateUpd,
     };
   }
 
@@ -51,9 +42,6 @@ export class UserRegisteredDomainEvent extends DomainEvent {
       body.firstName,
       body.lastName,
       body.email,
-      body.password,
-      body.dateAdd,
-      body.dateUpd,
       eventId,
       occurredOn
     );

@@ -50,10 +50,7 @@ export class UserAuth extends AggregateRoot {
         user.id.value,
         user.firstName.value,
         user.lastName.value,
-        user.email.value,
-        user.password.value,
-        user.dateAdd.value,
-        user.dateUpd.value
+        user.email.value
       )
     );
     return user;
