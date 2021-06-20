@@ -11,6 +11,7 @@ import {
   RabbitMQDomainEventsConsumer,
   RedisProvider,
   RedisClient,
+  ErrorHandler,
 } from '@sharedInfra';
 
 export class SharedContainer {
@@ -25,6 +26,7 @@ export class SharedContainer {
         DomainEventSubscriberLocator,
         RedisProvider,
         RedisClient,
+        ErrorHandler,
       ],
       domainContracts: [
         {

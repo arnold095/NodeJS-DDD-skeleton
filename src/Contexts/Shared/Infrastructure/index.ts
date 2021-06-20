@@ -1,4 +1,5 @@
 export * from './Server/Koa/KoaServer';
+export * from './Server/Koa/Middleware/ErrorHandler';
 
 export * from './EventBus/InMemory/InMemorySyncEventBus';
 export * from './EventBus/RabbitMQ/RabbitMQConnection';
