@@ -4,6 +4,7 @@ import { UserAuthFirstNameMother } from '../../Domain/UserAuthFirstNameMother';
 import { UserAuthLastNameMother } from '../../Domain/UserAuthLastNameMother';
 import { UserAuthEmailMother } from '../../Domain/UserAuthEmailMother';
 import { UserAuthPasswordMother } from '../../Domain/UserAuthPasswordMother';
+import { plainToClass } from 'class-transformer';
 
 type RegisterTypes = {
   id?: string;
@@ -21,12 +22,12 @@ export class UserRegisterRequestMother {
     lastName,
     password,
   }: RegisterTypes): UserRegisterRequest {
-    return new UserRegisterRequest(
-      id ?? UserAuthIdMother.create().value,
-      firstName ?? UserAuthFirstNameMother.create().value,
-      lastName ?? UserAuthLastNameMother.create().value,
-      email ?? UserAuthEmailMother.create().value,
-      password ?? UserAuthPasswordMother.create().value
-    );
+    return plainToClass(UserRegisterRequest, {
+      id: id ?? UserAuthIdMother.create().value,
+      firstName: firstName ?? UserAuthFirstNameMother.create().value,
+      lastName: lastName ?? UserAuthLastNameMother.create().value,
+      email: email ?? UserAuthEmailMother.create().value,
+      password: password ?? UserAuthPasswordMother.create().value,
+    });
   }
 }
