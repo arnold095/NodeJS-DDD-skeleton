@@ -1,7 +1,9 @@
 import { inject, injectable } from 'inversify';
-import { AuthorizationUserEncode } from '../Domain/AuthorizationUserEncode';
-import { UserEncoderRequest } from './UserEncoderRequest';
-import { AuthorizationUser } from '../Domain/AuthorizationUser';
+import {
+  AuthorizationUser,
+  AuthorizationUserEncode,
+  UserEncoderRequest,
+} from '@authorization';
 import {
   UserAuthEmail,
   UserAuthFirstName,

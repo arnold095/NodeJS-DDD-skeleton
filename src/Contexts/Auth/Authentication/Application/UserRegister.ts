@@ -2,14 +2,16 @@ import { inject, injectable } from 'inversify';
 import { UserAuthRepository } from '../Domain/UserAuthRepository';
 import { EventBus } from '@sharedDomain';
 import { UserEncoder } from '@authorization';
-import { UserRegisterRequest } from './UserRegisterRequest';
-import { UserAuth } from '../Domain/UserAuth';
-import { UserAuthId } from '../Domain/ValueObject/UserAuthId';
-import { UserAuthEmail } from '../Domain/ValueObject/UserAuthEmail';
-import { UserAuthFirstName } from '../Domain/ValueObject/UserAuthFirstName';
-import { UserAuthLastName } from '../Domain/ValueObject/UserAuthLastName';
-import { UserAlreadyExists } from '../Domain/Exception/UserAlreadyExists';
-import { UserAuthPassword } from '../Domain/ValueObject/UserAuthPassword';
+import {
+  UserAlreadyExists,
+  UserAuth,
+  UserAuthEmail,
+  UserAuthFirstName,
+  UserAuthId,
+  UserAuthLastName,
+  UserAuthPassword,
+  UserRegisterRequest,
+} from '@authentication';
 
 @injectable()
 export class UserRegister {

@@ -1,10 +1,12 @@
 import { inject, injectable } from 'inversify';
-import { UserAuthRepository } from '../Domain/UserAuthRepository';
 import { UserEncoder } from '@authorization';
 import { EventBus } from '@sharedDomain';
-import { UserLoginRequest } from './UserLoginRequest';
-import { UserAuthEmail } from '../Domain/ValueObject/UserAuthEmail';
-import { UserAuthFinder } from '../Domain/Services/UserAuthFinder';
+import {
+  UserLoginRequest,
+  UserAuthEmail,
+  UserAuthFinder,
+  UserAuthRepository,
+} from '@authentication';
 
 @injectable()
 export class UserLogin {
