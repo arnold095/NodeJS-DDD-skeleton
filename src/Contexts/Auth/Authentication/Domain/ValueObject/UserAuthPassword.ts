@@ -16,10 +16,7 @@ export class UserAuthPassword extends Bcrypt {
 
   public ensureIsValid(): void {
     if (!this.regex.test(this.value)) {
-      throw new InvalidUserPassword(
-        403,
-        `The password must contain lower case, upper case, numbers and symbols and at least 6 characters`
-      );
+      throw new InvalidUserPassword();
     }
   }
 

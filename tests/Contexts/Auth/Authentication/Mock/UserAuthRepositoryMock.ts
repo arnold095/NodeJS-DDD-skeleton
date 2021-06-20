@@ -25,7 +25,7 @@ export class UserAuthRepositoryMock implements UserAuthRepository {
   private async generateUsers(max: number): Promise<UserAuth[]> {
     const promises = [];
     for (let i = 0; i <= max; i++) {
-      promises.push(UserAuthMother.create());
+      promises.push(UserAuthMother.create({}));
     }
     return await Promise.all(promises);
   }

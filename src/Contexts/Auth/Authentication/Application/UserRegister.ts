@@ -34,21 +34,17 @@ export class UserRegister {
   private async processCustomer(request: UserRegisterRequest): Promise<UserAuth> {
     const id = new UserAuthId(request.id);
     const email = new UserAuthEmail(request.email);
-    await this.ensureUserDoesNotExist(email);
+    await this.ensureEmailDoesNotExist(email);
     const firstName = new UserAuthFirstName(request.firstName);
     const lastName = new UserAuthLastName(request.lastName);
     const password = await this.processAndHashPassword(request.password);
     return UserAuth.register(id, firstName, lastName, email, password);
   }
 
-  private async ensureUserDoesNotExist(email: UserAuthEmail) {
-    await this.ensureEmailDoesNotExist(email);
-  }
-
   private async ensureEmailDoesNotExist(email: UserAuthEmail) {
     const user = await this.repository.find(email);
     if (undefined !== user) {
-      throw new UserAlreadyExists(403, `The email ${email.value} already exists`);
+      throw new UserAlreadyExists();
     }
   }
 
