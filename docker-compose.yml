@@ -20,7 +20,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./package.json:/code/package.json
+      - ./package.json:/home/node/app/package.json
       - ./src:/home/node/app/src
     env_file:
       - ./dev.env
@@ -36,7 +36,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./package.json:/code/package.json
+      - ./package.json:/home/node/app/package.json
       - ./src:/home/node/app/src
     env_file:
       - ./dev.env
@@ -53,7 +53,7 @@ services:
     ports:
       - "3002:3002"
     volumes:
-      - ./package.json:/code/package.json
+      - ./package.json:/home/node/app/package.json
       - ./src:/home/node/app/src
     env_file:
       - ./dev.env

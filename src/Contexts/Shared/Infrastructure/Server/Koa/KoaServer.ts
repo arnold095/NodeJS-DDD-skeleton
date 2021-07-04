@@ -4,6 +4,7 @@ import { inject, injectable } from 'inversify';
 import { IocAdapter, Logger, WebServer } from '@sharedDomain';
 import { ErrorHandler } from './Middleware/ErrorHandler';
 import { Server } from 'http';
+import cors from '@koa/cors';
 
 @injectable()
 export class KoaServer implements WebServer {
@@ -25,6 +26,7 @@ export class KoaServer implements WebServer {
         this.errorHandler.run(ctx, err);
       }
     });
+    this.koaServer.use(cors());
     this.koaServer.on('error', (err) => {
       this.logger.info('Server error', err);
     });
