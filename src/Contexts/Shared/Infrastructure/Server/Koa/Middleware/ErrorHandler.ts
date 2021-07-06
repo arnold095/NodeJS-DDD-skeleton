@@ -8,20 +8,17 @@ import { Context } from 'koa';
 type ErrorType = {
   errorCode: number;
   reason: string;
-  explanation?: {
-    property: string;
-    constraints?: string;
-  }[];
+  errors?: Record<string, unknown>;
 };
 
 @injectable()
 export class ErrorHandler {
   public run(ctx: Context, error: BaseError | Error): void {
-    const { errorCode, reason, explanation } = this.errorResponse(error);
+    const { errorCode, reason, errors } = this.errorResponse(error);
     ctx.status = errorCode;
     ctx.body = {
       reason,
-      explanation,
+      errors,
     };
     ctx.app.emit('error', error, ctx);
   }
@@ -30,7 +27,7 @@ export class ErrorHandler {
     const errorResponse = {
       errorCode: 500,
       reason: 'Internal server error',
-      explanation: [],
+      errors: {} as ErrorType['errors'],
     };
     if (error instanceof BaseError) {
       errorResponse.errorCode = error.code;
@@ -38,18 +35,15 @@ export class ErrorHandler {
     } else if (this.isDtoValidation(error)) {
       errorResponse.errorCode = 400;
       errorResponse.reason = 'The request data is not valid.';
-      errorResponse.explanation = this.validationResponse(error);
+      errorResponse.errors = this.validationResponse(error);
     }
     return errorResponse;
   }
 
-  private validationResponse(error: any): any {
-    const mappedErrors = [];
+  private validationResponse(error: any): ErrorType['errors'] {
+    const mappedErrors: ErrorType['errors'] = {};
     for (const err of error.errors) {
-      mappedErrors.push({
-        property: err.property,
-        constraints: err.constraints,
-      });
+      mappedErrors[err.property] = Object.values(err.constraints);
     }
     return mappedErrors;
   }
