@@ -1,17 +1,24 @@
 import { inject, injectable } from 'inversify';
-import { Body, Controller, HttpCode, Post } from 'routing-controllers';
+import { Body, Controller, Post, Res } from 'routing-controllers';
 import { UserRegister, UserRegisterRequest } from '@authentication';
+import { Response } from 'koa';
+import { BaseController } from '../BaseController';
 
 @injectable()
 @Controller('/auth')
-export class RegisterController {
+export class RegisterController extends BaseController {
   public constructor(
     @inject('UserRegister') private readonly userRegister: UserRegister
-  ) {}
+  ) {
+    super();
+  }
 
   @Post('/register')
-  @HttpCode(201)
-  public async run(@Body() request: UserRegisterRequest): Promise<unknown> {
-    return await this.userRegister.run(request);
+  public async run(
+    @Body() request: UserRegisterRequest,
+    @Res() res: Response
+  ): Promise<unknown> {
+    const jwt = await this.userRegister.run(request);
+    return this.ok(jwt, res);
   }
 }
