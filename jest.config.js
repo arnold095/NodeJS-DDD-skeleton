@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config({ path: './dev.test.env' });
 const tsconfig = require('./tsconfig.json');
 const moduleNameMapper = require('tsconfig-paths-jest')(tsconfig);
@@ -10,13 +11,14 @@ module.exports = {
     'ts-jest': {
       tsconfig: 'tsconfig.json',
       diagnostics: true,
+      isolatedModules: true,
     },
   },
   moduleFileExtensions: ['ts', 'js'],
   moduleNameMapper,
   testEnvironment: 'node',
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '\\.ts$': './jest.transformer',
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   testMatch: ['**/tests/**/*.test.ts?(x)'],
