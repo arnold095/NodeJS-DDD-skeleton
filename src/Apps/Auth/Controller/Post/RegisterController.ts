@@ -19,6 +19,6 @@ export class RegisterController extends BaseController {
     @Res() res: Response
   ): Promise<unknown> {
     const jwt = await this.userRegister.run(request);
-    return this.ok(jwt, res);
+    return this.ok({ jwt }, res);
   }
 }
