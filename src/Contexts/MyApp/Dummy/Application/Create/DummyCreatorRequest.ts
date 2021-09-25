@@ -1,8 +1,19 @@
+import { IsEmail, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+
 export class DummyCreatorRequest {
-  constructor(
-    public readonly id: string,
-    public readonly title: string,
-    public readonly content: string,
-    public readonly email: string
-  ) {}
+  @IsNotEmpty()
+  @IsUUID()
+  public readonly id!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public readonly title!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  public readonly content!: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  public readonly email!: string;
 }

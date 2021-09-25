@@ -18,4 +18,4 @@ export * from './Domain/ValueObject/UserAuthEmail';
 export * from './Domain/ValueObject/UserAuthDateUpd';
 export * from './Domain/ValueObject/UserAuthPassword';
 
-export * from './Infrastructure/MongoDbUserAuthRepository';
+export * from './Infrastructure/Persistence/MongoDb/MongoDbUserAuthRepository';

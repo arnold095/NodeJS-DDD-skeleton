@@ -1,7 +1,4 @@
-import { inject, injectable } from 'inversify';
-import { UserAuthRepository } from '../Domain/UserAuthRepository';
 import { EventBus } from '@sharedDomain';
-import { UserEncoder } from '@authorization';
 import {
   UserAlreadyExists,
   UserAuth,
@@ -10,27 +7,20 @@ import {
   UserAuthId,
   UserAuthLastName,
   UserAuthPassword,
+  UserAuthRepository,
   UserRegisterRequest,
 } from '@authentication';
 
-@injectable()
 export class UserRegister {
   public constructor(
-    @inject('UserAuthRepository') private readonly repository: UserAuthRepository,
-    @inject('EventBus') private readonly bus: EventBus,
-    @inject('UserEncoder') private readonly encoder: UserEncoder
+    private readonly repository: UserAuthRepository,
+    private readonly bus: EventBus
   ) {}
 
-  public async run(request: UserRegisterRequest): Promise<string> {
+  public async run(request: UserRegisterRequest): Promise<void> {
     const user = await this.processCustomer(request);
     await this.repository.save(user);
     await this.bus.publish(user.pullDomainEvents());
-    return this.encoder.run({
-      id: user.id.value,
-      name: user.firstName.value,
-      lastName: user.lastName.value,
-      email: user.email.value,
-    });
   }
 
   private async processCustomer(request: UserRegisterRequest): Promise<UserAuth> {

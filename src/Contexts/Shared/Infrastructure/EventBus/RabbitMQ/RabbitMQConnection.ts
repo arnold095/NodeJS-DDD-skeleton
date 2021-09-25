@@ -1,14 +1,12 @@
 import { Channel, connect, Connection, Options, Replies } from 'amqplib';
-import { inject, injectable } from 'inversify';
 import { Logger } from '@sharedDomain';
 
-@injectable()
 export class RabbitMQConnection {
   private configuration!: Options.Connect;
   private connection!: Connection;
   private _channel!: Channel;
 
-  public constructor(@inject('Logger') private readonly logger: Logger) {
+  public constructor(private readonly logger: Logger) {
     this.loadConfiguration();
   }
 

@@ -9,6 +9,10 @@ export class NumberValueObject {
     return this.value > other;
   }
 
+  public equals(other: number): boolean {
+    return this.value === other;
+  }
+
   public get value(): number {
     return this._value;
   }

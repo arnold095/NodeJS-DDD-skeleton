@@ -20,6 +20,6 @@ export abstract class DomainEvent {
   public static fromPrimitives: (...args: never[]) => DomainEvent;
 }
 export type DomainEventClass = {
-  EVENT_NAME: string;
+  eventName: string;
   fromPrimitives(...args: unknown[]): DomainEvent;
 };

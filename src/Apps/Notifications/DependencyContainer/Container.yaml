@@ -1,0 +1,3 @@
+imports:
+  - { resource: ./Containers/SharedContainer.yaml }
+  - { resource: ./Containers/NotificationsContainer.yaml }

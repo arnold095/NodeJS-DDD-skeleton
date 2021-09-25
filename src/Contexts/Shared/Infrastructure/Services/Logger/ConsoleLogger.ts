@@ -1,28 +1,26 @@
-import { injectable } from 'inversify';
 import { Logger } from '@sharedDomain';
 
-@injectable()
 export class ConsoleLogger implements Logger {
   debug(message: string, ...obj: unknown[]): void {
     // eslint-disable-next-line no-console
-    console.debug(message, obj);
+    console.debug(`[${new Date().toISOString()}] ${message}`, obj);
   }
 
   error(message: string, ...obj: unknown[]): void {
-    console.error(message, obj);
+    console.error(`[${new Date().toISOString()}] ${message}`, obj);
   }
 
   public info(message: string, ...obj: unknown[]): void {
-    console.info(message, obj);
+    console.info(`[${new Date().toISOString()}] ${message}`, obj);
   }
 
   log(message: string, ...obj: unknown[]): void {
     // eslint-disable-next-line no-console
-    console.log(message, obj);
+    console.log(`[${new Date().toISOString()}] ${message}`, obj);
   }
 
   warn(message: string, ...obj: unknown[]): void {
     // eslint-disable-next-line no-console
-    console.warn(message, obj);
+    console.warn(`[${new Date().toISOString()}] ${message}`, obj);
   }
 }

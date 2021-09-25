@@ -1,11 +1,7 @@
 import 'reflect-metadata';
-import {
-  ConsoleLogger,
-  MongoDbClient,
-  MongoDbProvider,
-} from '../../../../../../src/Contexts/Shared/Infrastructure';
-import { MotherCreator } from '../../../Domain/MotherCreator';
+import { ConsoleLogger, MongoDbClient, MongoDbProvider } from '@sharedInfra';
 import { UuidMother } from '../../../Domain/UuidMother';
+import { MotherCreator } from '../../../Domain/MotherCreator';
 
 let mongoDbClient: MongoDbClient;
 const existingId = UuidMother.random();
@@ -18,7 +14,7 @@ beforeAll(async () => {
     ...MotherCreator.random().datatype.array(),
     ...{ _id: existingId },
   };
-  await mongoDbClient.insertOne(objectToSave);
+  await mongoDbClient.upsert({ _id: existingId }, objectToSave);
 });
 
 afterAll(async () => {
@@ -35,11 +31,14 @@ describe('MongoDB', () => {
 
   it('[InsertOne] Should can save a object', async () => {
     expect.assertions(1);
+    const id = UuidMother.random();
     const objectToSave = {
       ...MotherCreator.random().datatype.array(),
-      ...{ _id: UuidMother.random() },
+      ...{ _id: id },
     };
-    await expect(mongoDbClient.insertOne(objectToSave)).resolves.toBeUndefined();
+    await expect(
+      mongoDbClient.upsert({ _id: id }, objectToSave)
+    ).resolves.toBeUndefined();
   });
 
   it('[UpdateOne] Should can update a object', async () => {

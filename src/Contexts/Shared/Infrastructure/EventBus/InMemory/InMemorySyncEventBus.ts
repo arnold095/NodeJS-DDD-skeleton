@@ -1,18 +1,14 @@
-import { injectable, multiInject } from 'inversify';
 import { DomainEvent, DomainEventSubscriber, EventBus } from '@sharedDomain';
 
-@injectable()
 export class InMemorySyncEventBus implements EventBus {
   private subscriptions: Map<string, [DomainEventSubscriber]> = new Map();
 
-  public constructor(
-    @multiInject('DomainEventSubscriber') private subscribers: DomainEventSubscriber[]
-  ) {}
+  public constructor(private subscribers: DomainEventSubscriber[]) {}
 
   public load(): void {
     for (const subscriber of this.subscribers) {
       for (const domainEvent of subscriber.subscribedTo()) {
-        this.subscribe(domainEvent.EVENT_NAME, subscriber);
+        this.subscribe(domainEvent.eventName, subscriber);
       }
     }
   }

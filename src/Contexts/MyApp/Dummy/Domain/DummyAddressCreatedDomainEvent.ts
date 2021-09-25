@@ -1,4 +1,4 @@
-import { domainEvent, DomainEvent } from '@sharedDomain';
+import { DomainEvent } from '@sharedDomain';
 
 type DummyAddressCreatedDomainEventBody = {
   id: string;
@@ -12,9 +12,8 @@ type DummyAddressCreatedDomainEventBody = {
   dateUpd: Date;
 };
 
-@domainEvent()
 export class DummyAddressCreatedDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = 'dummy_address.created';
+  static readonly eventName = 'dummy_address.created';
 
   public constructor(
     private readonly id: string,

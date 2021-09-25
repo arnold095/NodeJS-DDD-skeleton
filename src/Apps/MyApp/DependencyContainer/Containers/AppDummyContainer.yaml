@@ -1,0 +1,12 @@
+services:
+  DummyPostController:
+    class: ../../Controller/Dummy/Post/DummyPostController
+    arguments: ['@Dummy.DummyCreator']
+
+  DummyAddressPostController:
+    class: ../../Controller/Dummy/Post/DummyAddressPostController
+    arguments: ['@Dummy.DummyAddressCreator']
+
+  DummyGetController:
+    class: ../../Controller/Dummy/Get/DummyGetController
+    arguments: ['@Dummy.DummyFinder']

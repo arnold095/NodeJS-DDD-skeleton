@@ -1,11 +1,7 @@
-import {
-  DomainEvent,
-  DomainEventClass,
-  DomainEventSubscriber,
-} from '../../../../../src/Contexts/Shared/Domain';
+import { DomainEvent, DomainEventClass, DomainEventSubscriber } from '@sharedDomain';
 
 export class DomainEventMock extends DomainEvent {
-  static EVENT_NAME = 'domain_event_mooc';
+  static eventName = 'domain_event_mooc';
 
   constructor(id: string) {
     super(id, DomainEventMock.EVENT_NAME);

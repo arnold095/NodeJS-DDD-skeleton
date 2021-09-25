@@ -1,47 +1,31 @@
-import { inject, injectable } from 'inversify';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { RedisProvider } from '@sharedInfra';
-import { promisify } from 'util';
-import { Logger, Nullable } from '@sharedDomain';
 
-@injectable()
 export class RedisClient {
-  constructor(
-    @inject('RedisProvider') private readonly provider: RedisProvider,
-    @inject('Logger') private readonly logger: Logger
-  ) {}
+  constructor(private readonly provider: RedisProvider) {}
 
-  public async get<T>(key: string): Promise<Nullable<T>> {
-    try {
-      let foundObject;
-      const client = await this.provider.client();
-      const getAsync = await promisify(client.get).bind(client);
-      const result = await getAsync(key);
-      if (result) {
-        foundObject = JSON.parse(result);
-      }
-      return foundObject;
-    } catch (err) {
-      this.logger.error('An error occurred while retrieving the data');
-      throw err;
-    }
+  public async get(key: string): Promise<any> {
+    const client = await this.provider.client();
+    return await client.get(key);
   }
 
-  public async set(key: string, body: unknown): Promise<void> {
-    try {
-      const client = await this.provider.client();
-      const setAsync = await promisify(client.set).bind(client);
-      body = JSON.stringify(body);
-      if (typeof body === 'string') {
-        setAsync(key, body);
-      }
-    } catch (err) {
-      this.logger.error('An error occurred while saving the data');
-      throw err;
+  public async set(key: string, body: any, ttl?: number): Promise<void> {
+    const client = await this.provider.client();
+    if (undefined === ttl) {
+      ttl = parseInt(process.env.REDIS_TTL || '3600000');
     }
+    body = JSON.stringify(body);
+    await client.set(key, body, 'EX', ttl);
+  }
+
+  public async del(key: string) {
+    const client = await this.provider.client();
+    client.del(key);
   }
 
   public async disconnect(): Promise<void> {
     const client = await this.provider.client();
-    await client.quit();
+    client.disconnect();
   }
 }

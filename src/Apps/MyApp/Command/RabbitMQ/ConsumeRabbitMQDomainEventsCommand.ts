@@ -1,34 +1,44 @@
-import 'module-alias/register';
 import * as map from 'source-map-support';
 import 'reflect-metadata';
-import { DomainEventSubscriberLocator, RabbitMQDomainEventsConsumer } from '@sharedInfra';
-import { InversifyAdapter } from '../../DependencyContainer/InversifyAdapter';
+import {
+  DomainEventSubscriberLocator,
+  NodeDependencyInjectionIocAdapter,
+  RabbitMQConfigurator,
+  RabbitMQDomainEventsConsumer,
+} from '@sharedInfra';
+import { join } from 'path';
 
 map.install();
 
 export class ConsumeRabbitMQDomainEventsCommand {
+  private exchangeName = process.env.RABBITMQ_EXCHANGE ?? 'domain_events';
+  private iocAdapter = new NodeDependencyInjectionIocAdapter(
+    join(__dirname, '../../DependencyContainer/Container.yaml')
+  );
+
   private readonly consumer: RabbitMQDomainEventsConsumer;
+  private readonly configurator: RabbitMQConfigurator;
   private readonly locator: DomainEventSubscriberLocator;
-  private readonly container: InversifyAdapter;
 
   constructor() {
-    this.container = new InversifyAdapter();
-    this.consumer = this.container.getClass('RabbitMQDomainEventsConsumer');
-    this.locator = this.container.getClass('DomainEventSubscriberLocator');
+    this.configurator = this.iocAdapter.get('Shared.RabbitMQConfigurator');
+    this.consumer = this.iocAdapter.get('Shared.RabbitMQDomainEventsConsumer');
+    this.locator = this.iocAdapter.get('Shared.DomainEventSubscriberLocator');
   }
 
   public async run(): Promise<void> {
-    const queueName = this.queue();
-    const subscriber = this.locator.withRabbitMQQueueNamed(queueName);
-    await this.consumer.consume(subscriber, queueName);
+    await this.configurator.configure(this.exchangeName);
+    const consumerName = this.consumerName();
+    const subscriber = this.locator.withRabbitMQQueueNamed(consumerName);
+    await this.consumer.consume(subscriber, consumerName);
   }
 
-  private queue(): string {
-    const queue = process.argv.find((arg) => arg.includes('queue'));
-    if (!queue) {
-      throw new Error('This queue does not exist');
+  private consumerName(): string {
+    const consumer = process.argv.find((arg) => arg.includes('consumer'));
+    if (!consumer) {
+      throw new Error('This consumer does not exist');
     }
-    return queue.replace('queue:', '');
+    return consumer.replace('consumer:', '');
   }
 }
 

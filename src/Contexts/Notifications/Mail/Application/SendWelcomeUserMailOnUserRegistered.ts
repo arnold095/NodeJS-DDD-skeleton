@@ -1,4 +1,3 @@
-import { injectable, inject } from 'inversify';
 import { DomainEventClass, DomainEventSubscriber } from '@sharedDomain';
 import { UserRegisteredDomainEvent } from '@authentication';
 import {
@@ -8,11 +7,8 @@ import {
   MailBody,
 } from '@notificationsMail';
 
-@injectable()
 export class SendWelcomeUserMailOnUserRegistered implements DomainEventSubscriber {
-  public constructor(
-    @inject('SendWelcomeUserMail') private readonly sendMail: SendWelcomeUserMail
-  ) {}
+  public constructor(private readonly sendMail: SendWelcomeUserMail) {}
 
   public subscribedTo(): DomainEventClass[] {
     return [UserRegisteredDomainEvent];

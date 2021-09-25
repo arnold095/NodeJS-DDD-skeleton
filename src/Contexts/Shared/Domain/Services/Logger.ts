@@ -3,7 +3,7 @@ export interface Logger {
 
   info(message: string, ...obj: unknown[]): void;
 
-  error(message: string, ...obj: undefined[]): void;
+  error(message: string, ...obj: unknown[]): void;
 
   warn(message: string, ...obj: unknown[]): void;
 
