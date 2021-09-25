@@ -1,4 +1,4 @@
-import { domainEvent, DomainEvent } from '@sharedDomain';
+import { DomainEvent } from '@sharedDomain';
 
 type UserRegisteredEventBody = {
   id: string;
@@ -7,9 +7,8 @@ type UserRegisteredEventBody = {
   email: string;
 };
 
-@domainEvent()
 export class UserRegisteredDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = 'user.registered';
+  static readonly eventName = 'user.registered';
 
   public constructor(
     readonly id: string,

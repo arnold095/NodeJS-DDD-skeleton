@@ -1,4 +1,3 @@
-import { inject, injectable } from 'inversify';
 import { UserEncoder } from '@authorization';
 import { EventBus } from '@sharedDomain';
 import {
@@ -8,13 +7,12 @@ import {
   UserAuthRepository,
 } from '@authentication';
 
-@injectable()
 export class UserLogin {
   private finder: UserAuthFinder;
   public constructor(
-    @inject('UserAuthRepository') private readonly repository: UserAuthRepository,
-    @inject('EventBus') private readonly bus: EventBus,
-    @inject('UserEncoder') private readonly encoder: UserEncoder
+    private readonly repository: UserAuthRepository,
+    private readonly bus: EventBus,
+    private readonly encoder: UserEncoder
   ) {
     this.finder = new UserAuthFinder(this.repository);
   }

@@ -1,4 +1,3 @@
-import { inject, injectable } from 'inversify';
 import {
   AuthorizationUser,
   AuthorizationUserEncode,
@@ -11,11 +10,8 @@ import {
   UserAuthLastName,
 } from '@authentication';
 
-@injectable()
 export class UserEncoder {
-  public constructor(
-    @inject('AuthorizationUserEncode') private readonly encoder: AuthorizationUserEncode
-  ) {}
+  public constructor(private readonly encoder: AuthorizationUserEncode) {}
 
   public run(request: UserEncoderRequest): string {
     const user = AuthorizationUser.create(
