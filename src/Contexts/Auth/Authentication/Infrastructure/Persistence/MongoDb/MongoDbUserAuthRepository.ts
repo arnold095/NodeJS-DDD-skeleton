@@ -6,9 +6,7 @@ import {
   UserAuthRepository,
 } from '@authentication';
 import { Nullable } from '@sharedDomain';
-import { injectable } from 'inversify';
 
-@injectable()
 export class MongoDbUserAuthRepository
   extends MongoDbClient
   implements UserAuthRepository

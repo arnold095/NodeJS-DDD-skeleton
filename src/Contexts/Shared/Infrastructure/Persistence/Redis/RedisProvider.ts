@@ -1,54 +1,30 @@
-import { createClient, RedisClient } from 'redis';
-import { promisify } from 'util';
-import { inject, injectable } from 'inversify';
-import { Logger } from '@sharedDomain';
+import Redis, { RedisOptions } from 'ioredis';
 
-export type RedisTypes = {
-  port: number;
-  host: string;
-  db: number;
-};
-@injectable()
 export class RedisProvider {
-  private _client!: RedisClient;
-  private config!: RedisTypes;
+  private static client: Redis.Redis;
+  private config!: RedisOptions;
 
-  constructor(@inject('Logger') private readonly logger: Logger) {}
-
-  public async client(): Promise<RedisClient> {
-    if (!this._client) {
+  public async client(): Promise<Redis.Redis> {
+    if (undefined === RedisProvider.client) {
       await this.connect();
     }
-    return this._client;
+    return RedisProvider.client;
   }
 
-  private async connect(): Promise<void> {
+  protected async connect(): Promise<void> {
     this.loadConfiguration();
-    this._client = createClient(this.config);
-    await this.onConnect();
+    RedisProvider.client = new Redis(this.config);
   }
 
   private loadConfiguration() {
-    const { REDIS_PORT, REDIS_HOST, REDIS_DEFAULT_DB } = process.env;
+    const { REDIS_PORT, REDIS_HOST, REDIS_DEFAULT_DB, REDIS_FAMILY, REDIS_PASSWORD } =
+      process.env;
     this.config = {
-      host: REDIS_HOST ?? '127.0.0.1',
-      port: parseInt(REDIS_PORT ?? '6379'),
+      host: REDIS_HOST,
+      port: parseInt(REDIS_PORT ?? '3679'),
       db: parseInt(REDIS_DEFAULT_DB ?? '0'),
+      family: REDIS_FAMILY ? parseInt(REDIS_FAMILY) : undefined,
+      password: REDIS_PASSWORD,
     };
-  }
-
-  private async onConnect(): Promise<void> {
-    try {
-      this.logger.info(`Connecting to redis`);
-      const on = await promisify(this._client.on).bind(this._client);
-      await on('connect');
-      this.logger.info(
-        `Connection to redis has been successfully established in port`,
-        process.env.REDIS_PORT
-      );
-    } catch (err) {
-      this.logger.error("Can't connect to redis", err);
-      throw err;
-    }
   }
 }

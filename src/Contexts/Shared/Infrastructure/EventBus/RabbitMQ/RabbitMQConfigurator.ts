@@ -1,20 +1,17 @@
-import { inject, injectable, multiInject, optional } from 'inversify';
 import { Replies } from 'amqplib';
 import { RabbitMQConnection } from './RabbitMQConnection';
 import { RabbitMQExchangeNameFormatter } from './RabbitMQExchangeNameFormatter';
 import { DomainEventSubscriber } from '@sharedDomain';
 import { RabbitMQQueueNameFormatter } from './RabbitMQQueueNameFormatter';
 
-@injectable()
 export class RabbitMQConfigurator {
   public constructor(
-    @inject('RabbitMQConnection') private connection: RabbitMQConnection,
-    @optional()
-    @multiInject('DomainEventSubscriber')
+    private connection: RabbitMQConnection,
     private subscribers: DomainEventSubscriber[]
   ) {}
 
   public async configure(exchangeName: string): Promise<void> {
+    await this.connection.checkConnection();
     const retryExchangeName = RabbitMQExchangeNameFormatter.retry(exchangeName);
     const deadLetterExchangeName = RabbitMQExchangeNameFormatter.deadLetter(exchangeName);
     await this.declareExchange(exchangeName);
@@ -67,7 +64,7 @@ export class RabbitMQConfigurator {
     await channel.bindQueue(deadLetterQueue.queue, deadLetterExchangeName, queueName);
 
     subscriber.subscribedTo().map(async (eventClass) => {
-      await channel.bindQueue(queue.queue, exchangeName, eventClass.EVENT_NAME);
+      await channel.bindQueue(queue.queue, exchangeName, eventClass.eventName);
     });
   }
 

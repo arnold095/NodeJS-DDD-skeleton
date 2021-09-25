@@ -8,7 +8,8 @@ import {
   DummyEmail,
   DummyId,
   DummyTitle,
-} from '../../../../../../src/Contexts/MyApp/Dummy';
+} from '@dummy';
+import { plainToClass } from 'class-transformer';
 
 export class DummyCreatorRequestMother {
   public static create(
@@ -17,11 +18,11 @@ export class DummyCreatorRequestMother {
     content?: DummyContent,
     email?: DummyEmail
   ): DummyCreatorRequest {
-    return new DummyCreatorRequest(
-      id?.value ?? DummyIdMother.create().value,
-      title?.value ?? DummyTitleMother.create().value,
-      content?.value ?? DummyContentMother.create().value,
-      email?.value ?? DummyEmailMother.create().value
-    );
+    return plainToClass(DummyCreatorRequest, {
+      id: id?.value ?? DummyIdMother.create().value,
+      title: title?.value ?? DummyTitleMother.create().value,
+      content: content?.value ?? DummyContentMother.create().value,
+      email: email?.value ?? DummyEmailMother.create().value,
+    });
   }
 }

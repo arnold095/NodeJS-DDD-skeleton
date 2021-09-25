@@ -1,33 +1,25 @@
 import 'reflect-metadata';
-import 'module-alias/register';
 import * as map from 'source-map-support';
-import { InversifyAdapter } from './DependencyContainer/InversifyAdapter';
+import { RouterBuilder } from 'decorator-koa-router';
 import { join } from 'path';
-import { EventBus, WebServer } from '@sharedDomain';
-import { ApmClient } from '../../Contexts/Shared/Infrastructure/ApmClient';
+import { KoaWebServer, NodeDependencyInjectionIocAdapter } from '@sharedInfra';
 map.install();
+
 export class App {
-  private readonly server: WebServer;
-  private readonly iocAdapter = new InversifyAdapter();
   private readonly serverPort = parseInt(process.env.SERVER_PORT ?? '3000');
 
+  private readonly server: KoaWebServer;
+  private iocAdapter = new NodeDependencyInjectionIocAdapter(
+    join(__dirname, './DependencyContainer/Container.yaml')
+  );
+
   constructor() {
-    this.server = this.iocAdapter.getClass('WebServer');
+    this.server = this.iocAdapter.get('Shared.WebServer');
   }
 
   public async bootStrap(): Promise<void> {
-    this.server.load(this.iocAdapter, this.serverPort, this.controllers());
-    this.loadEventBus();
-    ApmClient.connect();
-  }
-
-  private loadEventBus() {
-    const eventBus = this.iocAdapter.getClass<EventBus>('EventBus');
-    eventBus.load();
-  }
-
-  private controllers(): string[] {
-    return [join(__dirname, '/Controller/**/*.ts')];
+    const router = await RouterBuilder('/api', this.iocAdapter, './Controller/*.ts');
+    await this.server.load(this.serverPort, router);
   }
 }
 

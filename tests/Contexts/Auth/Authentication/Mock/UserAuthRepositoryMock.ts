@@ -1,9 +1,7 @@
 import { UserAuth, UserAuthEmail, UserAuthRepository } from '@authentication';
 import { Nullable } from '@sharedDomain';
 import { UserAuthMother } from '../Domain/UserAuthMother';
-import { injectable } from 'inversify';
 
-@injectable()
 export class UserAuthRepositoryMock implements UserAuthRepository {
   private mockedUsers: Map<string, UserAuth> = new Map();
 

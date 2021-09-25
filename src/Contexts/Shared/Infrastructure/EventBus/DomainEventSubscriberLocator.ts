@@ -1,14 +1,8 @@
-import { injectable, multiInject, optional } from 'inversify';
 import { DomainEventSubscriber } from '@sharedDomain';
 import { RabbitMQQueueNameFormatter } from './RabbitMQ/RabbitMQQueueNameFormatter';
 
-@injectable()
 export class DomainEventSubscriberLocator {
-  constructor(
-    @optional()
-    @multiInject('DomainEventSubscriber')
-    private readonly domainEventSubscriber: DomainEventSubscriber[]
-  ) {}
+  constructor(private readonly domainEventSubscriber: DomainEventSubscriber[]) {}
 
   public withRabbitMQQueueNamed(queueName: string): DomainEventSubscriber {
     let subscriber;

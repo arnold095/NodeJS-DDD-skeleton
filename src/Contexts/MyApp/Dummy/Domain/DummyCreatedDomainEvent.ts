@@ -8,7 +8,7 @@ export type DummyCreatedDomainEventBody = {
 
 @domainEvent()
 export class DummyCreatedDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = 'dummy.created';
+  static readonly eventName = 'dummy.created';
   public constructor(
     readonly id: string,
     readonly title: string,

@@ -1,17 +1,15 @@
-import { inject, injectable } from 'inversify';
 import { DomainEvent, EventBus, Logger } from '@sharedDomain';
 import { RabbitMQConnection } from './RabbitMQConnection';
 import { RabbitMQConfigurator } from './RabbitMQConfigurator';
 import { DomainEventJsonSerializer } from '../DomainEventJsonSerializer';
 
-@injectable()
 export class RabbitMQDomainEventBus implements EventBus {
   private readonly exchangeName = process.env.RABBITMQ_EXCHANGE ?? 'domain_events';
 
   public constructor(
-    @inject('RabbitMQConnection') private readonly connection: RabbitMQConnection,
-    @inject('RabbitMQConfigurator') private readonly configurator: RabbitMQConfigurator,
-    @inject('Logger') private readonly logger: Logger
+    private readonly connection: RabbitMQConnection,
+    private readonly configurator: RabbitMQConfigurator,
+    private readonly logger: Logger
   ) {}
 
   public async load(): Promise<void> {
@@ -29,7 +27,7 @@ export class RabbitMQDomainEventBus implements EventBus {
     try {
       await this.publishEvent(event);
     } catch (err) {
-      this.logger.error(err); // TODO:: Fail publisher
+      this.logger.error('An error occurred while publishing the event', err); // TODO:: Fail publisher
     }
   }
 

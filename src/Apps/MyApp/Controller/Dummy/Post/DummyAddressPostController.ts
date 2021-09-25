@@ -1,17 +1,16 @@
-import { inject, injectable } from 'inversify';
-import { Body, Controller, OnUndefined, Post } from 'routing-controllers';
+import { Context, Response } from 'koa';
+import { controller, httpPost } from 'decorator-koa-router';
+import { KoaBaseController, validateDto } from '@sharedInfra';
 import { DummyAddressCreator, DummyAddressCreatorRequest } from '@dummy';
+@controller('/dummy')
+export class DummyAddressPostController extends KoaBaseController {
+  public constructor(private readonly addressCreator: DummyAddressCreator) {
+    super();
+  }
 
-@injectable()
-@Controller('/dummy/address')
-export class DummyAddressPostController {
-  public constructor(
-    @inject('DummyAddressCreator') private readonly addressCreator: DummyAddressCreator
-  ) {}
-
-  @Post('/save')
-  @OnUndefined(202)
-  public async run(@Body() request: DummyAddressCreatorRequest): Promise<void> {
-    await this.addressCreator.run(request);
+  @httpPost('/address/', validateDto(DummyAddressCreatorRequest))
+  public async run({ response, dtoBody }: Context): Promise<Response> {
+    await this.addressCreator.run(dtoBody);
+    return this.notContent(response);
   }
 }

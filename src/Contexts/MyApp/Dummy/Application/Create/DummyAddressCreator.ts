@@ -1,4 +1,3 @@
-import { inject, injectable } from 'inversify';
 import {
   DummyAddressCreatorRequest,
   DummyId,
@@ -16,11 +15,10 @@ import {
   DummyAddressStreet,
 } from '@dummyAddress';
 
-@injectable()
 export class DummyAddressCreator {
   public constructor(
-    @inject('DummyRepository') private readonly repository: DummyRepository,
-    @inject('EventBus') private readonly eventBus: EventBus
+    private readonly repository: DummyRepository,
+    private readonly eventBus: EventBus
   ) {}
 
   public async run(request: DummyAddressCreatorRequest): Promise<void> {
@@ -31,14 +29,13 @@ export class DummyAddressCreator {
     }
     const dummyAddress = DummyAddress.create(
       new DummyAddressId(request.id),
-      dummyId,
       new DummyAddressAlias(request.alias),
       new DummyAddressStreet(request.street),
       new DummyAddressCity(request.city),
       new DummyAddressPostalCode(request.postalCode),
       new DummyAddressCountry(request.country)
     );
-    dummy.saveAddress(dummyAddress);
+    dummy.addAddress(dummyAddress);
     await this.repository.save(dummy);
     await this.eventBus.publish(dummy.pullDomainEvents());
   }

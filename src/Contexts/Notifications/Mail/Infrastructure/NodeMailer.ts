@@ -1,8 +1,6 @@
 import { createTransport, createTestAccount } from 'nodemailer';
-import { injectable } from 'inversify';
 import { MailSender, Mail } from '@notificationsMail';
 
-@injectable()
 export class NodeMailer implements MailSender {
   public async send(mail: Mail): Promise<void> {
     const credentials = await this.credentials();

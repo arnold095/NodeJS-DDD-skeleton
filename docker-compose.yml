@@ -20,8 +20,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./package.json:/home/node/app/package.json
-      - ./src:/home/node/app/src
+      - .:/home/node/app
     env_file:
       - ./dev.env
     command: bash -c "npm i && npm run start:dev"
@@ -36,8 +35,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./package.json:/home/node/app/package.json
-      - ./src:/home/node/app/src
+      - .:/home/node/app
     env_file:
       - ./dev.env
     command: bash -c "npm i && npm run auth:dev"
@@ -53,8 +51,7 @@ services:
     ports:
       - "3002:3002"
     volumes:
-      - ./package.json:/home/node/app/package.json
-      - ./src:/home/node/app/src
+      - .:/home/node/app
     env_file:
       - ./dev.env
     command: bash -c "npm i && npm run consumer:start -- queue:_send_welcome_dummy_mail_on_dummy_created"
@@ -69,22 +66,7 @@ services:
     logging:
       driver: none
     ports:
-      - 6379:6379
-  mariadb_ddd_skeleton:
-    image: mariadb:10.5
-    logging:
-      driver: none
-    container_name: mariadb_ddd_skeleton
-    restart: unless-stopped
-    ports:
-      - '3307:3306'
-    networks:
-      - "node_ddd_skeleton"
-    environment:
-      MYSQL_DATABASE: node_ddd_skeleton
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 123qwe
-      MYSQL_ROOT_PASSWORD: 123qwe
+      - "6379:6379"
   mongodb:
     container_name: mongodb_ddd_skeleton
     image: library/mongo:4.4.4
@@ -93,7 +75,7 @@ services:
     networks:
       - "node_ddd_skeleton"
     ports:
-      - 27017:27017
+      - "27017:27017"
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -106,9 +88,9 @@ services:
       - "rabbitmq-prometheus"
     restart: unless-stopped
     ports:
-      - 5630:5672
-      - 8090:15672
-      - 15693:15692
+      - "5630:5672"
+      - "8090:15672"
+      - "15693:15692"
     cap_add:
       - ALL
     environment:

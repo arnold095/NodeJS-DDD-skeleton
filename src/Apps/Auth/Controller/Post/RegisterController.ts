@@ -1,24 +1,17 @@
-import { inject, injectable } from 'inversify';
-import { Body, Controller, Post, Res } from 'routing-controllers';
+import { Context, Response } from 'koa';
+import { controller, httpPost } from 'decorator-koa-router';
+import { KoaBaseController, validateDto } from '@sharedInfra';
 import { UserRegister, UserRegisterRequest } from '@authentication';
-import { Response } from 'koa';
-import { BaseController } from '../BaseController';
 
-@injectable()
-@Controller('/auth')
-export class RegisterController extends BaseController {
-  public constructor(
-    @inject('UserRegister') private readonly userRegister: UserRegister
-  ) {
+@controller('/auth')
+export class RegisterController extends KoaBaseController {
+  public constructor(private readonly userRegister: UserRegister) {
     super();
   }
 
-  @Post('/register')
-  public async run(
-    @Body() request: UserRegisterRequest,
-    @Res() res: Response
-  ): Promise<unknown> {
-    const jwt = await this.userRegister.run(request);
-    return this.ok({ jwt }, res);
+  @httpPost('/register', validateDto(UserRegisterRequest))
+  public async run({ dtoBody, response }: Context): Promise<Response> {
+    const jwt = await this.userRegister.run(dtoBody);
+    return this.ok({ jwt }, response);
   }
 }

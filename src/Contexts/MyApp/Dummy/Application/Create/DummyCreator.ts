@@ -1,4 +1,3 @@
-import { inject, injectable } from 'inversify';
 import { EventBus } from '@sharedDomain';
 import {
   Dummy,
@@ -10,11 +9,11 @@ import {
   DummyRepository,
   DummyTitle,
 } from '@dummy';
-@injectable()
+
 export class DummyCreator {
   constructor(
-    @inject('DummyRepository') private readonly repository: DummyRepository,
-    @inject('EventBus') private readonly eventBus: EventBus
+    private readonly repository: DummyRepository,
+    private readonly eventBus: EventBus
   ) {}
 
   public async run(request: DummyCreatorRequest): Promise<void> {

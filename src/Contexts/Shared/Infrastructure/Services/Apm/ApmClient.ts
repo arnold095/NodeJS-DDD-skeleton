@@ -1,9 +1,6 @@
-import { injectable } from 'inversify';
 import { start } from 'elastic-apm-node';
-
-@injectable()
 export class ApmClient {
-  public static connect(): void {
+  public static run(): void {
     if (process.env.APM_ACTIVE === 'true') {
       start(this.configuration());
     }
@@ -19,3 +16,4 @@ export class ApmClient {
     };
   }
 }
+ApmClient.run();

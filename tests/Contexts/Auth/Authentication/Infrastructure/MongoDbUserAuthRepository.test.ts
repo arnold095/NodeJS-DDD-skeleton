@@ -10,7 +10,7 @@ const existingPassword = UserAuthPasswordMother.create('123qweQWE!');
 
 beforeAll(async () => {
   await Arranger.run();
-  repository = Arranger.container.getClass('UserAuthRepository');
+  repository = Arranger.container.get('Auth.UserAuthRepository');
   const user = UserAuthMother.create({
     email: existingEmail,
     password: existingPassword,

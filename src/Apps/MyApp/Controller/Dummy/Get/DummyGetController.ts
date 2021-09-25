@@ -1,16 +1,18 @@
-import { inject, injectable } from 'inversify';
-import { Controller, Get, HttpCode, Param } from 'routing-controllers';
-import { DummyFinder, DummyFinderRequest } from '@dummy';
+import { Context, Response } from 'koa';
+import { controller, httpGet } from 'decorator-koa-router';
+import { KoaBaseController } from '@sharedInfra';
+import { DummyFinder } from '@dummy';
 
-@Controller('/dummy')
-@injectable()
-export class DummyGetController {
-  public constructor(@inject('DummyFinder') private readonly finder: DummyFinder) {}
+@controller('/dummy')
+export class DummyGetController extends KoaBaseController {
+  public constructor(private readonly finder: DummyFinder) {
+    super();
+  }
 
-  @Get('/:id')
-  @HttpCode(200)
-  public async run(@Param('id') id: string): Promise<unknown> {
-    const request = new DummyFinderRequest(id);
-    return await this.finder.run(request); // TODO: DTO Response
+  @httpGet('/:id')
+  public async run({ params, response }: Context): Promise<Response> {
+    const { id } = params;
+    const dummy = await this.finder.run(id); // TODO: DTO Response
+    return this.ok(dummy, response);
   }
 }

@@ -1,4 +1,6 @@
-export * from './Server/Koa/KoaServer';
+export * from './Server/Koa/KoaWebServer';
+export * from './Server/Koa/KoaBaseController';
+export * from './Server/Koa/Middleware/KoaDtoValidationMiddleware';
 export * from './Server/Koa/Middleware/ErrorHandler';
 
 export * from './EventBus/InMemory/InMemorySyncEventBus';
@@ -15,6 +17,7 @@ export * from './EventBus/DomainEventJsonDeserializer';
 export * from './EventBus/DomainEventSubscriberLocator';
 
 export * from './Services/Logger/ConsoleLogger';
+export * from './Services/IocAdapter/NodeDependencyInjectionIocAdapter';
 
 export * from './Persistence/Redis/RedisClient';
 export * from './Persistence/Redis/RedisProvider';

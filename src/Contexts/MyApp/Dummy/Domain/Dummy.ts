@@ -1,5 +1,5 @@
 import { AggregateRoot, Nullable } from '@sharedDomain';
-import { DummyAddress, DummyAddressId } from '@dummyAddress';
+import { DummyAddress, DummyAddressId, DummyAddressPrimitives } from '@dummyAddress';
 import {
   DummyId,
   DummyTitle,
@@ -15,15 +15,16 @@ export type DummyPrimitives = {
   title: string;
   content: string;
   email: string;
+  addresses: DummyAddressPrimitives[];
 };
-export class Dummy extends AggregateRoot {
-  private _addresses: DummyAddress[] = [];
 
+export class Dummy extends AggregateRoot {
   constructor(
     private _id: DummyId,
     private _title: DummyTitle,
     private _content: DummyContent,
-    private _email: DummyEmail
+    private _email: DummyEmail,
+    private _addresses: DummyAddress[] = []
   ) {
     super();
   }
@@ -41,7 +42,7 @@ export class Dummy extends AggregateRoot {
     return dummy;
   }
 
-  public saveAddress(dummyAddress: DummyAddress): void {
+  public addAddress(dummyAddress: DummyAddress): void {
     this.ensureThatTheAddressDoesNotExist(dummyAddress);
     this._addresses.push(dummyAddress);
     const domainEvent = new DummyAddressCreatedDomainEvent(
@@ -87,5 +88,29 @@ export class Dummy extends AggregateRoot {
 
   public findAddress(id: DummyAddressId): Nullable<DummyAddress> {
     return this.addresses.find((address) => address.id.equals(id));
+  }
+
+  public toPrimitives(): DummyPrimitives {
+    const addresses = this._addresses.map((address) => address.toPrimitives());
+    return {
+      id: this.id.value,
+      title: this.title.value,
+      content: this.content.value,
+      email: this.email.value,
+      addresses,
+    };
+  }
+
+  public static fromPrimitives(primitives: DummyPrimitives): Dummy {
+    const addresses = primitives?.addresses.map((address) =>
+      DummyAddress.fromPrimitives(address)
+    );
+    return new Dummy(
+      new DummyId(primitives.id),
+      new DummyTitle(primitives.title),
+      new DummyContent(primitives.content),
+      new DummyEmail(primitives.email),
+      addresses
+    );
   }
 }

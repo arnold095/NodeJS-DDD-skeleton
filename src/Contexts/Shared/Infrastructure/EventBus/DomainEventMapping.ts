@@ -1,7 +1,5 @@
-import { injectable } from 'inversify';
 import { DomainEventClass, domainEvents } from '@sharedDomain';
 
-@injectable()
 export class DomainEventMapping {
   private mapping: Map<string, DomainEventClass> = new Map();
 
@@ -11,7 +9,7 @@ export class DomainEventMapping {
 
   public addSubscribers(domainEvents: DomainEventClass[]): void {
     for (const domainEvent of domainEvents) {
-      this.mapping.set(domainEvent.EVENT_NAME, domainEvent);
+      this.mapping.set(domainEvent.eventName, domainEvent);
     }
   }
 

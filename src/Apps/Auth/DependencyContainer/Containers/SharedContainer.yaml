@@ -1,0 +1,53 @@
+services:
+  Shared.Logger:
+    class: ../../../../Contexts/Shared/Infrastructure/Services/Logger/ConsoleLogger
+    arguments: []
+
+  Shared.WebServer:
+    class: ../../../../Contexts/Shared/Infrastructure/Server/Koa/KoaWebServer
+    arguments: ['@Shared.Logger']
+
+  Shared.MongoDbProvider:
+    class: ../../../../Contexts/Shared/Infrastructure/Persistence/MongoDb/MongoDbProvider
+    arguments: ['@Shared.Logger']
+
+  Shared.MongoDbClient:
+    class: ../../../../Contexts/Shared/Infrastructure/Persistence/MongoDb/MongoDbClient
+    arguments: ['@Shared.MongoDbProvider']
+
+  Shared.RedisProvider:
+    class: ../../../../Contexts/Shared/Infrastructure/Persistence/Redis/RedisProvider
+    arguments: []
+
+  Shared.RedisClient:
+    class: ../../../../Contexts/Shared/Infrastructure/Persistence/Redis/RedisClient
+    arguments: ['@Shared.RedisProvider']
+
+  Shared.DomainEventMapping:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/DomainEventMapping
+    arguments: []
+
+  Shared.DomainEventJsonDeserializer:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/DomainEventJsonDeserializer
+    arguments: ['@Shared.DomainEventMapping']
+
+  Shared.RabbitMQConnection:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConnection
+    arguments: ['@Shared.Logger']
+
+  Shared.RabbitMQConfigurator:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQConfigurator
+    arguments: ['@Shared.RabbitMQConnection', '!tagged DomainEventSubscriber']
+
+  Shared.EventBus:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQDomainEventBus
+    arguments: ['@Shared.RabbitMQConnection', '@Shared.RabbitMQConfigurator', '@Shared.Logger' ]
+
+  Shared.RabbitMQDomainEventsConsumer:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/RabbitMQ/RabbitMQDomainEventsConsumer
+    arguments: [ '@Shared.RabbitMQConnection', '@Shared.DomainEventJsonDeserializer', '@Shared.Logger' ]
+
+  Shared.DomainEventSubscriberLocator:
+    class: ../../../../Contexts/Shared/Infrastructure/EventBus/DomainEventSubscriberLocator
+    arguments: [ '!tagged DomainEventSubscriber' ]
+

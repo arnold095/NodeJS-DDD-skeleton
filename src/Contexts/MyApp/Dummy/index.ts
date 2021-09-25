@@ -1,7 +1,7 @@
 export * from './Application/Create/DummyAddressCreator';
 export * from './Application/Find/DummyFinder';
 export * from './Application/Create/DummyCreator';
-export * from './Application/Find/DummyFinderRequest';
+export * from './Application/Find/DummyFinderResponse';
 export * from './Application/Create/DummyAddressCreatorRequest';
 export * from './Application/Create/DummyCreatorRequest';
 
@@ -18,4 +18,4 @@ export * from './Domain/Exception/DummyAlreadyExist';
 export * from './Domain/Exception/DummyNotFound';
 export * from './Domain/Exception/InvalidDummyEmail';
 
-export * from './Infrastructure/RedisDummyRepository';
+export * from './Infrastructure/Persistence/Redis/RedisDummyRepository';
