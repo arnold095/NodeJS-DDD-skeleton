@@ -1,6 +1,6 @@
 import { Context, Next } from 'koa';
 import { IncomingHttpHeaders } from 'http';
-import { NotAuthorized } from '../../../../Domain/Exception/NotAuthorized';
+import { NotAuthorized } from '@sharedDomain';
 import { JwtVerifier } from '../../../Jwt/JwtVerifier';
 
 export const AuthorizationMiddleware = async (

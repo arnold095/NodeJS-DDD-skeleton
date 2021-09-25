@@ -12,6 +12,8 @@ export * from './Services/Logger';
 export * from './Aggregate/AggregateRoot';
 export * from './Exception/BaseError';
 export * from './Exception/InvalidArgumentError';
+export * from './Exception/NotAuthorized';
+export * from './Exception/TokenExpired';
 export * from './Decorators/DomainEvent';
 
 export * from './ValueObject/Uuid';
