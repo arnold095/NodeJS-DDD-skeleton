@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "yarn test:unit && yarn test:integration && yarn test:e2e",
-    "test:unit": "jest test/Unit",
-    "test:integration": "jest test/Integration --runInBand",
+    "test:unit": "jest tests/Unit",
+    "test:integration": "jest tests/Integration --runInBand",
     "test:e2e": "cucumber-js -p e2e --publish-quiet --exit",
     "dev": "concurrently 'yarn watch-compile' 'yarn watch-dev'",
     "watch-compile": "swc src --copy-files -w --out-dir dist",
