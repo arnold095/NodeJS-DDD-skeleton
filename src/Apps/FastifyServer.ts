@@ -4,6 +4,7 @@ import fastifyHelmet from '@fastify/helmet';
 import { LoadContainer } from './Shared/Config/Di/Loaders';
 import { connectToSessionMongoDb } from './Shared/Config/MongoDbConfig';
 import { LoadRoutes } from './Shared/Config/Routes/LoadRoutes';
+import { loadFilesHelper } from './Shared/Config/Di/Loaders/FilesLoaderHelper';
 
 const enableCors = async (server: FastifyInstance): Promise<void> => {
   await server.register(fastifyCors, {
@@ -22,6 +23,7 @@ const addSecurityHeaders = async (server: FastifyInstance): Promise<void> => {
 export const fastifyServer = async (): Promise<FastifyInstance> => {
   const server = fastify({ logger: true });
 
+  await loadFilesHelper();
   LoadContainer();
   await LoadRoutes(server);
   await enableCors(server);
