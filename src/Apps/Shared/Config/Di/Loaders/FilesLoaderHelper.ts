@@ -12,6 +12,8 @@ const eventHandlersPath = join(
   '/Contexts/**/Application/EventHandlers/**/*.js',
 );
 
+const repositoriesPath = join(rootPath, '/Contexts/**/Infrastructure/**/*.js');
+
 const load = async (path: string): Promise<void> => {
   const files = glob.sync(path);
 
@@ -20,6 +22,8 @@ const load = async (path: string): Promise<void> => {
 
 export const loadFilesHelper = async (): Promise<void> => {
   await Promise.all(
-    [controllersPath, useCasesPath, eventHandlersPath].map(path => load(path)),
+    [controllersPath, useCasesPath, eventHandlersPath, repositoriesPath].map(path =>
+      load(path),
+    ),
   );
 };

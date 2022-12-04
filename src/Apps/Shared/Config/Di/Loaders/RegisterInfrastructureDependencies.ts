@@ -3,7 +3,18 @@ import { registerServicesDependencies } from './RegisterServicesDependencies';
 import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
 import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
 import { registerControllerDependencies } from './RegisterControllerDependencies';
+import { repositories } from '../../../../../Contexts/Shared/Domain/Decorators/RepositoryDecorator';
+import { NewableClass } from '../../../../../Contexts/Shared/Domain/Utils/NewableClass';
 
+const registerRepositories = (container: Container): void => {
+  console.info(repositories);
+  for (const repository of repositories) {
+    container.registerImplementationAs(
+      repository.target as NewableClass<unknown>,
+      repository.abstraction,
+    );
+  }
+};
 export const registerInfrastructureDependencies = (container: Container): void => {
   // Event bus
   container.registerImplementationAs(
@@ -17,4 +28,7 @@ export const registerInfrastructureDependencies = (container: Container): void =
 
   // Controllers
   registerControllerDependencies(container);
+
+  // Repositories
+  registerRepositories(container);
 };
