@@ -1,13 +1,34 @@
 import { Container, DependencyScope } from '../Container';
-import { registerServicesDependencies } from './RegisterServicesDependencies';
 import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
 import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
-import { registerControllerDependencies } from './RegisterControllerDependencies';
 import { repositories } from '../../../../../Contexts/Shared/Domain/Decorators/RepositoryDecorator';
 import { NewableClass } from '../../../../../Contexts/Shared/Domain/Utils/NewableClass';
+import { controllers } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+import { Newable } from 'diod';
+import { BaseController } from '../../../Controllers/BaseController';
+import { MongoClient } from 'mongodb';
+import { env } from '../../env';
+import { SessionMongoDbClient } from '../../MongoDbConfig';
+
+export const registerServicesDependencies = (container: Container): void => {
+  // Mongo
+  container.registerFactoryAs(
+    () => {
+      return new MongoClient(env.mongo.mongoUri, {
+        loggerLevel: 'debug',
+      });
+    },
+    SessionMongoDbClient,
+    DependencyScope.Singleton,
+  );
+};
+const registerControllerDependencies = (container: Container): void => {
+  for (const controller of controllers) {
+    container.registerImplementation(controller.target as Newable<BaseController>);
+  }
+};
 
 const registerRepositories = (container: Container): void => {
-  console.info(repositories);
   for (const repository of repositories) {
     container.registerImplementationAs(
       repository.target as NewableClass<unknown>,
