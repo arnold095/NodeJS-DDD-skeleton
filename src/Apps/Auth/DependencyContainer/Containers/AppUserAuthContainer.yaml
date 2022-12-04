@@ -1,8 +1,0 @@
-services:
-  LoginController:
-    class: ../../Controller/Post/LoginController
-    arguments: ['@Auth.UserLogin']
-
-  RegisterController:
-    class: ../../Controller/Post/RegisterController
-    arguments: [ '@Auth.UserRegister' ]

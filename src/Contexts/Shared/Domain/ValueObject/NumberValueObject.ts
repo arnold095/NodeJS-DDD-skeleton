@@ -1,5 +1,9 @@
-export class NumberValueObject {
-  public constructor(private _value: number) {}
+import { ValueObject } from './ValueObject';
+
+export class NumberValueObject extends ValueObject<number> {
+  public constructor(value: number) {
+    super(value);
+  }
 
   public lessThan(other: number): boolean {
     return this.value < other;
@@ -7,13 +11,5 @@ export class NumberValueObject {
 
   public isBiggerThan(other: number): boolean {
     return this.value > other;
-  }
-
-  public equals(other: number): boolean {
-    return this.value === other;
-  }
-
-  public get value(): number {
-    return this._value;
   }
 }

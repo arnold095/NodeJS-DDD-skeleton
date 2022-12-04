@@ -1,7 +1,7 @@
-export abstract class StringValueObject {
-  public constructor(private _value: string) {}
+import { ValueObject } from './ValueObject';
 
-  public get value(): string {
-    return this._value;
+export class StringValueObject extends ValueObject<string> {
+  constructor(value: string) {
+    super(value ? String(value).trim() : value);
   }
 }

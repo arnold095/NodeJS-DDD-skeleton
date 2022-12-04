@@ -1,4 +1,0 @@
-imports:
-  - { resource: ./Containers/SharedContainer.yaml }
-  - { resource: ./Containers/AppUserAuthContainer.yaml }
-  - { resource: ./Containers/UserAuthContainer.yaml }

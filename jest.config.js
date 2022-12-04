@@ -1,25 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-require('dotenv').config({ path: './dev.test.env' });
-const tsconfig = require('./tsconfig.json');
-const moduleNameMapper = require('tsconfig-paths-jest')(tsconfig);
+require('dotenv').config({ path: './.env.test' });
+
+/** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
-  clearMocks: true,
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json',
-      diagnostics: true,
-      isolatedModules: true,
-    },
-  },
-  moduleFileExtensions: ['ts', 'js'],
-  moduleNameMapper,
-  testEnvironment: 'node',
+  testMatch: ['<rootDir>/**/*.test.ts'],
+  setupFilesAfterEnv: ['./test/Lib/Setup.js'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  testEnvironmentOptions: { node: true },
   transform: {
-    '\\.ts$': './jest.transformer',
+    '^.+\\.tsx?$': ['@swc/jest'],
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  testMatch: ['**/tests/**/*.test.ts?(x)'],
 };

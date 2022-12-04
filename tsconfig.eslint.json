@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "types": ["reflect-metadata", "@types/node", "jest"],
+    "noEmit": true,
+    "allowJs": true
+  },
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    ".eslintrc.js"
+  ]
+}

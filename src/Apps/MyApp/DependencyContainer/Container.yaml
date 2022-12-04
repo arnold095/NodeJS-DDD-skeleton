@@ -1,4 +1,0 @@
-imports:
-  - { resource: ./Containers/SharedContainer.yaml }
-  - { resource: ./Containers/AppDummyContainer.yaml }
-  - { resource: ./Containers/DummyContainer.yaml }

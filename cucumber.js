@@ -5,12 +5,10 @@ const common = [
   '--require-module tsconfig-paths/register',
 ];
 console.info('RUNNING ACCEPTANCE TESTS');
-const auth = [
-  ...common,
-  '**/tests/Apps/Auth/**/*.feature',
-  '--require **/tests/Apps/Auth/**/*.steps.ts',
-].join(' ');
+const e2e = [...common, '**/tests/**/*.feature', '--require **/tests/**/*.steps.ts'].join(
+  ' ',
+);
 
 module.exports = {
-  auth,
+  e2e,
 };
