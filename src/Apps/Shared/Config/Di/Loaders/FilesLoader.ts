@@ -3,16 +3,19 @@ import { join } from 'path';
 
 const rootPath = join(__dirname, '../../../../../');
 
-const controllersPath = join(rootPath, '/Apps/**/Controllers/**/*Controller.js');
+const controllersPath = join(rootPath, '/Apps/**/Controllers/**/*Controller.{ts,js}');
 
-const useCasesPath = join(rootPath, '/Contexts/**/Application/UseCases/**/*.js');
+const useCasesPath = join(rootPath, '/Contexts/**/Application/UseCases/**/*.{ts,js}');
 
 const eventHandlersPath = join(
   rootPath,
-  '/Contexts/**/Application/EventHandlers/**/*.js',
+  '/Contexts/**/Application/EventHandlers/**/*.{ts,js}',
 );
 
-const repositoriesPath = join(rootPath, '/Contexts/**/Infrastructure/**/*Repository.js');
+const repositoriesPath = join(
+  rootPath,
+  '/Contexts/**/Infrastructure/**/*Repository.{ts,js}',
+);
 
 const load = async (path: string): Promise<void> => {
   const files = glob.sync(path);

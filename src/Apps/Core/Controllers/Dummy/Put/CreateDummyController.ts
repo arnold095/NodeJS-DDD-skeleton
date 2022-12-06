@@ -8,7 +8,7 @@ type CreateDummyRequest = {
 
 @isController({
   method: 'PUT',
-  path: '/dummy/:id/create',
+  path: '/dummies/:id',
 })
 export class CreateDummyController extends BaseController {
   public constructor(private readonly useCase: CreateDummy) {
@@ -19,6 +19,7 @@ export class CreateDummyController extends BaseController {
     const request = this.body<CreateDummyRequest>();
 
     await this.useCase.execute({ ...request, id });
+
     this.sendOk();
   }
 }
