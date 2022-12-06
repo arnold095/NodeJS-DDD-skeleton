@@ -29,7 +29,7 @@ interface ControllerProps extends ControllerArgs {
 
 export const controllers: ControllerProps[] = [];
 
-export const IsController = (props?: ControllerArgs): ClassDecorator => {
+export const isController = (props?: ControllerArgs): ClassDecorator => {
   return <TFunction>(target: TFunction): TFunction => {
     if (props) {
       controllers.push({ ...props, target });

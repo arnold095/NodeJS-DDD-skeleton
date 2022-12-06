@@ -1,33 +1,39 @@
-import { AfterAll, BeforeAll, Given, Then } from '@cucumber/cucumber';
-import request, { Response, Test } from 'supertest';
-import { App } from './App';
-import { Bootstrap } from '../Utils/Bootstrap';
+import {
+  AfterAll as afterAll,
+  BeforeAll as beforeAll,
+  Given as given,
+  Then as then,
+} from '@cucumber/cucumber';
 import { deepStrictEqual } from 'assert';
+import request, { Response, Test } from 'supertest';
+
+import { bootstrap } from '../Utils/Bootstrap';
+import { App } from './App';
 
 let app: App;
 let _request: Test;
 let _response: Response;
-BeforeAll(async () => {
-  app = await Bootstrap();
+beforeAll(async () => {
+  app = await bootstrap();
 });
 
-AfterAll(async () => {
+afterAll(async () => {
   await app.stop();
 });
 
-Given('I send a GET request to {string}', (route: string) => {
+given('I send a GET request to {string}', (route: string) => {
   _request = request(app.server.server).get(route).send();
 });
 
-Then('the response status code should be {int}', async (status: number) => {
+then('the response status code should be {int}', async (status: number) => {
   _response = await _request.expect(status);
 });
 
-Then('the response should be empty', () => {
+then('the response should be empty', () => {
   deepStrictEqual(_response.body, {});
 });
 
-Then('the response content should be ok', () => {
+then('the response content should be ok', () => {
   deepStrictEqual(_response.body, {
     status: 'ok',
   });

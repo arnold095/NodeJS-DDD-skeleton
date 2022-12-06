@@ -1,6 +1,6 @@
 import { Dummy } from '../../../src/Contexts/Core/Dummy/Domain/Dummy';
-import { DummyName } from '../../../src/Contexts/Core/Dummy/Domain/DummyName';
 import { DummyId } from '../../../src/Contexts/Core/Dummy/Domain/DummyId';
+import { DummyName } from '../../../src/Contexts/Core/Dummy/Domain/DummyName';
 import { StringMother } from '../../ObjectMother/StringMother';
 
 export class DummyBuilder {

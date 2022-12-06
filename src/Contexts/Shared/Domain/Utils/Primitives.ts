@@ -1,6 +1,7 @@
 // This utility has been extracted from Codely repository
 
 /* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable no-use-before-define */
 
 type Methods<T> = {
   [P in keyof T]: T[P] extends Function ? P : never;

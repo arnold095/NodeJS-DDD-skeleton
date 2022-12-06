@@ -1,7 +1,7 @@
 import { Dummy } from '../Domain/Dummy';
-import { DummySchema } from './DummySchema';
 import { DummyId } from '../Domain/DummyId';
 import { DummyName } from '../Domain/DummyName';
+import { DummySchema } from './DummySchema';
 
 export class MongoDbDummyMapper {
   public static toDomainModel(schema: DummySchema): Dummy {

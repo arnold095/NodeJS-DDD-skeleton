@@ -1,9 +1,10 @@
+import { mock } from 'jest-mock-extended';
+
 import { CreateDummy } from '../../../../../src/Contexts/Core/Dummy/Application/UseCases/CreateDummy';
 import { Dummy } from '../../../../../src/Contexts/Core/Dummy/Domain/Dummy';
-import { InMemoryDummyRepository } from '../../../../../src/Contexts/Core/Dummy/Infrastructure/InMemoryDummyRepository';
-import { mock } from 'jest-mock-extended';
-import { EventBus } from '../../../../../src/Contexts/Shared/Domain/Bus/EventBus';
 import { DummyId } from '../../../../../src/Contexts/Core/Dummy/Domain/DummyId';
+import { InMemoryDummyRepository } from '../../../../../src/Contexts/Core/Dummy/Infrastructure/InMemoryDummyRepository';
+import { EventBus } from '../../../../../src/Contexts/Shared/Domain/Bus/EventBus';
 import { StringMother } from '../../../../ObjectMother/StringMother';
 
 const eventBus = mock<EventBus>();

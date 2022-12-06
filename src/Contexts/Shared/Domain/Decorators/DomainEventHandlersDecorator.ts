@@ -3,7 +3,7 @@ import { Class } from '../Utils/Class';
 
 export const eventHandlers = new Set<Class<EventHandler>>();
 
-export const IsDomainEventHandler = (): ClassDecorator => {
+export const isDomainEventHandler = (): ClassDecorator => {
   return <TFunction extends Class<EventHandler>>(target: TFunction): TFunction => {
     eventHandlers.add(target);
 

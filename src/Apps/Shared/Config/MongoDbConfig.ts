@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+
 import { container } from './Di/DiConfig';
 
 export abstract class SessionMongoDbClient extends MongoClient {}
@@ -8,6 +9,7 @@ export const connectToSessionMongoDb = async (): Promise<void> => {
 
   try {
     await client.connect();
+    // eslint-disable-next-line no-console
     console.info('[MONGODB_SESSION_CONNECTED]');
   } catch (error) {
     console.error(

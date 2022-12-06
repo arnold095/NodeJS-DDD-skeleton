@@ -15,7 +15,7 @@ export const env = {
     debug: isEnabled('MONGO_DEBUG'),
   },
   app: {
-    port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
     domain: process.env.DOMAIN || 'localhost',
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     cookieSecret: process.env.COOKIE_SECRET || 'cookie-secret',

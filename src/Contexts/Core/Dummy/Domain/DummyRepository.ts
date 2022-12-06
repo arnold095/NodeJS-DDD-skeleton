@@ -1,5 +1,5 @@
-import { Dummy } from './Dummy';
 import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
+import { Dummy } from './Dummy';
 import { DummyId } from './DummyId';
 
 export abstract class DummyRepository {

@@ -1,9 +1,9 @@
-import { IsService } from '../../Domain/Decorators/ServiceDecorator';
+import { DomainEvent } from '../../Domain/Bus/DomainEvent';
 import { EventBus } from '../../Domain/Bus/EventBus';
 import { EventHandler } from '../../Domain/Bus/EventHandler';
-import { DomainEvent } from '../../Domain/Bus/DomainEvent';
+import { isService } from '../../Domain/Decorators/ServiceDecorator';
 
-@IsService()
+@isService()
 export class InMemorySyncEventBus implements EventBus {
   private readonly subscriptions: Map<string, [EventHandler]> = new Map();
 

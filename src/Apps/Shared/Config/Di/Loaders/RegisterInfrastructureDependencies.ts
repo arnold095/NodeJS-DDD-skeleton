@@ -1,14 +1,15 @@
-import { Container, DependencyScope } from '../Container';
-import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
+import { Newable } from 'diod';
+import { MongoClient } from 'mongodb';
+
 import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
 import { repositories } from '../../../../../Contexts/Shared/Domain/Decorators/RepositoryDecorator';
 import { NewableClass } from '../../../../../Contexts/Shared/Domain/Utils/NewableClass';
+import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
 import { controllers } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
-import { Newable } from 'diod';
 import { BaseController } from '../../../Controllers/BaseController';
-import { MongoClient } from 'mongodb';
 import { env } from '../../env';
 import { SessionMongoDbClient } from '../../MongoDbConfig';
+import { Container, DependencyScope } from '../Container';
 
 const registerServicesDependencies = (container: Container): void => {
   // Event bus

@@ -1,15 +1,15 @@
-import { IsUseCase } from '../../../../Shared/Domain/Decorators/UseCaseDecorator';
-import { DummyRepository } from '../../Domain/DummyRepository';
+import { EventBus } from '../../../../Shared/Domain/Bus/EventBus';
+import { isUseCase } from '../../../../Shared/Domain/Decorators/UseCaseDecorator';
 import { Dummy } from '../../Domain/Dummy';
 import { DummyId } from '../../Domain/DummyId';
 import { DummyName } from '../../Domain/DummyName';
-import { EventBus } from '../../../../Shared/Domain/Bus/EventBus';
+import { DummyRepository } from '../../Domain/DummyRepository';
 
 type Params = {
   id: string;
   name: string;
 };
-@IsUseCase()
+@isUseCase()
 export class CreateDummy {
   constructor(
     private readonly repository: DummyRepository,

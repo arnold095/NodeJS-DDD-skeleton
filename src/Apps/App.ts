@@ -1,7 +1,9 @@
 import 'reflect-metadata';
+
 import * as map from 'source-map-support';
-import { env } from './Shared/Config/env';
+
 import { fastifyServer } from './FastifyServer';
+import { env } from './Shared/Config/env';
 
 map.install();
 
@@ -12,6 +14,7 @@ const start = async (): Promise<void> => {
       if (err) {
         throw err;
       }
+      // eslint-disable-next-line no-console
       console.info(`Server listening on ${address} \n`, server.printRoutes());
     });
   } catch (err) {

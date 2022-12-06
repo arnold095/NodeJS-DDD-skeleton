@@ -10,7 +10,7 @@ type RepositoryProps = RepositoryArgs & {
 
 export const repositories: RepositoryProps[] = [];
 
-export const IsRepository = (props?: RepositoryArgs): Class<unknown> => {
+export const isRepository = (props?: RepositoryArgs): Class<unknown> => {
   return (target: Class<unknown>): Class<unknown> => {
     if (props) {
       repositories.push({ ...props, target });

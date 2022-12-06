@@ -1,7 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { IsController } from '../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
 
-@IsController()
+import { isController } from '../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+
+@isController()
 export abstract class BaseController {
   protected request!: FastifyRequest;
   protected response!: FastifyReply;

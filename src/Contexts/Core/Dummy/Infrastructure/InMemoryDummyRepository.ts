@@ -1,7 +1,7 @@
+import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
 import { Dummy } from '../Domain/Dummy';
 import { DummyId } from '../Domain/DummyId';
 import { DummyRepository } from '../Domain/DummyRepository';
-import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
 
 export class InMemoryDummyRepository implements DummyRepository {
   public constructor(private readonly dummies: Dummy[] = []) {}

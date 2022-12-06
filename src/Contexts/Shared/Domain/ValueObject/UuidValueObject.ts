@@ -1,5 +1,6 @@
-import { InvalidArgumentError } from '../Exceptions/InvalidArgumentError';
 import { randomUUID } from 'crypto';
+
+import { InvalidArgumentError } from '../Exceptions/InvalidArgumentError';
 
 const REGEX = /^[\da-f]{8}-[\da-f]{4}-[0-5][\da-f]{3}-[089ab][\da-f]{3}-[\da-f]{12}$/i;
 

@@ -1,13 +1,13 @@
-import { IsRepository } from '../../../Shared/Domain/Decorators/RepositoryDecorator';
-import { MongoDbRepository } from '../../../Shared/Infrastructure/Persistence/MongoDb/MongoDbRepository';
-import { DummyRepository } from '../Domain/DummyRepository';
-import { DummyId } from '../Domain/DummyId';
+import { isRepository } from '../../../Shared/Domain/Decorators/RepositoryDecorator';
 import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
+import { MongoDbRepository } from '../../../Shared/Infrastructure/Persistence/MongoDb/MongoDbRepository';
 import { Dummy } from '../Domain/Dummy';
-import { MongoDbDummyMapper } from './MongoDbDummyMapper';
+import { DummyId } from '../Domain/DummyId';
+import { DummyRepository } from '../Domain/DummyRepository';
 import { DummySchema } from './DummySchema';
+import { MongoDbDummyMapper } from './MongoDbDummyMapper';
 
-@IsRepository({
+@isRepository({
   abstraction: DummyRepository,
 })
 export class MongoDbDummyRepository

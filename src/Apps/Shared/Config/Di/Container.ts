@@ -6,8 +6,9 @@ import {
   Newable,
   WithScopeChange,
 } from 'diod';
-import { NewableClass } from '../../../../Contexts/Shared/Domain/Utils/NewableClass';
+
 import { Class } from '../../../../Contexts/Shared/Domain/Utils/Class';
+import { NewableClass } from '../../../../Contexts/Shared/Domain/Utils/NewableClass';
 
 export enum DependencyScope {
   Transient = 'Transient',
@@ -29,8 +30,8 @@ export class Container {
     return this.container.get(dependency) as T;
   }
 
-  public registerImplementationAs<T extends A, A>(
-    implementation: Newable<T>,
+  public registerImplementationAs<A, I extends A>(
+    implementation: Newable<I>,
     abstraction: Abstract<A>,
     scope: DependencyScope = DependencyScope.Transient,
   ): void {
@@ -46,8 +47,8 @@ export class Container {
     Container.setScope(registration, scope);
   }
 
-  public registerFactoryAs<T extends A, A>(
-    value: (c: Container) => Instance<T>,
+  public registerFactoryAs<A, I extends A>(
+    value: (c: Container) => Instance<I>,
     abstraction: Abstract<A>,
     scope: DependencyScope = DependencyScope.Transient,
   ): void {

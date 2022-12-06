@@ -1,12 +1,12 @@
-import { IsController } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
-import { BaseController } from '../../../../Shared/Controllers/BaseController';
 import { CreateDummy } from '../../../../../Contexts/Core/Dummy/Application/UseCases/CreateDummy';
+import { isController } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+import { BaseController } from '../../../../Shared/Controllers/BaseController';
 
 type CreateDummyRequest = {
   name: string;
 };
 
-@IsController({
+@isController({
   method: 'PUT',
   path: '/dummy/:id/create',
 })
