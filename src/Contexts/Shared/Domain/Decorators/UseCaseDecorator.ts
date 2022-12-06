@@ -1,13 +1,8 @@
 import { Class } from '../Utils/Class';
-
-interface Args {
-  target: Class<unknown>;
-}
-
-export const useCases: Args[] = [];
+export const useCases = new Set<Class<unknown>>();
 export const IsUseCase = (): Class<unknown> => {
-  return (target: Class<unknown>): Class<unknown> => {
-    useCases.push({ target });
+  return <TFunction extends Class<unknown>>(target: TFunction): TFunction => {
+    useCases.add(target);
 
     return target;
   };

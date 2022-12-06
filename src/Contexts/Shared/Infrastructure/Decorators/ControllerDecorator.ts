@@ -1,7 +1,14 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { HookHandlerDoneFunction } from 'fastify/types/hooks';
 
-export type AllowedHttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS';
+export enum AllowedHttpMethods {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+  PATCH = 'PATCH',
+  OPTIONS = 'OPTIONS',
+}
 
 type ControllerMiddleware = (
   request: FastifyRequest,
@@ -10,7 +17,7 @@ type ControllerMiddleware = (
 ) => Promise<void> | void;
 
 export interface ControllerArgs {
-  method: AllowedHttpMethods;
+  method: keyof typeof AllowedHttpMethods;
   path: string;
   middlewares?: ControllerMiddleware[];
   schema?: Record<string, unknown>;

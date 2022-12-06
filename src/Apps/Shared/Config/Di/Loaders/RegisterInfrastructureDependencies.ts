@@ -10,7 +10,14 @@ import { MongoClient } from 'mongodb';
 import { env } from '../../env';
 import { SessionMongoDbClient } from '../../MongoDbConfig';
 
-export const registerServicesDependencies = (container: Container): void => {
+const registerServicesDependencies = (container: Container): void => {
+  // Event bus
+  container.registerImplementationAs(
+    InMemorySyncEventBus,
+    EventBus,
+    DependencyScope.Singleton,
+  );
+
   // Mongo
   container.registerFactoryAs(
     () => {
@@ -22,6 +29,7 @@ export const registerServicesDependencies = (container: Container): void => {
     DependencyScope.Singleton,
   );
 };
+
 const registerControllerDependencies = (container: Container): void => {
   for (const controller of controllers) {
     container.registerImplementation(controller.target as Newable<BaseController>);
@@ -36,14 +44,8 @@ const registerRepositories = (container: Container): void => {
     );
   }
 };
-export const registerInfrastructureDependencies = (container: Container): void => {
-  // Event bus
-  container.registerImplementationAs(
-    InMemorySyncEventBus,
-    EventBus,
-    DependencyScope.Singleton,
-  );
 
+export const registerInfrastructureDependencies = (container: Container): void => {
   // Services
   registerServicesDependencies(container);
 
