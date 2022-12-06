@@ -91,6 +91,7 @@ module.exports = {
     'import/no-cycle': ['error'],
     'import/no-useless-path-segments': ['error'],
     'prettier/prettier': ['error'],
+    'jest/no-export': ['off'],
     'jest/expect-expect': [
       'error',
       { assertFunctionNames: ['expect**', 'request.**.expect'] },
