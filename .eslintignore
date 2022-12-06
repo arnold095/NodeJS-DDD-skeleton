@@ -1,6 +1,5 @@
-**/node_modules/**
+node_modules/**
 **/.eslintrc.js
 **/jest.config.js
 dist/
-**/next.config.js
 **/Setup.js
