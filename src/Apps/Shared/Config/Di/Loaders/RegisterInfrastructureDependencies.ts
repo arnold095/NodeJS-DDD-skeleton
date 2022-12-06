@@ -3,7 +3,6 @@ import { MongoClient } from 'mongodb';
 
 import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
 import { repositories } from '../../../../../Contexts/Shared/Domain/Decorators/RepositoryDecorator';
-import { NewableClass } from '../../../../../Contexts/Shared/Domain/Utils/NewableClass';
 import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
 import { controllers } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
 import { BaseController } from '../../../Controllers/BaseController';
@@ -39,10 +38,7 @@ const registerControllerDependencies = (container: Container): void => {
 
 const registerRepositories = (container: Container): void => {
   for (const repository of repositories) {
-    container.registerImplementationAs(
-      repository.target as NewableClass<unknown>,
-      repository.abstraction,
-    );
+    container.registerImplementationAs(repository.target, repository.abstraction);
   }
 };
 
