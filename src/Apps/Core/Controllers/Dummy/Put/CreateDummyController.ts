@@ -1,6 +1,7 @@
 import { CreateDummy } from '../../../../../Contexts/Core/Dummy/Application/UseCases/CreateDummy';
 import { isController } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
 import { BaseController } from '../../../../Shared/Controllers/BaseController';
+import { CreateDummySchema } from '../Schemas/CreateDummySchema';
 
 type CreateDummyRequest = {
   name: string;
@@ -9,6 +10,7 @@ type CreateDummyRequest = {
 @isController({
   method: 'PUT',
   path: '/dummies/:id',
+  schema: CreateDummySchema,
 })
 export class CreateDummyController extends BaseController {
   public constructor(private readonly useCase: CreateDummy) {
