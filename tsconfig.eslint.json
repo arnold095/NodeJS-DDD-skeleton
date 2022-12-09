@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "types": ["reflect-metadata", "@types/node", "jest"],
+    "types": [
+      "reflect-metadata",
+      "@types/node",
+      "jest"
+    ],
     "noEmit": true,
     "allowJs": true
   },

@@ -4,14 +4,20 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "sourceMap": true,
     "outDir": "dist",
     "types": [
-      "reflect-metadata", "jest"
+      "reflect-metadata",
+      "jest"
     ],
     "typeRoots": [
-      "./src/Apps/types", "node_modules/@types"],
+      "./src/Apps/types",
+      "node_modules/@types"
+    ],
     "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -33,7 +39,9 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts"
+  ],
   "ts-node": {
     "files": true
   }
