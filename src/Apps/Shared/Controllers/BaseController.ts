@@ -1,24 +1,22 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { FastifyReply, FastifyRequest } from 'fastify';
 
+import { Nullable } from '../../../Contexts/Shared/Domain/Utils/Nullable';
 import { isController } from '../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
 
 @isController()
-export abstract class BaseController {
+export abstract class BaseController<RequestBody = {}, RequestParams = {}> {
   protected request!: FastifyRequest;
   protected response!: FastifyReply;
 
   protected abstract execute(): Promise<void>;
 
-  protected params<T extends Record<string, unknown>>(): T {
-    return this.request.params as T;
+  protected params(): RequestParams {
+    return this.request.params as RequestParams;
   }
 
-  protected query<T extends Record<string, unknown>>(): T {
-    return this.request.query as T;
-  }
-
-  protected body<T>(): T {
-    return this.request.body as T;
+  protected body(): RequestBody {
+    return this.request.body as RequestBody;
   }
 
   protected sendOk(): void {
@@ -29,12 +27,8 @@ export abstract class BaseController {
     void this.response.status(statusCode || 200).send(params);
   }
 
-  protected userId(): string {
-    return this.body<{ userId: string }>()?.userId;
-  }
-
-  protected async empty(): Promise<void> {
-    await this.response.status(204).send();
+  protected userId(): Nullable<string> {
+    return this.request.userId;
   }
 
   public async register(request: FastifyRequest, response: FastifyReply): Promise<void> {
