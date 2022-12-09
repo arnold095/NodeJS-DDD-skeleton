@@ -20,4 +20,7 @@ export const env = {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     cookieSecret: process.env.COOKIE_SECRET || 'cookie-secret',
   },
+  jwt: {
+    privateKey: process.env.JWT_PRIVATE || 'jwt-private',
+  },
 };
