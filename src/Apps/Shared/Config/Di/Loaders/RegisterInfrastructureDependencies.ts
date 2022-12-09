@@ -1,11 +1,9 @@
-import { Newable } from 'diod';
 import { MongoClient } from 'mongodb';
 
 import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
 import { repositories } from '../../../../../Contexts/Shared/Domain/Decorators/RepositoryDecorator';
 import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
 import { controllers } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
-import { BaseController } from '../../../Controllers/BaseController';
 import { env } from '../../env';
 import { SessionMongoDbClient } from '../../MongoDbConfig';
 import { Container, DependencyScope } from '../Container';
@@ -32,7 +30,7 @@ const registerServicesDependencies = (container: Container): void => {
 
 const registerControllerDependencies = (container: Container): void => {
   for (const controller of controllers) {
-    container.registerImplementation(controller.target as Newable<BaseController>);
+    container.registerImplementation(controller.target);
   }
 };
 

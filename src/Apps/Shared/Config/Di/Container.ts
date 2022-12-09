@@ -3,7 +3,6 @@ import {
   Container as DiodContainer,
   ContainerBuilder,
   Instance,
-  Newable,
   WithScopeChange,
 } from 'diod';
 
@@ -31,7 +30,7 @@ export class Container {
   }
 
   public registerImplementationAs<A, I extends A>(
-    implementation: Newable<I>,
+    implementation: NewableClass<I>,
     abstraction: Abstract<A>,
     scope: DependencyScope = DependencyScope.Transient,
   ): void {
@@ -40,7 +39,7 @@ export class Container {
   }
 
   public registerImplementation<T>(
-    implementation: Newable<T>,
+    implementation: NewableClass<T>,
     scope: DependencyScope = DependencyScope.Transient,
   ): void {
     const registration = this.builder.register(implementation).use(implementation);

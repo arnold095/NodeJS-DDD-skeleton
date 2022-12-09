@@ -13,7 +13,7 @@ export const repositories: RepositoryProps<unknown, unknown>[] = [];
 
 export const isRepository = <A>(props?: RepositoryArgs<A>): Class<unknown> => {
   return <I extends A>(target: NewableClass<I>): Class<unknown> => {
-    if (props) {
+    if (props && props.abstraction) {
       repositories.push({ ...props, target });
     }
 

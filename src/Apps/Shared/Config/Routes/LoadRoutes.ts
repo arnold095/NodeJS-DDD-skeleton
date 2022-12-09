@@ -1,15 +1,13 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { RouteHandlerMethod, RouteShorthandOptions } from 'fastify/types/route';
 
-import { NewableClass } from '../../../../Contexts/Shared/Domain/Utils/NewableClass';
+import { Class } from '../../../../Contexts/Shared/Domain/Utils/Class';
 import {
   ControllerArgs,
   controllers,
 } from '../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
 import { BaseController } from '../../Controllers/BaseController';
 import { container } from '../Di/DiConfig';
-
-type ControllerClass = NewableClass<BaseController>;
 
 const loadHealthCheck = (server: FastifyInstance): void => {
   server.get('/health-check', (_request: FastifyRequest, response: FastifyReply) => {
@@ -56,7 +54,7 @@ const loadController =
     await controller.register.call(controller, request, response);
   };
 
-const findRouteHandler = (target: ControllerClass): RouteHandlerMethod => {
+const findRouteHandler = (target: Class<BaseController>): RouteHandlerMethod => {
   const controller = container.get<BaseController>(target);
 
   return loadController(controller);
@@ -68,7 +66,7 @@ export const loadRoutes = async (server: FastifyInstance): Promise<void> => {
       for (const controller of controllers) {
         const { target, ...controllerArgs } = controller;
 
-        const controllerHandler = findRouteHandler(target as ControllerClass);
+        const controllerHandler = findRouteHandler(target);
 
         loadRoutePath(instance, controllerHandler, controllerArgs);
       }

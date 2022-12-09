@@ -1,6 +1,10 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { HookHandlerDoneFunction } from 'fastify/types/hooks';
 
+import { type BaseController } from '../../../../Apps/Shared/Controllers/BaseController';
+import { Class } from '../../Domain/Utils/Class';
+import { NewableClass } from '../../Domain/Utils/NewableClass';
+
 export enum AllowedHttpMethods {
   GET = 'GET',
   POST = 'POST',
@@ -24,15 +28,15 @@ export interface ControllerArgs {
 }
 
 interface ControllerProps extends ControllerArgs {
-  target: unknown;
+  target: NewableClass<BaseController>;
 }
 
 export const controllers: ControllerProps[] = [];
 
-export const isController = (props?: ControllerArgs): ClassDecorator => {
-  return <TFunction>(target: TFunction): TFunction => {
+export const isController = (props?: ControllerArgs): Class<BaseController> => {
+  return (target: Class<BaseController>): Class<BaseController> => {
     if (props) {
-      controllers.push({ ...props, target });
+      controllers.push({ ...props, target: target as NewableClass<BaseController> });
     }
     return target;
   };
