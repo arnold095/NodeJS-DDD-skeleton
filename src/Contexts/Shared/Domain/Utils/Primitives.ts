@@ -11,10 +11,10 @@ type MethodsAndProperties<T> = { [key in keyof T]: T[key] };
 
 type Properties<T> = Omit<MethodsAndProperties<T>, Methods<T>>;
 
-type PrimitivesTypes = boolean | number | string | Date;
+type PrimitiveTypes = boolean | number | string | Date;
 
 type ValueObjectValue<T> = {
-  [key in keyof T]: T[key] extends PrimitivesTypes
+  [key in keyof T]: T[key] extends PrimitiveTypes
     ? T[key]
     : T[key] extends { value: unknown }
     ? Pick<T[key], 'value'>['value']
