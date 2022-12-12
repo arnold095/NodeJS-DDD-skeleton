@@ -1,10 +1,11 @@
 import { EventHandler } from '../Bus/EventHandler';
 import { Class } from '../Utils/Class';
 
-export const eventHandlers = new Set<Class<EventHandler>>();
+type Handler = Class<EventHandler>;
+export const eventHandlers = new Set<Handler>();
 
-export const isDomainEventHandler = (): ClassDecorator => {
-  return <TFunction extends Class<EventHandler>>(target: TFunction): TFunction => {
+export const isDomainEventHandler = (): Handler => {
+  return (target: Handler): Handler => {
     eventHandlers.add(target);
 
     return target;
