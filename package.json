@@ -34,8 +34,8 @@
     "@fastify/helmet": "10.1.0",
     "diod": "2.0.0",
     "dotenv": "16.0.3",
+    "fast-glob": "^3.2.12",
     "fastify": "4.10.2",
-    "glob": "^8.0.3",
     "jsonwebtoken": "8.5.1",
     "mongodb": "4.12.1",
     "reflect-metadata": "0.1.13"
