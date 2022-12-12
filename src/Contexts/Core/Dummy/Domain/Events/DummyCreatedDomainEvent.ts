@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../../Shared/Domain/Bus/DomainEvent';
+import { DomainEvent } from '../../../../Shared/Domain';
 import { DummyPrimitives } from '../DummyPrimitives';
 
 export class DummyCreatedDomainEvent extends DomainEvent {

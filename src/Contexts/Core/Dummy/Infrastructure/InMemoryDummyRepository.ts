@@ -1,4 +1,4 @@
-import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
+import { Nullable } from '../../../Shared/Domain';
 import { Dummy } from '../Domain/Dummy';
 import { DummyId } from '../Domain/DummyId';
 import { DummyRepository } from '../Domain/DummyRepository';

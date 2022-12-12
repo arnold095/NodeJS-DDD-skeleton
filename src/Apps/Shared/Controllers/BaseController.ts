@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { Nullable } from '../../../Contexts/Shared/Domain/Utils/Nullable';
-import { isController } from '../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+import { Nullable } from '../../../Contexts/Shared/Domain';
+import { isController } from '../../../Contexts/Shared/Infrastructure';
 
 @isController()
 export abstract class BaseController<RequestBody = {}, RequestParams = {}> {

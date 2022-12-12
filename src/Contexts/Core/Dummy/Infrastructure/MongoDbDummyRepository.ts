@@ -1,6 +1,5 @@
-import { isDomainImplementation } from '../../../Shared/Domain/Decorators/DomainImplementationDecorator';
-import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
-import { MongoDbRepository } from '../../../Shared/Infrastructure/Persistence/MongoDb/MongoDbRepository';
+import { isDomainImplementation, Nullable } from '../../../Shared/Domain';
+import { MongoDbRepository } from '../../../Shared/Infrastructure';
 import { Dummy } from '../Domain/Dummy';
 import { DummyId } from '../Domain/DummyId';
 import { DummyRepository } from '../Domain/DummyRepository';

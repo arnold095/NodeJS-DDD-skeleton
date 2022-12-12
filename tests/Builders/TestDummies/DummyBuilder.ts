@@ -1,7 +1,7 @@
 import { Dummy } from '../../../src/Contexts/Core/Dummy/Domain/Dummy';
 import { DummyId } from '../../../src/Contexts/Core/Dummy/Domain/DummyId';
 import { DummyName } from '../../../src/Contexts/Core/Dummy/Domain/DummyName';
-import { StringMother } from '../../ObjectMother/StringMother';
+import { StringMother } from '../../ObjectMother';
 
 export class DummyBuilder {
   private id: string | undefined;

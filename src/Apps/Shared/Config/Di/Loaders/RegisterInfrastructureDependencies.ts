@@ -1,9 +1,10 @@
 import { MongoClient } from 'mongodb';
 
-import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
-import { domainImplementations } from '../../../../../Contexts/Shared/Domain/Decorators/DomainImplementationDecorator';
-import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
-import { controllers } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+import { domainImplementations, EventBus } from '../../../../../Contexts/Shared/Domain';
+import {
+  controllers,
+  InMemorySyncEventBus,
+} from '../../../../../Contexts/Shared/Infrastructure';
 import { env } from '../../env';
 import { SessionMongoDbClient } from '../../MongoDbConfig';
 import { Container, DependencyScope } from '../Container';

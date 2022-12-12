@@ -1,4 +1,4 @@
-import { StringValueObject } from '../../../Shared/Domain/ValueObject/StringValueObject';
+import { StringValueObject } from '../../../Shared/Domain';
 
 export class DummyName extends StringValueObject {
   public static of(value: string): DummyName {

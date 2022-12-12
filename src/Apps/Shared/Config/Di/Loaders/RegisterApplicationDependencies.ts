@@ -1,7 +1,9 @@
-import { EventHandler } from '../../../../../Contexts/Shared/Domain/Bus/EventHandler';
-import { eventHandlers } from '../../../../../Contexts/Shared/Domain/Decorators/DomainEventHandlersDecorator';
-import { useCases } from '../../../../../Contexts/Shared/Domain/Decorators/UseCaseDecorator';
-import { NewableClass } from '../../../../../Contexts/Shared/Domain/Utils/NewableClass';
+import {
+  EventHandler,
+  eventHandlers,
+  NewableClass,
+  useCases,
+} from '../../../../../Contexts/Shared/Domain';
 import { Container } from '../Container';
 
 const registerUseCases = (container: Container): void => {

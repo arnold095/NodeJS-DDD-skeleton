@@ -1,4 +1,4 @@
-import { EventBus } from '../../../../../src/Contexts/Shared/Domain/Bus/EventBus';
+import { EventBus } from '../../../../../src/Contexts/Shared/Domain';
 import { DummyEvent } from './DummyEvent';
 
 export const eventBusTests = (eventBus: EventBus): void => {

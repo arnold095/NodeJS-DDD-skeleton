@@ -1,11 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { RouteHandlerMethod, RouteShorthandOptions } from 'fastify/types/route';
 
-import { Class } from '../../../../Contexts/Shared/Domain/Utils/Class';
-import {
-  ControllerArgs,
-  controllers,
-} from '../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+import { Class } from '../../../../Contexts/Shared/Domain';
+import { ControllerArgs, controllers } from '../../../../Contexts/Shared/Infrastructure';
 import { BaseController } from '../../Controllers/BaseController';
 import { container } from '../Di/DiConfig';
 

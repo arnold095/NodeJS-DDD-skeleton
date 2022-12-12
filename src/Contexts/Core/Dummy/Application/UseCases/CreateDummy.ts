@@ -1,5 +1,4 @@
-import { EventBus } from '../../../../Shared/Domain/Bus/EventBus';
-import { isUseCase } from '../../../../Shared/Domain/Decorators/UseCaseDecorator';
+import { EventBus, isUseCase } from '../../../../Shared/Domain';
 import { Dummy } from '../../Domain/Dummy';
 import { DummyId } from '../../Domain/DummyId';
 import { DummyName } from '../../Domain/DummyName';

@@ -1,4 +1,4 @@
-import { AggregateRoot } from '../../../Shared/Domain/Aggregate/AggregateRoot';
+import { AggregateRoot } from '../../../Shared/Domain';
 import { DummyId } from './DummyId';
 import { DummyName } from './DummyName';
 import { DummyPrimitives } from './DummyPrimitives';
@@ -8,6 +8,7 @@ type Args = {
   id: DummyId;
   name: DummyName;
 };
+
 export class Dummy extends AggregateRoot {
   private readonly _id: DummyId;
   private readonly _name: DummyName;

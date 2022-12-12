@@ -1,5 +1,5 @@
 import { CreateDummy } from '../../../../../Contexts/Core/Dummy/Application/UseCases/CreateDummy';
-import { isController } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
+import { isController } from '../../../../../Contexts/Shared/Infrastructure';
 import { BaseController } from '../../../../Shared/Controllers/BaseController';
 import { CreateDummySchema } from '../Schemas/CreateDummySchema';
 

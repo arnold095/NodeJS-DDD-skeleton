@@ -6,8 +6,7 @@ import {
   WithScopeChange,
 } from 'diod';
 
-import { Class } from '../../../../Contexts/Shared/Domain/Utils/Class';
-import { NewableClass } from '../../../../Contexts/Shared/Domain/Utils/NewableClass';
+import { Class, NewableClass } from '../../../../Contexts/Shared/Domain';
 
 export enum DependencyScope {
   Transient = 'Transient',

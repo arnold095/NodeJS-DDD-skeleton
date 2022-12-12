@@ -1,6 +1,5 @@
-import { DomainEvent } from '../../../../../src/Contexts/Shared/Domain/Bus/DomainEvent';
-import { UuidValueObject } from '../../../../../src/Contexts/Shared/Domain/ValueObject/UuidValueObject';
-import { StringMother } from '../../../../ObjectMother/StringMother';
+import { DomainEvent, UuidValueObject } from '../../../../../src/Contexts/Shared/Domain';
+import { StringMother } from '../../../../ObjectMother';
 
 export class DummyEvent extends DomainEvent {
   public static readonly eventName = 'dummy.event';
