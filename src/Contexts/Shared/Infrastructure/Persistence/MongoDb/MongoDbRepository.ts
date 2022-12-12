@@ -2,9 +2,9 @@ import { Document } from 'bson';
 import { Filter } from 'mongodb';
 
 import { SessionMongoDbClient } from '../../../../../Apps/Shared/Config/MongoDbConfig';
-import { isRepository } from '../../../Domain/Decorators/RepositoryDecorator';
+import { isDomainImplementation } from '../../../Domain/Decorators/DomainImplementationDecorator';
 
-@isRepository()
+@isDomainImplementation()
 export abstract class MongoDbRepository<TSchema extends Document> {
   public constructor(protected readonly client: SessionMongoDbClient) {}
 

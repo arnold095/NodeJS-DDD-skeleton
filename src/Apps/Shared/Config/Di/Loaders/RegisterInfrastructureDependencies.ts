@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 import { EventBus } from '../../../../../Contexts/Shared/Domain/Bus/EventBus';
-import { repositories } from '../../../../../Contexts/Shared/Domain/Decorators/RepositoryDecorator';
+import { domainImplementations } from '../../../../../Contexts/Shared/Domain/Decorators/DomainImplementationDecorator';
 import { InMemorySyncEventBus } from '../../../../../Contexts/Shared/Infrastructure/Bus/InMemorySyncEventBus';
 import { controllers } from '../../../../../Contexts/Shared/Infrastructure/Decorators/ControllerDecorator';
 import { env } from '../../env';
@@ -34,9 +34,9 @@ const registerControllerDependencies = (container: Container): void => {
   }
 };
 
-const registerRepositories = (container: Container): void => {
-  for (const repository of repositories) {
-    container.registerImplementationAs(repository.target, repository.abstraction);
+const registerDomainImplementation = (container: Container): void => {
+  for (const repository of domainImplementations) {
+    container.registerImplementationAs(repository.implementation, repository.abstraction);
   }
 };
 
@@ -48,5 +48,5 @@ export const registerInfrastructureDependencies = (container: Container): void =
   registerControllerDependencies(container);
 
   // Repositories
-  registerRepositories(container);
+  registerDomainImplementation(container);
 };

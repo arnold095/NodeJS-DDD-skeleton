@@ -5,7 +5,7 @@ import { type BaseController } from '../../../../Apps/Shared/Controllers/BaseCon
 import { Class } from '../../Domain/Utils/Class';
 import { NewableClass } from '../../Domain/Utils/NewableClass';
 
-export enum AllowedHttpMethods {
+enum AllowedHttpMethods {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -38,6 +38,7 @@ export const isController = (props?: ControllerArgs): Class<BaseController> => {
     if (props) {
       controllers.push({ ...props, target: target as NewableClass<BaseController> });
     }
+
     return target;
   };
 };

@@ -1,4 +1,4 @@
-import { isRepository } from '../../../Shared/Domain/Decorators/RepositoryDecorator';
+import { isDomainImplementation } from '../../../Shared/Domain/Decorators/DomainImplementationDecorator';
 import { Nullable } from '../../../Shared/Domain/Utils/Nullable';
 import { MongoDbRepository } from '../../../Shared/Infrastructure/Persistence/MongoDb/MongoDbRepository';
 import { Dummy } from '../Domain/Dummy';
@@ -7,9 +7,7 @@ import { DummyRepository } from '../Domain/DummyRepository';
 import { DummySchema } from './DummySchema';
 import { MongoDbDummyMapper } from './MongoDbDummyMapper';
 
-@isRepository({
-  abstraction: DummyRepository,
-})
+@isDomainImplementation({ abstraction: DummyRepository })
 export class MongoDbDummyRepository
   extends MongoDbRepository<DummySchema>
   implements DummyRepository
