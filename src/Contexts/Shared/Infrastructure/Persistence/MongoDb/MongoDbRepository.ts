@@ -2,7 +2,7 @@ import { Document } from 'bson';
 import { Filter } from 'mongodb';
 
 import { SessionMongoDbClient } from '../../../../../Apps/Shared/Config/MongoDbConfig';
-import { isDomainImplementation } from '../../../Domain/Decorators/DomainImplementationDecorator';
+import { isDomainImplementation } from '../../../Domain';
 
 @isDomainImplementation()
 export abstract class MongoDbRepository<TSchema extends Document> {

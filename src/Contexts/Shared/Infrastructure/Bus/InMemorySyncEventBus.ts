@@ -1,7 +1,4 @@
-import { DomainEvent } from '../../Domain/Bus/DomainEvent';
-import { EventBus } from '../../Domain/Bus/EventBus';
-import { EventHandler } from '../../Domain/Bus/EventHandler';
-import { isService } from '../../Domain/Decorators/ServiceDecorator';
+import { DomainEvent, EventBus, EventHandler, isService } from '../../Domain';
 
 @isService()
 export class InMemorySyncEventBus implements EventBus {

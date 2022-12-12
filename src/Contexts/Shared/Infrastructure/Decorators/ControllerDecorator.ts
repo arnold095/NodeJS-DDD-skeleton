@@ -2,8 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { HookHandlerDoneFunction } from 'fastify/types/hooks';
 
 import { type BaseController } from '../../../../Apps/Shared/Controllers/BaseController';
-import { Class } from '../../Domain/Utils/Class';
-import { NewableClass } from '../../Domain/Utils/NewableClass';
+import { Class, NewableClass } from '../../Domain';
 
 enum AllowedHttpMethods {
   GET = 'GET',
