@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import * as map from 'source-map-support';
 
 import { fastifyServer } from './FastifyServer';
-import { env } from './Shared/Config/env';
+import { env } from './Shared';
 
 map.install();
 

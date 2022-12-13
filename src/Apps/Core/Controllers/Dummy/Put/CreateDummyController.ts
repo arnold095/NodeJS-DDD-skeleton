@@ -1,6 +1,6 @@
 import { CreateDummy } from '../../../../../Contexts/Core/Dummy/Application/UseCases/CreateDummy';
 import { isController } from '../../../../../Contexts/Shared/Infrastructure';
-import { BaseController } from '../../../../Shared/Controllers/BaseController';
+import { BaseController } from '../../../../Shared';
 import { CreateDummySchema } from '../Schemas/CreateDummySchema';
 
 type CreateDummyRequest = {

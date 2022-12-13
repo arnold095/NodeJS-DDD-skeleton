@@ -2,9 +2,7 @@ import fastifyCors from '@fastify/cors';
 import fastifyHelmet from '@fastify/helmet';
 import fastify, { FastifyInstance } from 'fastify';
 
-import { loadContainer } from './Shared/Config/Di/Loaders';
-import { connectToSessionMongoDb } from './Shared/Config/MongoDbConfig';
-import { loadRoutes } from './Shared/Config/Routes/LoadRoutes';
+import { connectToSessionMongoDb, loadContainer, loadRoutes } from './Shared';
 
 const enableCors = async (server: FastifyInstance): Promise<void> => {
   await server.register(fastifyCors, {
