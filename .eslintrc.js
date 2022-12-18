@@ -44,6 +44,12 @@ module.exports = {
         'jest/no-export': ['off'],
       },
     },
+    {
+      files: ['./tests/**/*.steps.ts'],
+      rules: {
+        'new-cap': ['off']
+      }
+    }
   ],
   rules: {
     'import/no-unresolved': ['off'], // Does not work well with workspaces, needs to be off :(
