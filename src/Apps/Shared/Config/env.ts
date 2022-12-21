@@ -19,6 +19,7 @@ export const env = {
     domain: process.env.DOMAIN || 'localhost',
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     cookieSecret: process.env.COOKIE_SECRET || 'cookie-secret',
+    allowedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || '*',
   },
   jwt: {
     privateKey: process.env.JWT_PRIVATE || 'jwt-private',
