@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "swc src --copy-files -d dist",
     "test": "yarn test:unit && yarn test:integration && yarn test:e2e",
     "test:unit": "jest tests/Unit",
     "test:integration": "jest tests/Integration --runInBand",
