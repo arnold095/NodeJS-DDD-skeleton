@@ -35,24 +35,4 @@ describe('CreateDummy', () => {
     expect(dummy.id.value).toBe(params.id);
     expect(dummy.name.value).toBe(params.name);
   });
-
-  it('fail test create a dummy', async () => {
-    // Arrange
-    const params = {
-      id: DummyId.random().value,
-      name: StringMother.random({ length: 15 }),
-    };
-
-    const useCase = arrange({});
-
-    // Act
-    await useCase.execute(params);
-
-    // Assert
-    const dummy = (await inMemoryDummyRepository.find(DummyId.of(params.id))) as Dummy;
-
-    expect(dummy).toBeUndefined();
-    expect(dummy.id.value).toBe(params.id);
-    expect(dummy.name.value).toBe(params.name);
-  });
 });
