@@ -52,7 +52,7 @@ module.exports = {
     }
   ],
   rules: {
-    'import/no-unresolved': ['off'], // Does not work well with workspaces, needs to be off :(
+    'import/no-unresolved': ['off'],
     'import/prefer-default-export': ['off'],
     'prefer-destructuring': ['off'],
     'max-classes-per-file': ['error', 1],
