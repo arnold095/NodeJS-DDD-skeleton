@@ -26,18 +26,18 @@ The infrastructure layer is responsible for implementing the adapters that allow
 
 ## Running the project
 
-To run the project, you need node version 18 or higher and preferably have yarn installed.
+To run the project, you need node version 18 or higher and preferably have pnpm installed.
 
 To install the dependencies, run:
 
 ```bash
- yarn install
+ pnpm install
 ```
 
 To run the project, run:
 
 ```bash
- yarn dev
+ pnpm dev
 ```
 
 ## Running the tests
@@ -62,7 +62,7 @@ For e2e tests: cucumber, supertest and jest-mock-extended (for mocking dependenc
 In the unit tests, use cases are tested in isolation. The use cases use in-memory repositories and the other infrastructure dependencies are mocked.
 
 ```bash
- yarn test:unit
+ pnpm test:unit
 ```
 
 ### Integration tests
@@ -70,7 +70,7 @@ In the unit tests, use cases are tested in isolation. The use cases use in-memor
 In the integration tests, infrastructure services are tested in isolation.
     
 ```bash
-yarn test:integration
+pnpm test:integration
 ```
 
 ### E2E tests
@@ -78,5 +78,5 @@ yarn test:integration
 In the e2e tests, the whole system is tested. The tests use the real infrastructure dependencies.
 
 ```bash
-yarn test:e2e
+pnpm test:e2e
 ```

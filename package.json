@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "swc src --copy-files -d dist",
-    "test": "yarn test:unit && yarn test:integration && yarn test:e2e",
+    "test": "pnpm test:unit && pnpm test:integration && pnpm test:e2e",
     "test:unit": "jest tests/Unit",
     "test:integration": "jest tests/Integration --runInBand",
     "test:e2e": "cucumber-js -p e2e --publish-quiet --exit",
-    "dev": "concurrently 'yarn watch-compile' 'yarn watch-dev'",
+    "dev": "concurrently 'pnpm watch-compile' 'pnpm watch-dev'",
     "watch-compile": "swc src --copy-files -w --out-dir dist",
     "watch-dev": "nodemon --delay 10ms --watch 'dist/**/*' -e js ./dist/Apps/App.js",
     "lint": "eslint .",
@@ -21,8 +21,7 @@
     "url": "git+https://github.com/arnold095/NodeJS-DDD-skeleton.git"
   },
   "engines": {
-    "node": "^19.0.0",
-    "npm": "please-use-yarn"
+    "node": ">18.0.0"
   },
   "author": "",
   "license": "ISC",
@@ -37,7 +36,7 @@
     "dotenv": "16.0.3",
     "fast-glob": "^3.2.12",
     "fastify": "4.10.2",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "mongodb": "4.12.1",
     "reflect-metadata": "0.1.13"
   },
