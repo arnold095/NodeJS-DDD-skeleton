@@ -10,12 +10,7 @@ export class StringMother {
   public static random(options?: Props): string {
     const { length, lowercase, uppercase } = options || {};
 
-    const randomString = faker.datatype.string(length).replace(/[^a-zA-Z]/g, '');
-    const randomStringLength = randomString.length;
-    let completeLength = '';
-    if (length && randomStringLength <= length) {
-      completeLength = 'c'.repeat(length - randomStringLength);
-    }
+    const randomString = faker.random.alpha({ count: length });
 
     if (lowercase) {
       return randomString.toLowerCase();
@@ -25,6 +20,6 @@ export class StringMother {
       return randomString.toUpperCase();
     }
 
-    return randomString + completeLength;
+    return randomString;
   }
 }
