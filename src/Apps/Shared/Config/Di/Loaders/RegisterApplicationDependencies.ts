@@ -1,20 +1,23 @@
 import {
+  Class,
   EventHandler,
   eventHandlers,
   NewableClass,
   useCases,
 } from '../../../../../Contexts/Shared/Domain';
-import { Container } from '../Container';
+import { Container } from '../DiContainer';
 
 const registerUseCases = (container: Container): void => {
   for (const useCase of useCases) {
-    container.registerImplementation(useCase as NewableClass<unknown>);
+    container.register(useCase).use(useCase as NewableClass<unknown>);
   }
 };
 
 const registerEventHandlers = (container: Container): void => {
   for (const handler of eventHandlers) {
-    container.registerImplementation(handler as NewableClass<EventHandler>);
+    container
+      .register(handler as Class<EventHandler>)
+      .use(handler as NewableClass<EventHandler>);
   }
 };
 

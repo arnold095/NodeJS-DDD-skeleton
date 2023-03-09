@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-import { container } from './Di/DiConfig';
+import { container } from './Di/DiContainer';
 
 export abstract class SessionMongoDbClient extends MongoClient {}
 

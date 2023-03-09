@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { HookHandlerDoneFunction } from 'fastify/types/hooks';
 
-import { type BaseController } from '../../../../Apps/Shared/Controllers/BaseController';
+import { type BaseController } from '../../../../Apps/Shared';
 import { Class, NewableClass } from '../../Domain';
 
 enum AllowedHttpMethods {

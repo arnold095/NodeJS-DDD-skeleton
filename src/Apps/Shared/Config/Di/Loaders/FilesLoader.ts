@@ -3,16 +3,12 @@ import { join } from 'path';
 
 const rootPath = join(__dirname, '../../../../../');
 
-const controllersPath = join(rootPath, '/Apps/**/Controllers/**/*Controller.{ts,js}');
-
-const useCasesPath = join(rootPath, '/Contexts/**/Application/UseCases/**/*.{ts,js}');
-
-const eventHandlersPath = join(
-  rootPath,
-  '/Contexts/**/Application/EventHandlers/**/*.{ts,js}',
-);
-
-const infrastructureServices = join(rootPath, '/Contexts/**/Infrastructure/**/*.{ts,js}');
+const paths = {
+  controllers: join(rootPath, '/Apps/**/Controllers/**/*Controller.{ts,js}'),
+  useCases: join(rootPath, '/Contexts/**/Application/UseCases/**/*.{ts,js}'),
+  eventHandlers: join(rootPath, '/Contexts/**/Application/EventHandlers/**/*.{ts,js}'),
+  infrastructureServices: join(rootPath, '/Contexts/**/Infrastructure/**/*.{ts,js}'),
+};
 
 /**
  * Is necessary to load all files before register the dependencies
@@ -20,10 +16,10 @@ const infrastructureServices = join(rootPath, '/Contexts/**/Infrastructure/**/*.
  */
 export const filesLoader = async (): Promise<void> => {
   const files = sync([
-    controllersPath,
-    useCasesPath,
-    eventHandlersPath,
-    infrastructureServices,
+    paths.controllers,
+    paths.useCases,
+    paths.eventHandlers,
+    paths.infrastructureServices,
   ]);
 
   await Promise.all(files.map(file => import(file)));

@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { FastifyInstance } from 'fastify';
 
 import { fastifyServer } from '../../src/Apps/FastifyServer';
-import { container } from '../../src/Apps/Shared/Config/Di/DiConfig';
+import { container } from '../../src/Apps/Shared/Config/Di/DiContainer';
 import { env } from '../../src/Apps/Shared/Config/env';
 import { SessionMongoDbClient } from '../../src/Apps/Shared/Config/MongoDbConfig';
 

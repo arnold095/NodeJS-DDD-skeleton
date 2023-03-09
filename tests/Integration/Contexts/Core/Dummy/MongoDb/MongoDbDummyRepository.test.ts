@@ -1,15 +1,10 @@
-import { container } from '../../../../../../src/Apps/Shared/Config/Di/DiConfig';
-import { SessionMongoDbClient } from '../../../../../../src/Apps/Shared/Config/MongoDbConfig';
+import { container, SessionMongoDbClient } from '../../../../../../src/Apps/Shared';
 import { MongoDbDummyRepository } from '../../../../../../src/Contexts/Core/Dummy/Infrastructure/MongoDbDummyRepository';
-import {
-  connectMongoDb,
-  disconnectMongoDb,
-  loadMongoDb,
-} from '../../../../../Utils/MongoDbLoader';
+import { connectMongoDb, disconnectMongoDb } from '../../../../../Utils/Database';
+import { registerInfrastructureDependencies } from '../../../../../Utils/Utils';
 import { dummyRepositoryTests } from '../DummyRepositoryTests';
 
-loadMongoDb();
-
+registerInfrastructureDependencies();
 beforeEach(async () => {
   await connectMongoDb();
 });

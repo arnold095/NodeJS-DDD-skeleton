@@ -1,49 +1,30 @@
-import { MongoClient } from 'mongodb';
-
 import { domainImplementations, EventBus } from '../../../../../Contexts/Shared/Domain';
 import {
   controllers,
   InMemorySyncEventBus,
 } from '../../../../../Contexts/Shared/Infrastructure';
-import { env } from '../../env';
-import { SessionMongoDbClient } from '../../MongoDbConfig';
-import { Container, DependencyScope } from '../Container';
+import { Container } from '../DiContainer';
 
-const registerServicesDependencies = (container: Container): void => {
+const registerBuses = (container: Container): void => {
   // Event bus
-  container.registerImplementationAs(
-    InMemorySyncEventBus,
-    EventBus,
-    DependencyScope.Singleton,
-  );
-
-  // Mongo
-  container.registerFactoryAs(
-    () => {
-      return new MongoClient(env.mongo.mongoUri, {
-        loggerLevel: 'debug',
-      });
-    },
-    SessionMongoDbClient,
-    DependencyScope.Singleton,
-  );
+  container.register(EventBus).use(InMemorySyncEventBus).asSingleton();
 };
 
 const registerControllerDependencies = (container: Container): void => {
   for (const controller of controllers) {
-    container.registerImplementation(controller.target);
+    container.register(controller.target).use(controller.target);
   }
 };
 
 const registerDomainImplementation = (container: Container): void => {
-  for (const repository of domainImplementations) {
-    container.registerImplementationAs(repository.implementation, repository.abstraction);
+  for (const domainImplementation of domainImplementations) {
+    container.register(domainImplementation.abstraction).use(domainImplementation.target);
   }
 };
 
 export const registerInfrastructureDependencies = (container: Container): void => {
-  // Services
-  registerServicesDependencies(container);
+  // Buses
+  registerBuses(container);
 
   // Controllers
   registerControllerDependencies(container);

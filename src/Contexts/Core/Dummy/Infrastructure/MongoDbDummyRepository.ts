@@ -6,7 +6,7 @@ import { DummyRepository } from '../Domain/DummyRepository';
 import { DummySchema } from './DummySchema';
 import { MongoDbDummyMapper } from './MongoDbDummyMapper';
 
-@isDomainImplementation({ abstraction: DummyRepository })
+@isDomainImplementation(DummyRepository)
 export class MongoDbDummyRepository
   extends MongoDbRepository<DummySchema>
   implements DummyRepository

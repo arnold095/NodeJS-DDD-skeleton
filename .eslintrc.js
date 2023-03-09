@@ -114,7 +114,6 @@ module.exports = {
     'no-unmodified-loop-condition': 'error',
     'no-unreachable-loop': 'error',
     'no-unused-private-class-members': 'error',
-    'no-use-before-define': 'error',
     'require-atomic-updates': 'error',
 
     // good practises

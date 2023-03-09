@@ -1,5 +1,5 @@
 import { DomainEvent } from '../../../../Shared/Domain';
-import { DummyPrimitives } from '../DummyPrimitives';
+import type { DummyPrimitives } from '../Dummy';
 
 export class DummyCreatedDomainEvent extends DomainEvent {
   public static readonly eventName = 'core.dummy.dummy_created';

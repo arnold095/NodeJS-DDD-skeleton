@@ -1,30 +1,21 @@
 // This utility has been extracted from Codely repository
 
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable no-use-before-define */
+import { PropertiesOf } from './PropertiesOf';
 
-type Methods<T> = {
-  [P in keyof T]: T[P] extends Function ? P : never;
-}[keyof T];
+type PrimitiveTypes = string | number | boolean | Date | undefined | null;
 
-type MethodsAndProperties<T> = { [key in keyof T]: T[key] };
+type ValueObjectValue<T> = T extends PrimitiveTypes
+  ? T
+  : T extends { value: infer U }
+  ? U
+  : T extends Array<{ value: infer U }>
+  ? U[]
+  : T extends Array<infer U>
+  ? Array<ValueObjectValue<U>>
+  : T extends { [K in keyof PropertiesOf<T>]: infer U }
+  ? { [K in keyof PropertiesOf<T>]: ValueObjectValue<U> }
+  : never;
 
-type Properties<T> = Omit<MethodsAndProperties<T>, Methods<T>>;
-
-type PrimitiveTypes = boolean | number | string | Date;
-
-type ValueObjectValue<T> = {
-  [key in keyof T]: T[key] extends PrimitiveTypes
-    ? T[key]
-    : T[key] extends { value: unknown }
-    ? Pick<T[key], 'value'>['value']
-    : T[key] extends Array<{ value: unknown }>
-    ? Pick<T[key][number], 'value'>['value'][]
-    : T[key] extends Array<Object>
-    ? Primitives<T[key][number]>[]
-    : T[key] extends Object
-    ? Primitives<T[key]>
-    : T[key];
+export type Primitives<T> = {
+  [key in keyof PropertiesOf<T>]: ValueObjectValue<T[key]>;
 };
-
-export type Primitives<T> = ValueObjectValue<Properties<T>>;

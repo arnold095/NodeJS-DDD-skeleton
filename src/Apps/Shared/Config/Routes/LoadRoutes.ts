@@ -1,10 +1,10 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { RouteHandlerMethod, RouteShorthandOptions } from 'fastify/types/route';
+import { RouteHandlerMethod } from 'fastify/types/route';
 
 import { Class } from '../../../../Contexts/Shared/Domain';
 import { ControllerArgs, controllers } from '../../../../Contexts/Shared/Infrastructure';
 import { BaseController } from '../../Controllers/BaseController';
-import { container } from '../Di/DiConfig';
+import { container } from '../Di/DiContainer';
 
 const loadHealthCheck = (server: FastifyInstance): void => {
   server.get('/health-check', (_request: FastifyRequest, response: FastifyReply) => {
@@ -19,30 +19,13 @@ const loadRoutePath = (
 ): void => {
   const middlewares = args.middlewares || [];
 
-  const options: RouteShorthandOptions = {
+  server.route({
+    method: args.method,
+    url: args.path,
+    handler: controllerHandler,
     preHandler: [...middlewares],
     schema: args?.schema,
-  };
-
-  switch (args.method) {
-    case 'PUT':
-      server.put(`${args.path}`, options, controllerHandler);
-      break;
-    case 'POST':
-      server.post(`${args.path}`, options, controllerHandler);
-      break;
-    case 'GET':
-      server.get(`${args.path}`, options, controllerHandler);
-      break;
-    case 'DELETE':
-      server.delete(`${args.path}`, options, controllerHandler);
-      break;
-    case 'PATCH':
-      server.patch(`${args.path}`, options, controllerHandler);
-      break;
-    default:
-      throw new Error(`Unsupported Http method: ${args.method}`);
-  }
+  });
 };
 
 const loadController =

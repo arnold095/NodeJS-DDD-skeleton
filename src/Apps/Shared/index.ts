@@ -1,5 +1,4 @@
-export * from './Config/Di/Container';
-export * from './Config/Di/DiConfig';
+export * from './Config/Di/DiContainer';
 export * from './Config/Di/Loaders/AddHandlersToEventBus';
 export * from './Config/Di/Loaders/FilesLoader';
 export * from './Config/Di/Loaders/index';

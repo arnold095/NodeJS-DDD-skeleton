@@ -1,5 +1,5 @@
 import { EventBus, eventHandlers } from '../../../../../Contexts/Shared/Domain';
-import { Container } from '../Container';
+import { Container } from '../DiContainer';
 
 export const addHandlersToEventBus = (container: Container): void => {
   // Add handlers to event bus

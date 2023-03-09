@@ -1,13 +1,11 @@
-import { AggregateRoot } from '../../../Shared/Domain';
+import { AggregateRoot, Primitives } from '../../../Shared/Domain';
+import { PropertiesOf } from '../../../Shared/Domain/Utils/PropertiesOf';
 import { DummyId } from './DummyId';
 import { DummyName } from './DummyName';
-import { DummyPrimitives } from './DummyPrimitives';
 import { DummyCreatedDomainEvent } from './Events/DummyCreatedDomainEvent';
 
-type Args = {
-  id: DummyId;
-  name: DummyName;
-};
+type Args = PropertiesOf<Dummy>;
+export type DummyPrimitives = Primitives<Dummy>;
 
 export class Dummy extends AggregateRoot {
   private readonly _id: DummyId;

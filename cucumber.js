@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config({ path: './dev.test.env' });
+require('dotenv').config({ path: './.env.test' });
 const common = ['--require-module @swc/register'];
 
 console.info('RUNNING ACCEPTANCE TESTS');
