@@ -1,25 +1,34 @@
+import { type Casing } from '@faker-js/faker';
 import { faker } from '@faker-js/faker/locale/en';
 
-interface Props {
+type Options = {
   length?: number;
-  uppercase?: boolean;
-  lowercase?: boolean;
-}
+  casing?: Casing;
+};
 
 export class StringMother {
-  public static random(options?: Props): string {
-    const { length, lowercase, uppercase } = options || {};
+  public static random(options?: Options): string {
+    const { length, casing } = options || {};
 
-    const randomString = faker.random.alpha({ count: length });
+    return faker.string.alpha({
+      length,
+      casing,
+    });
+  }
 
-    if (lowercase) {
-      return randomString.toLowerCase();
-    }
+  public static color(): string {
+    return faker.internet.color();
+  }
 
-    if (uppercase) {
-      return randomString.toUpperCase();
-    }
+  public static city(): string {
+    return faker.location.city();
+  }
 
-    return randomString;
+  public static country(): string {
+    return faker.location.countryCode();
+  }
+
+  public static email(): string {
+    return faker.internet.email();
   }
 }

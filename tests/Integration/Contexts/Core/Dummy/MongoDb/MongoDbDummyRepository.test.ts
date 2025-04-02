@@ -1,16 +1,24 @@
-import { container, SessionMongoDbClient } from '../../../../../../src/Apps/Shared';
+import { MongoClient } from 'mongodb';
+
+import { env } from '../../../../../../src/Apps/Config/env';
 import { MongoDbDummyRepository } from '../../../../../../src/Contexts/Core/Dummy/Infrastructure/MongoDbDummyRepository';
-import { connectMongoDb, disconnectMongoDb } from '../../../../../Utils/Database';
-import { registerInfrastructureDependencies } from '../../../../../Utils/Utils';
 import { dummyRepositoryTests } from '../DummyRepositoryTests';
 
-registerInfrastructureDependencies();
-beforeEach(async () => {
-  await connectMongoDb();
+const mongoClient = new MongoClient(env.mongo.mongoUri, {
+  monitorCommands: true,
 });
 
-afterEach(async () => {
-  await disconnectMongoDb();
+beforeAll(async (): Promise<void> => {
+  await mongoClient.connect();
 });
 
-dummyRepositoryTests(new MongoDbDummyRepository(container.get(SessionMongoDbClient)));
+afterAll(async (): Promise<void> => {
+  await mongoClient.db().dropDatabase();
+  await mongoClient.close();
+});
+
+beforeEach(async (): Promise<void> => {
+  await mongoClient.db().dropDatabase();
+});
+
+dummyRepositoryTests(new MongoDbDummyRepository(mongoClient));

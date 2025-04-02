@@ -1,4 +1,4 @@
-import { mock } from 'jest-mock-extended';
+import { mock, mockReset } from 'vitest-mock-extended';
 
 import { CreateDummy } from '../../../../../src/Contexts/Core/Dummy/Application/UseCases/CreateDummy';
 import { Dummy } from '../../../../../src/Contexts/Core/Dummy/Domain/Dummy';
@@ -8,12 +8,17 @@ import { EventBus } from '../../../../../src/Contexts/Shared/Domain';
 import { StringMother } from '../../../../ObjectMother';
 
 const eventBus = mock<EventBus>();
-let inMemoryDummyRepository: InMemoryDummyRepository;
-const arrange = (params: { dummies?: Dummy[] }): CreateDummy => {
-  inMemoryDummyRepository = new InMemoryDummyRepository(params.dummies);
+let dummyRepository: InMemoryDummyRepository;
 
-  return new CreateDummy(inMemoryDummyRepository, eventBus);
+const arrange = (params: { dummies?: Dummy[] }): CreateDummy => {
+  dummyRepository = new InMemoryDummyRepository(params.dummies);
+
+  return new CreateDummy(dummyRepository, eventBus);
 };
+
+beforeEach(() => {
+  mockReset(eventBus);
+});
 
 describe('CreateDummy', () => {
   it('should create a dummy', async () => {
@@ -29,7 +34,7 @@ describe('CreateDummy', () => {
     await useCase.execute(params);
 
     // Assert
-    const dummy = (await inMemoryDummyRepository.find(DummyId.of(params.id))) as Dummy;
+    const dummy = (await dummyRepository.find(DummyId.of(params.id))) as Dummy;
 
     expect(dummy).toBeDefined();
     expect(dummy.id.value).toBe(params.id);

@@ -9,12 +9,8 @@
     "transform": {
       "legacyDecorator": true,
       "decoratorMetadata": true
-    }
-  },
-  "env": {
-    "targets": {
-      "node": "19"
-    }
+    },
+    "target": "es2022"
   },
   "sourceMaps": "inline",
   "module": {

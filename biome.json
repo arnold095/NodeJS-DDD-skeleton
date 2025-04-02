@@ -1,0 +1,101 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "arrowParentheses": "asNeeded"
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "lineWidth": 90,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "formatWithErrors": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noThisInStatic": "off",
+        "noStaticOnlyClass": "off",
+        "noUselessRename": "error",
+        "noUselessConstructor": "off",
+        "useOptionalChain": "warn",
+        "noForEach": "error",
+        "noExtraBooleanCast": "error",
+        "useRegexLiterals": "error",
+        "useFlatMap": "error",
+        "useLiteralKeys": "error",
+        "noUselessTernary": "error",
+        "noBannedTypes": "error"
+      },
+      "correctness": {
+        "noSwitchDeclarations": "warn",
+        "noVoidTypeReturn": "error",
+        "noUnsafeFinally": "error",
+        "noUnusedVariables": "error",
+        "noInvalidUseBeforeDeclaration": "error",
+        "noUnusedImports": "error"
+      },
+      "nursery": {
+        "useExplicitType": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noEvolvingTypes": "warn",
+        "noEmptyInterface": "off",
+        "noPrototypeBuiltins": "warn",
+        "noConfusingVoidType": "error",
+        "noAssignInExpressions": "error",
+        "noMisleadingCharacterClass": "error",
+        "noEmptyBlockStatements": "error",
+        "noConstEnum": "error",
+        "noDoubleEquals": "error",
+        "noGlobalIsNan": "error",
+        "noSkippedTests": "error"
+      },
+      "style": {
+        "noUselessElse": "warn",
+        "useNamingConvention": {
+          "level": "off",
+          "options": {
+            "strictCase": false
+          }
+        },
+        "useTemplate": "warn",
+        "useDefaultParameterLast": "warn",
+        "useEnumInitializers": "warn",
+        "useImportType": "off",
+        "noInferrableTypes": "error",
+        "useNodejsImportProtocol": "warn",
+        "useNumberNamespace": "warn",
+        "useExportType": "off",
+        "useShorthandFunctionType": "off",
+        "useForOf": "error",
+        "useBlockStatements": "warn"
+      },
+      "performance": {
+        "noDelete": "error",
+        "noAccumulatingSpread": "error"
+      }
+    }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignore": ["./**/node_modules", "./**/dist", "./**/coverage"],
+    "include": ["./src/**/*.ts", "./tests/**/*.ts"]
+  }
+}

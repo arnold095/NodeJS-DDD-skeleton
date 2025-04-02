@@ -1,4 +1,5 @@
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 export interface NewableClass<T> extends Function {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   new (...args: any[]): T;
 }

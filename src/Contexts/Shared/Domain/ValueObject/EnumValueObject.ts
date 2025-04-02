@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 export abstract class EnumValueObject<T> {
-  constructor(public readonly value: T, public readonly validValues: T[]) {
+  constructor(
+    public readonly value: T,
+    public readonly validValues: T[],
+  ) {
     this.checkValueIsValid();
   }
 

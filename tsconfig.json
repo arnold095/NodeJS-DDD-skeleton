@@ -10,14 +10,8 @@
     ],
     "sourceMap": true,
     "outDir": "dist",
-    "types": [
-      "reflect-metadata",
-      "jest"
-    ],
-    "typeRoots": [
-      "./src/Apps/types",
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types", "./node_modules"],
+    "types": ["reflect-metadata", "@types/node", "vitest/globals"],
     "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -40,7 +34,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "test/**/*.ts"
   ],
   "ts-node": {
     "files": true

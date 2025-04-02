@@ -1,4 +1,4 @@
-import { isDomainImplementation, Nullable } from '../../../Shared/Domain';
+import { Nullable, isDomainImplementation } from '../../../Shared/Domain';
 import { MongoDbRepository } from '../../../Shared/Infrastructure';
 import { Dummy } from '../Domain/Dummy';
 import { DummyId } from '../Domain/DummyId';
@@ -11,12 +11,10 @@ export class MongoDbDummyRepository
   extends MongoDbRepository<DummySchema>
   implements DummyRepository
 {
-  protected collectionName(): string {
-    return 'Dummies';
-  }
+  protected collectionName = 'Dummies';
 
   public async find(id: DummyId): Promise<Nullable<Dummy>> {
-    let dummy;
+    let dummy: Dummy | undefined;
 
     const foundDummy = await this.searchOne({ _id: id.value });
 

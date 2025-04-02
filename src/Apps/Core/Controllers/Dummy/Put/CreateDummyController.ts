@@ -1,6 +1,6 @@
 import { CreateDummy } from '../../../../../Contexts/Core/Dummy/Application/UseCases/CreateDummy';
 import { isController } from '../../../../../Contexts/Shared/Infrastructure';
-import { BaseController } from '../../../../Shared';
+import { BaseController } from '../../BaseController';
 import { CreateDummySchema } from '../Schemas/CreateDummySchema';
 
 type CreateDummyRequest = {
@@ -14,7 +14,7 @@ type Params = { id: string };
   path: '/dummies/:id',
   schema: CreateDummySchema,
 })
-export class CreateDummyController extends BaseController<CreateDummyRequest, Params> {
+export class CreateDummyController extends BaseController<Params, CreateDummyRequest> {
   public constructor(private readonly useCase: CreateDummy) {
     super();
   }
@@ -24,6 +24,6 @@ export class CreateDummyController extends BaseController<CreateDummyRequest, Pa
 
     await this.useCase.execute({ ...request, id });
 
-    this.sendOk();
+    await this.sendNoContent();
   }
 }
