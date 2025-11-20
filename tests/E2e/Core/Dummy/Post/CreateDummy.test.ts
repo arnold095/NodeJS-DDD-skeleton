@@ -11,8 +11,8 @@ afterAll(async () => {
   await TestApp.stop();
 });
 
-describe('POST /api/geniallys', () => {
-  it('should create a genially', async () => {
+describe('POST /api/dummy', () => {
+  it('should create a dummy', async () => {
     await request(TestApp.httpServer)
       .put(`/api/dummies/${DummyId.random().value}`)
       .send({
