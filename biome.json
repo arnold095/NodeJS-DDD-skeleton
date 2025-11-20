@@ -63,7 +63,7 @@
         "noUnusedImports": "error"
       },
       "nursery": {
-        "useExplicitType": "error"
+        "useExplicitType": "warn"
       },
       "suspicious": {
         "noExplicitAny": "error",
@@ -105,13 +105,60 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/**/Domain/**/*.ts", "src/**/Application/**/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["**/Infrastructure/**"],
+                    "message": "The domain and application layers should not depend on infrastructure implementations."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/src/core/**/domain/**/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["**/Application/*"],
+                    "message": "The domain layer should not depend on the application layer."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["./**/node_modules", "./**/dist", "./**/coverage"],
-    "include": ["./src/**/*.ts", "./tests/**/*.ts"]
+    "includes": [
+      "src/**/*.ts",
+      "tests/**/*.ts",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/coverage"
+    ]
   }
 }
