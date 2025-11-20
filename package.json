@@ -12,9 +12,9 @@
     "test:unit": "vitest run --config vitest.config.mjs --mode unit",
     "test:integration": "vitest run --config vitest.config.mjs --mode integration",
     "test:e2e": "vitest run --config vitest.config.mjs --mode e2e",
-    "dev": "concurrently 'pnpm watch-compile' 'pnpm watch-dev'",
+    "dev": "concurrently 'node --run watch-compile' 'node --run watch-dev'",
     "watch-compile": "rm -rf dist && swc src --copy-files -w --out-dir dist",
-    "watch-dev": "wait-on ./dist/src/Apps/App.js && node --watch ./dist/src/Apps/App.js",
+    "watch-dev": "wait-on ./dist/src/Apps/App.js && node --env-file=.env --watch ./dist/src/Apps/App.js",
     "prepare": "husky install"
   },
   "repository": {

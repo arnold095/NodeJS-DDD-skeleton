@@ -1,10 +1,3 @@
-import { join } from 'node:path';
-import { config } from 'dotenv';
-
-config({
-  path: join(process.cwd(), `.env${process.env.NODE_ENV === 'test' ? '.test' : ''}`),
-});
-
 const isEnabled = (envVar: string): boolean => process.env[envVar] === 'true';
 
 export const env = {
