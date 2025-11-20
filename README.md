@@ -52,9 +52,9 @@ Example:
 ```
 
 Libraries used:
-For unit tests and integration tests: jest and jest-mock-extended (for mocking dependencies)
+For unit tests and integration tests: vitest and vitest-mock-extended (for mocking dependencies)
 
-For e2e tests: cucumber, supertest and jest-mock-extended (for mocking dependencies)
+For e2e tests: supertest and vitest-mock-extended (for mocking dependencies)
 
 #### Unit tests
 
