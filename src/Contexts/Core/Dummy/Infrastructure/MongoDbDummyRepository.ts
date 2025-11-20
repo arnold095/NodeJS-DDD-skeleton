@@ -1,4 +1,4 @@
-import { Nullable, isDomainImplementation } from '../../../Shared/Domain';
+import { isDomainImplementation, Nullable } from '../../../Shared/Domain';
 import { MongoDbRepository } from '../../../Shared/Infrastructure';
 import { Dummy } from '../Domain/Dummy';
 import { DummyId } from '../Domain/DummyId';

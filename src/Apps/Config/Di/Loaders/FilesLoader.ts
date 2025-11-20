@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+
 import { sync } from 'fast-glob';
 
 const rootPath = join(__dirname, '../../../../');

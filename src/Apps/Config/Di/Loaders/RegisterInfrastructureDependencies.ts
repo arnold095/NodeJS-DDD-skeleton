@@ -1,7 +1,7 @@
-import { EventBus, domainImplementations } from '../../../../Contexts/Shared/Domain';
+import { domainImplementations, EventBus } from '../../../../Contexts/Shared/Domain';
 import {
-  InMemorySyncEventBus,
   controllers,
+  InMemorySyncEventBus,
 } from '../../../../Contexts/Shared/Infrastructure';
 import { Container } from '../DiContainer';
 

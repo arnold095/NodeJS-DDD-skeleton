@@ -1,8 +1,8 @@
 import {
   Class,
   EventHandler,
-  NewableClass,
   eventHandlers,
+  NewableClass,
   useCases,
 } from '../../../../Contexts/Shared/Domain';
 import { Container } from '../DiContainer';

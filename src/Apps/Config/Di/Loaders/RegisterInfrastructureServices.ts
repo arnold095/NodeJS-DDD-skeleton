@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
-import { CoreMongoDbClient } from '../../MongoDbConfig';
 import { env } from '../../env';
+import { CoreMongoDbClient } from '../../MongoDbConfig';
 import { Container } from '../DiContainer';
 
 export const registerInfrastructureServices = (container: Container): void => {

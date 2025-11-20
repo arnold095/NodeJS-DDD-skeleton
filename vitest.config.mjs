@@ -25,8 +25,8 @@ export default defineConfig(({ mode }) => {
             ],
             extraConfig: {
                 testTimeout: 30000,
-                globalSetup: 'test/lib/vitest/global.setup.integration.ts',
-                setupFiles: ['test/lib/vitest/SetupIntegration.ts'],
+                globalSetup: 'tests/Lib/vitest/global.setup.integration.ts',
+                setupFiles: ['tests/Lib/vitest/SetupIntegration.ts'],
             },
             plugins: [
                 // This is required to build the test files with SWC

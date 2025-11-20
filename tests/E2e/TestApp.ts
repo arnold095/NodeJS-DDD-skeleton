@@ -4,9 +4,9 @@ import type { Server } from 'node:http';
 
 import { container } from '../../src/Apps/Config/Di/DiContainer';
 import { loadContainer } from '../../src/Apps/Config/Di/Loaders';
+import { env } from '../../src/Apps/Config/env';
 import { loadFastifyServer } from '../../src/Apps/Config/Fastify/FastifyServer';
 import { CoreMongoDbClient, loadMongoDb } from '../../src/Apps/Config/MongoDbConfig';
-import { env } from '../../src/Apps/Config/env';
 import { Logger } from '../../src/Contexts/Shared/Domain/Services/Logger';
 
 export class TestApp {

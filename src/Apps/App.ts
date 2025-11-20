@@ -1,11 +1,12 @@
 import 'reflect-metadata';
+
 import { isService } from '../Contexts/Shared/Domain';
 import { Logger } from '../Contexts/Shared/Domain/Services/Logger';
 import { container } from './Config/Di/DiContainer';
 import { loadContainer } from './Config/Di/Loaders';
+import { env } from './Config/env';
 import { loadFastifyServer } from './Config/Fastify/FastifyServer';
 import { loadMongoDb } from './Config/MongoDbConfig';
-import { env } from './Config/env';
 
 @isService()
 export class App {
