@@ -1,7 +1,7 @@
 import {
   clearConnectionEnvVars,
   overrideConnectionEnvVars,
-} from '../../utils/overrideConnectionEnvVars';
+} from '../../Utils/overrideConnectionEnvVars';
 
 beforeAll(() => {
   overrideConnectionEnvVars();

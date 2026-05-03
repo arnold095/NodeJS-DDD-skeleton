@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "skipLibCheck": true,
     "target": "ESNext",
     "lib": [
@@ -9,13 +8,11 @@
       "DOM"
     ],
     "sourceMap": true,
-    "outDir": "dist",
     "typeRoots": ["node_modules/@types", "./node_modules"],
     "types": ["reflect-metadata", "@types/node", "vitest/globals"],
     "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "baseUrl": ".",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -35,7 +32,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "test/**/*.ts"
+    "tests/**/*.ts"
   ],
   "ts-node": {
     "files": true

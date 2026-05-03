@@ -16,10 +16,6 @@ export class StringMother {
     });
   }
 
-  public static color(): string {
-    return faker.internet.color();
-  }
-
   public static city(): string {
     return faker.location.city();
   }

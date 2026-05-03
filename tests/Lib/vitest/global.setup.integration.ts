@@ -1,4 +1,4 @@
-import { MongoTestContainer } from '../../testcontainers/MongoTestContainer';
+import { MongoTestContainer } from '../../TestContainers/MongoTestContainer';
 
 export async function setup(): Promise<void> {
   await Promise.all([MongoTestContainer.start()]);
