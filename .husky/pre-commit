@@ -1,4 +1,23 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/bash
 
-npx lint-staged
+if [ "$IS_AI_AGENT" != "true" ]; then
+    echo "👤 Human commit detected. Skipping branch protection..."
+else
+    # 2. Protection branch (Only for IA)
+    branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+
+    if [ "$branch" = "master" ] || [ "$branch" = "main" ]; then
+        echo "❌ AI Agent Error: Commits to 'master' or 'main' are not allowed for agents."
+        exit 1
+    fi
+
+    echo "🤖 AI Agent detected. Running mandatory checks..."
+
+    cd api || exit 1
+
+    echo "🔍 Running Lint..."
+    pnpm lint || { echo "❌ Lint failed. AI must fix it before commit."; exit 1; }
+fi
+
+echo "✅ Pre-commit checks passed."
+exit 0
